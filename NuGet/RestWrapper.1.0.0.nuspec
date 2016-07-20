@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>RestWrapper</id>
+        <version>1.0.0</version>
+        <title>RestWrapper</title>
+        <authors>Joel Christner</authors>
+        <owners>Joel Christner</owners>
+        <licenseUrl>https://github.com/jchristn/RestWrapper/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>http://github.com/jchristn/RestWrapper</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A simple C# wrapper for making RESTful HTTP requests</description>
+        <summary>A simple C# wrapper for making RESTful HTTP requests</summary>
+        <copyright>(c) 2016</copyright>
+    </metadata>
+    <files>
+        <file src="lib\RestWrapper.dll" target="lib\RestWrapper.dll" />
+        <file src="lib\RestWrapper.pdb" target="lib\RestWrapper.pdb" />
+    </files>
+</package>
