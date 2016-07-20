@@ -1,0 +1,8 @@
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapperTest.exe.config
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapperTest.exe
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapperTest.pdb
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapper.dll
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapper.pdb
+D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Debug\RestWrapperTest.csprojResolveAssemblyReference.cache
+D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Debug\RestWrapperTest.exe
+D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Debug\RestWrapperTest.pdb

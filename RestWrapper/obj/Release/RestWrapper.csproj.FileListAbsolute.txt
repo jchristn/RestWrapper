@@ -1,0 +1,8 @@
+D:\Code\Misc\StripeWrapper\RestWrapper\bin\Release\RestWrapper.dll
+D:\Code\Misc\StripeWrapper\RestWrapper\bin\Release\RestWrapper.pdb
+D:\Code\Misc\StripeWrapper\RestWrapper\obj\Release\RestWrapper.dll
+D:\Code\Misc\StripeWrapper\RestWrapper\obj\Release\RestWrapper.pdb
+D:\Code\Misc\RestWrapper\RestWrapper\bin\Release\RestWrapper.dll
+D:\Code\Misc\RestWrapper\RestWrapper\bin\Release\RestWrapper.pdb
+D:\Code\Misc\RestWrapper\RestWrapper\obj\Release\RestWrapper.dll
+D:\Code\Misc\RestWrapper\RestWrapper\obj\Release\RestWrapper.pdb
