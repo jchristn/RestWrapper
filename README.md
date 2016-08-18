@@ -1,4 +1,10 @@
 # RestWrapper
+
+[![][nuget-img]][nuget]
+
+[nuget]:     https://www.nuget.org/packages/RestWrapper/
+[nuget-img]: https://badge.fury.io/nu/Object.svg
+
 A simple C# class library to help simplify RESTful HTTP requests and responses. 
 
 ## Test App
