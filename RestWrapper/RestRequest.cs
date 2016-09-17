@@ -92,6 +92,7 @@ namespace RestWrapper
             client.Timeout = 30000;
             client.ContentLength = 0;
             client.ContentType = ContentType;
+            client.UserAgent = "RestWrapper (www.github.com/jchristn/RestWrapper)";
 
             #endregion
 
