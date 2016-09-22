@@ -59,6 +59,7 @@ namespace RestWrapper
             string User,
             string Password,
             bool EncodeCredentials,
+            bool IgnoreCertErrors,
             Dictionary<string, string> UserHeaders,
             byte[] Data
             )
@@ -85,6 +86,8 @@ namespace RestWrapper
 
             #region Setup-Webrequest
 
+            if (IgnoreCertErrors) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            
             HttpWebRequest client = (HttpWebRequest)WebRequest.Create(URL);
             client.KeepAlive = false;
             client.Method = Method.ToUpper().Trim();
@@ -260,13 +263,14 @@ namespace RestWrapper
             string User,
             string Password,
             bool EncodeCredentials,
+            bool IgnoreCertErrors,
             Dictionary<string, string> UserHeaders,
             byte[] Data
             )
         {
             try
             {
-                return SendRequest(URL, ContentType, Method, User, Password, EncodeCredentials, UserHeaders, Data);
+                return SendRequest(URL, ContentType, Method, User, Password, EncodeCredentials, IgnoreCertErrors, UserHeaders, Data);
             }
             catch (WebException we)
             {

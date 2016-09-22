@@ -37,6 +37,7 @@ namespace RestWrapperTest
                                 UserInputString("User", null, true),
                                 UserInputString("Password", null, true),
                                 UserInputBoolean("Encode Credentials", true),
+                                UserInputBoolean("Ignore Cert Errors", true),
                                 null,
                                 Encoding.UTF8.GetBytes(UserInputString("Data", "{}", false)));
 
@@ -59,6 +60,7 @@ namespace RestWrapperTest
                                 UserInputString("User", null, true),
                                 UserInputString("Password", null, true),
                                 UserInputBoolean("Encode Credentials", true),
+                                UserInputBoolean("Ignore Cert Errors", true),
                                 null,
                                 null);
 

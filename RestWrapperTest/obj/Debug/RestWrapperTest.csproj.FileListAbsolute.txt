@@ -1,8 +1,8 @@
-D:\code\misc\restwrapper\RestWrapperTest\bin\Debug\RestWrapperTest.exe.config
-D:\code\misc\restwrapper\RestWrapperTest\bin\Debug\RestWrapperTest.exe
-D:\code\misc\restwrapper\RestWrapperTest\bin\Debug\RestWrapperTest.pdb
-D:\code\misc\restwrapper\RestWrapperTest\bin\Debug\RestWrapper.dll
-D:\code\misc\restwrapper\RestWrapperTest\bin\Debug\RestWrapper.pdb
-D:\code\misc\restwrapper\RestWrapperTest\obj\Debug\RestWrapperTest.csprojResolveAssemblyReference.cache
-D:\code\misc\restwrapper\RestWrapperTest\obj\Debug\RestWrapperTest.exe
-D:\code\misc\restwrapper\RestWrapperTest\obj\Debug\RestWrapperTest.pdb
+D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Debug\RestWrapperTest.csprojResolveAssemblyReference.cache
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapperTest.exe.config
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapperTest.exe
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapperTest.pdb
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapper.dll
+D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Debug\RestWrapper.pdb
+D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Debug\RestWrapperTest.exe
+D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Debug\RestWrapperTest.pdb
