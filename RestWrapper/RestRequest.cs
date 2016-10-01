@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -86,7 +88,10 @@ namespace RestWrapper
 
             #region Setup-Webrequest
 
-            if (IgnoreCertErrors) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            if (IgnoreCertErrors)
+            {
+                ServicePointManager.ServerCertificateValidationCallback = Validator;
+            }
             
             HttpWebRequest client = (HttpWebRequest)WebRequest.Create(URL);
             client.KeepAlive = false;
@@ -176,7 +181,7 @@ namespace RestWrapper
             ret.ContentLength = response.ContentLength;
             ret.ResponseURI = response.ResponseUri.ToString();
             ret.StatusCode = (int)response.StatusCode;
-            ret.StatusDescripion = response.StatusDescription;
+            ret.StatusDescription = response.StatusDescription;
 
             #endregion
             
@@ -283,7 +288,7 @@ namespace RestWrapper
                 resp.ContentLength = 0;
                 resp.ResponseURI = null;
                 resp.StatusCode = 0;
-                resp.StatusDescripion = null;
+                resp.StatusDescription = null;
                 resp.Data = null;
 
                 HttpWebResponse exceptionResponse = we.Response as HttpWebResponse;
@@ -294,7 +299,7 @@ namespace RestWrapper
                     resp.ContentLength = exceptionResponse.ContentLength;
                     resp.ResponseURI = exceptionResponse.ResponseUri.ToString();
                     resp.StatusCode = (int)exceptionResponse.StatusCode;
-                    resp.StatusDescripion = exceptionResponse.StatusDescription;
+                    resp.StatusDescription = exceptionResponse.StatusDescription;
 
                     if (exceptionResponse.Headers != null && exceptionResponse.Headers.Count > 0)
                     {
@@ -356,6 +361,11 @@ namespace RestWrapper
 
                 return ms.ToArray();
             }
+        }
+
+        private static bool Validator(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
         }
 
         #endregion

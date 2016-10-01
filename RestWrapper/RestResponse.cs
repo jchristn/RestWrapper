@@ -54,7 +54,7 @@ namespace RestWrapper
         /// <summary>
         /// The HTTP status description associated with the HTTP status code.
         /// </summary>
-        public string StatusDescripion;
+        public string StatusDescription;
 
         /// <summary>
         /// The response data returned from the server.
@@ -91,7 +91,7 @@ namespace RestWrapper
                 ret += "  Response URI       : " + ResponseURI + Environment.NewLine;
 
             ret += "  Status Code        : " + StatusCode + Environment.NewLine;
-            ret += "  Status Description : " + StatusDescripion + Environment.NewLine;
+            ret += "  Status Description : " + StatusDescription + Environment.NewLine;
             ret += "  Content Length     : " + ContentLength + Environment.NewLine;
 
             if (Data != null && Data.Length > 0)
