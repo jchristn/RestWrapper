@@ -2,7 +2,7 @@ D:\Code\Misc\StripeWrapper\RestWrapper\bin\Debug\RestWrapper.dll
 D:\Code\Misc\StripeWrapper\RestWrapper\bin\Debug\RestWrapper.pdb
 D:\Code\Misc\StripeWrapper\RestWrapper\obj\Debug\RestWrapper.dll
 D:\Code\Misc\StripeWrapper\RestWrapper\obj\Debug\RestWrapper.pdb
-D:\Code\Misc\RestWrapper\RestWrapper\bin\Debug\RestWrapper.dll
-D:\Code\Misc\RestWrapper\RestWrapper\bin\Debug\RestWrapper.pdb
-D:\Code\Misc\RestWrapper\RestWrapper\obj\Debug\RestWrapper.dll
-D:\Code\Misc\RestWrapper\RestWrapper\obj\Debug\RestWrapper.pdb
+D:\code\misc\restwrapper\RestWrapper\bin\Debug\RestWrapper.dll
+D:\code\misc\restwrapper\RestWrapper\bin\Debug\RestWrapper.pdb
+D:\code\misc\restwrapper\RestWrapper\obj\Debug\RestWrapper.dll
+D:\code\misc\restwrapper\RestWrapper\obj\Debug\RestWrapper.pdb
