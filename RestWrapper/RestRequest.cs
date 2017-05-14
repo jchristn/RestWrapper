@@ -224,6 +224,8 @@ namespace RestWrapper
                 ServicePointManager.ServerCertificateValidationCallback = Validator;
             }
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             HttpWebRequest client = (HttpWebRequest)WebRequest.Create(URL);
             client.KeepAlive = false;
             client.Method = Method.ToUpper().Trim();
