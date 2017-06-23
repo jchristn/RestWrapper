@@ -264,24 +264,58 @@ namespace RestWrapper
                     if (String.IsNullOrEmpty(pair.Key)) continue;
                     if (String.IsNullOrEmpty(pair.Value)) continue;
 
-                    if (String.Compare(pair.Key.ToLower().Trim(), "accept") == 0)
+                    if (pair.Key.ToLower().Trim().Equals("accept"))
                     {
-                        client.Accept = pair.Value;
-                        continue;
+                        client.Accept = pair.Value; 
                     }
-
-                    if (String.Compare(pair.Key.ToLower().Trim(), "content-type") == 0)
+                    else if (pair.Key.ToLower().Trim().Equals("connection"))
+                    {
+                        client.Connection = pair.Value;  
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("content-length"))
+                    {
+                        client.ContentLength = Convert.ToInt64(pair.Value);
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("content-type"))
                     {
                         client.ContentType = pair.Value;
-                        continue;
                     }
-
-                    if (String.Compare(pair.Key.ToLower().Trim(), "host") == 0)
+                    else if (pair.Key.ToLower().Trim().Equals("date"))
                     {
-                        client.Host = pair.Value;
+                        client.Date = Convert.ToDateTime(pair.Value);
                     }
-
-                    client.Headers.Add(pair.Key, pair.Value);
+                    else if (pair.Key.ToLower().Trim().Equals("expect"))
+                    {
+                        client.Expect = pair.Value;
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("host"))
+                    {
+                        client.Host = pair.Value; 
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("if-modified-since"))
+                    {
+                        client.IfModifiedSince = Convert.ToDateTime(pair.Value);
+                    } 
+                    else if (pair.Key.ToLower().Trim().Equals("proxy-connection"))
+                    {
+                        // do nothing
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("referer"))
+                    {
+                        client.Referer = pair.Value;
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("transfer-encoding"))
+                    {
+                        client.TransferEncoding = pair.Value;
+                    }
+                    else if (pair.Key.ToLower().Trim().Equals("user-agent"))
+                    {
+                        client.UserAgent = pair.Value;
+                    }
+                    else
+                    {
+                        client.Headers.Add(pair.Key, pair.Value);
+                    }
                 }
             }
 
@@ -476,9 +510,9 @@ namespace RestWrapper
 
                 #endregion
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
