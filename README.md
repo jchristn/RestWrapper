@@ -29,7 +29,6 @@ RestResponse resp = RestRequest.SendRequest(
 	null, null, false, 			// user, password, encode
 	null, 						// headers
 	null);						// byte array data
-);
 
 //
 // Enumerate response
