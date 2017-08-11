@@ -45,115 +45,115 @@ namespace RestWrapper
         /// <summary>
         /// Send a RESTful HTTP request without specifying a certificate file.  All exceptions are thrown to the caller.
         /// </summary>
-        /// <param name="URL">The URL to which the request should be sent.</param>
-        /// <param name="ContentType">The type of content contained in Data (the request body).</param>
-        /// <param name="Method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
-        /// <param name="User">The HTTP user authorization field data.</param>
-        /// <param name="Password">The HTTP password authorization field data.</param>
-        /// <param name="EncodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
-        /// <param name="UserHeaders">Supply any custom or user-specified headers.</param>
-        /// <param name="Data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
+        /// <param name="url">The URL to which the request should be sent.</param>
+        /// <param name="contentType">The type of content contained in Data (the request body).</param>
+        /// <param name="method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
+        /// <param name="user">The HTTP user authorization field data.</param>
+        /// <param name="password">The HTTP password authorization field data.</param>
+        /// <param name="encodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
+        /// <param name="userHeaders">Supply any custom or user-specified headers.</param>
+        /// <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
         /// <returns>A RestResponse object containing response data.</returns>
         public static RestResponse SendRequest(
-            string URL,
-            string ContentType,
-            string Method,
-            string User,
-            string Password,
-            bool EncodeCredentials,
-            bool IgnoreCertErrors,
-            Dictionary<string, string> UserHeaders,
-            byte[] Data
+            string url,
+            string contentType,
+            string method,
+            string user,
+            string password,
+            bool encodeCredentials,
+            bool ignoreCertErrors,
+            Dictionary<string, string> userHeaders,
+            byte[] data
             )
         {
-            return SendRequestInternal(URL, ContentType, Method, User, Password, EncodeCredentials, IgnoreCertErrors, null, null, UserHeaders, Data);
+            return SendRequestInternal(url, contentType, method, user, password, encodeCredentials, ignoreCertErrors, null, null, userHeaders, data);
         }
 
         /// <summary>
         /// Send a RESTful HTTP request with a specified certificate file.  All exceptions are thrown to the caller.
         /// </summary>
-        /// <param name="URL">The URL to which the request should be sent.</param>
-        /// <param name="ContentType">The type of content contained in Data (the request body).</param>
-        /// <param name="Method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
-        /// <param name="User">The HTTP user authorization field data.</param>
-        /// <param name="Password">The HTTP password authorization field data.</param>
-        /// <param name="EncodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
-        /// <param name="CertificateFile">Specify the PFX certificate file to use.</param>
-        /// <param name="CertificatePassword">Specify the password, if any, to the PFX certificate file.</param>
-        /// <param name="UserHeaders">Supply any custom or user-specified headers.</param>
+        /// <param name="url">The URL to which the request should be sent.</param>
+        /// <param name="contentType">The type of content contained in Data (the request body).</param>
+        /// <param name="method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
+        /// <param name="user">The HTTP user authorization field data.</param>
+        /// <param name="password">The HTTP password authorization field data.</param>
+        /// <param name="encodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
+        /// <param name="certFile">Specify the PFX certificate file to use.</param>
+        /// <param name="certPass">Specify the password, if any, to the PFX certificate file.</param>
+        /// <param name="userHeaders">Supply any custom or user-specified headers.</param>
         /// <param name="Data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
         /// <returns>A RestResponse object containing response data.</returns>
         public static RestResponse SendRequest(
-            string URL,
-            string ContentType,
-            string Method,
-            string User,
-            string Password,
-            bool EncodeCredentials,
-            bool IgnoreCertErrors,
-            string CertificateFile,
-            string CertificatePassword,
-            Dictionary<string, string> UserHeaders,
+            string url,
+            string contentType,
+            string method,
+            string user,
+            string password,
+            bool encodeCredentials,
+            bool ignoreCertErrors,
+            string certFile,
+            string certPass,
+            Dictionary<string, string> userHeaders,
             byte[] Data
             )
         {
-            return SendRequestInternal(URL, ContentType, Method, User, Password, EncodeCredentials, IgnoreCertErrors, CertificateFile, CertificatePassword, UserHeaders, Data);
+            return SendRequestInternal(url, contentType, method, user, password, encodeCredentials, ignoreCertErrors, certFile, certPass, userHeaders, Data);
         }
 
         /// <summary>
         /// Send a RESTful HTTP request without specifying a certificate file.  WebExceptions are managed and formed into a response object and are not thrown.  Uncaught exceptions are thrown to the caller.
         /// </summary>
-        /// <param name="URL">The URL to which the request should be sent.</param>
-        /// <param name="ContentType">The type of content contained in Data (the request body).</param>
-        /// <param name="Method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
-        /// <param name="User">The HTTP user authorization field data.</param>
-        /// <param name="Password">The HTTP password authorization field data.</param>
-        /// <param name="EncodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
-        /// <param name="UserHeaders">Supply any custom or user-specified headers.</param>
-        /// <param name="Data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
+        /// <param name="url">The URL to which the request should be sent.</param>
+        /// <param name="contentType">The type of content contained in Data (the request body).</param>
+        /// <param name="method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
+        /// <param name="user">The HTTP user authorization field data.</param>
+        /// <param name="password">The HTTP password authorization field data.</param>
+        /// <param name="encodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
+        /// <param name="userHeaders">Supply any custom or user-specified headers.</param>
+        /// <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
         /// <returns>A RestResponse object containing response data.</returns>
         public static RestResponse SendRequestSafe(
-            string URL,
-            string ContentType,
-            string Method,
-            string User,
-            string Password,
-            bool EncodeCredentials,
-            bool IgnoreCertErrors,
-            Dictionary<string, string> UserHeaders,
-            byte[] Data)
+            string url,
+            string contentType,
+            string method,
+            string user,
+            string password,
+            bool encodeCredentials,
+            bool ignoreCertErrors,
+            Dictionary<string, string> userHeaders,
+            byte[] data)
         {
-            return SendRequestInternalSafe(URL, ContentType, Method, User, Password, EncodeCredentials, IgnoreCertErrors, null, null, UserHeaders, Data);
+            return SendRequestInternalSafe(url, contentType, method, user, password, encodeCredentials, ignoreCertErrors, null, null, userHeaders, data);
         }
 
         /// <summary>
         /// Send a RESTful HTTP request with a specified certificate file.  WebExceptions are managed and formed into a response object and are not thrown.  Uncaught exceptions are thrown to the caller.
         /// </summary>
-        /// <param name="URL">The URL to which the request should be sent.</param>
-        /// <param name="ContentType">The type of content contained in Data (the request body).</param>
-        /// <param name="Method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
-        /// <param name="User">The HTTP user authorization field data.</param>
-        /// <param name="Password">The HTTP password authorization field data.</param>
-        /// <param name="EncodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
-        /// <param name="CertificateFile">Specify the PFX certificate file to use.</param>
-        /// <param name="CertificatePassword">Specify the password, if any, to the PFX certificate file.</param>
-        /// <param name="UserHeaders">Supply any custom or user-specified headers.</param>
-        /// <param name="Data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
+        /// <param name="url">The URL to which the request should be sent.</param>
+        /// <param name="contentType">The type of content contained in Data (the request body).</param>
+        /// <param name="method">The HTTP verb to use for this request (GET, PUT, POST, DELETE, HEAD).</param>
+        /// <param name="user">The HTTP user authorization field data.</param>
+        /// <param name="password">The HTTP password authorization field data.</param>
+        /// <param name="encodeCredentials">Specify whether or not credentials should be encoded in the HTTP authorization header.</param>
+        /// <param name="certFile">Specify the PFX certificate file to use.</param>
+        /// <param name="certPass">Specify the password, if any, to the PFX certificate file.</param>
+        /// <param name="userHeaders">Supply any custom or user-specified headers.</param>
+        /// <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
         /// <returns>A RestResponse object containing response data.</returns>
         public static RestResponse SendRequestSafe(
-            string URL,
-            string ContentType,
-            string Method,
-            string User,
-            string Password,
-            bool EncodeCredentials,
-            bool IgnoreCertErrors,
-            string CertificateFile,
-            string CertificatePassword,
-            Dictionary<string, string> UserHeaders,
-            byte[] Data)
+            string url,
+            string contentType,
+            string method,
+            string user,
+            string password,
+            bool encodeCredentials,
+            bool ignoreCertErrors,
+            string certFile,
+            string certPass,
+            Dictionary<string, string> userHeaders,
+            byte[] data)
         {
-            return SendRequestInternalSafe(URL, ContentType, Method, User, Password, EncodeCredentials, IgnoreCertErrors, CertificateFile, CertificatePassword, UserHeaders, Data);
+            return SendRequestInternalSafe(url, contentType, method, user, password, encodeCredentials, ignoreCertErrors, certFile, certPass, userHeaders, data);
         }
 
         #endregion
@@ -184,71 +184,72 @@ namespace RestWrapper
         }
 
         private static RestResponse SendRequestInternal(
-           string URL,
-           string ContentType,
-           string Method,
-           string User,
-           string Password,
-           bool EncodeCredentials,
-           bool IgnoreCertErrors,
-           string CertificateFile,
-           string CertificatePassword,
-           Dictionary<string, string> UserHeaders,
+           string url,
+           string contentType,
+           string method,
+           string user,
+           string password,
+           bool encodeCredentials,
+           bool ignoreCertErrors,
+           string certFile,
+           string certPass,
+           Dictionary<string, string> userHeaders,
            byte[] Data
            )
         {
             #region Check-for-Null-Values
 
-            if (String.IsNullOrEmpty(URL)) throw new ArgumentNullException("URL");
-            if (String.IsNullOrEmpty(URL)) throw new ArgumentNullException("Method");
+            if (String.IsNullOrEmpty(url)) throw new ArgumentNullException(nameof(url));
+            if (String.IsNullOrEmpty(method)) throw new ArgumentNullException(nameof(method));
 
             #endregion
 
             #region Check-Method
 
-            if ((String.Compare(Method.ToLower().Trim(), "head") != 0) &&
-                (String.Compare(Method.ToLower().Trim(), "get") != 0) &&
-                (String.Compare(Method.ToLower().Trim(), "post") != 0) &&
-                (String.Compare(Method.ToLower().Trim(), "put") != 0) &&
-                (String.Compare(Method.ToLower().Trim(), "delete") != 0))
+            if ((String.Compare(method.ToLower().Trim(), "head") != 0) &&
+                (String.Compare(method.ToLower().Trim(), "get") != 0) &&
+                (String.Compare(method.ToLower().Trim(), "post") != 0) &&
+                (String.Compare(method.ToLower().Trim(), "put") != 0) &&
+                (String.Compare(method.ToLower().Trim(), "delete") != 0) &&
+                (String.Compare(method.ToLower().Trim(), "options") != 0))
             {
-                throw new ArgumentOutOfRangeException("Method");
+                throw new ArgumentException("Invalid method supplied: " + method + ".");
             }
 
             #endregion
 
             #region Setup-Webrequest
 
-            if (IgnoreCertErrors)
+            if (ignoreCertErrors)
             {
                 ServicePointManager.ServerCertificateValidationCallback = Validator;
             }
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            HttpWebRequest client = (HttpWebRequest)WebRequest.Create(URL);
+            HttpWebRequest client = (HttpWebRequest)WebRequest.Create(url);
             client.KeepAlive = false;
-            client.Method = Method.ToUpper().Trim();
+            client.Method = method.ToUpper().Trim();
             client.AllowAutoRedirect = true;
             client.Timeout = 30000;
             client.ContentLength = 0;
-            client.ContentType = ContentType;
+            client.ContentType = contentType;
             client.UserAgent = "RestWrapper (www.github.com/jchristn/RestWrapper)";
 
             #endregion
 
             #region Add-Certificate
 
-            if (!String.IsNullOrEmpty(CertificateFile))
+            if (!String.IsNullOrEmpty(certFile))
             {
-                if (!String.IsNullOrEmpty(CertificatePassword))
+                if (!String.IsNullOrEmpty(certPass))
                 {
-                    X509Certificate2 cert = new X509Certificate2(@CertificateFile, CertificatePassword);
+                    X509Certificate2 cert = new X509Certificate2(certFile, certPass);
                     client.ClientCertificates.Add(cert);
                 }
                 else
                 {
-                    X509Certificate2 cert = new X509Certificate2(CertificateFile);
+                    X509Certificate2 cert = new X509Certificate2(certFile);
                     client.ClientCertificates.Add(cert);
                 }
             }
@@ -257,9 +258,9 @@ namespace RestWrapper
 
             #region Add-Headers
 
-            if (UserHeaders != null && UserHeaders.Count > 0)
+            if (userHeaders != null && userHeaders.Count > 0)
             {
-                foreach (KeyValuePair<string, string> pair in UserHeaders)
+                foreach (KeyValuePair<string, string> pair in userHeaders)
                 {
                     if (String.IsNullOrEmpty(pair.Key)) continue;
                     if (String.IsNullOrEmpty(pair.Value)) continue;
@@ -268,9 +269,13 @@ namespace RestWrapper
                     {
                         client.Accept = pair.Value; 
                     }
+                    else if (pair.Key.ToLower().Trim().Equals("close"))
+                    {
+                        // do nothing
+                    }
                     else if (pair.Key.ToLower().Trim().Equals("connection"))
                     {
-                        client.Connection = pair.Value;  
+                        // do nothing
                     }
                     else if (pair.Key.ToLower().Trim().Equals("content-length"))
                     {
@@ -296,6 +301,10 @@ namespace RestWrapper
                     {
                         client.IfModifiedSince = Convert.ToDateTime(pair.Value);
                     } 
+                    else if (pair.Key.ToLower().Trim().Equals("keep-alive"))
+                    {
+                        client.KeepAlive = Convert.ToBoolean(pair.Value);
+                    }
                     else if (pair.Key.ToLower().Trim().Equals("proxy-connection"))
                     {
                         // do nothing
@@ -323,17 +332,17 @@ namespace RestWrapper
 
             #region Add-Auth-Info
 
-            if (!String.IsNullOrEmpty(User))
+            if (!String.IsNullOrEmpty(user))
             {
-                if (EncodeCredentials)
+                if (encodeCredentials)
                 {
-                    string authInfo = User + ":" + Password;
+                    string authInfo = user + ":" + password;
                     authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
                     client.Headers.Add("Authorization", "Basic " + authInfo);
                 }
                 else
                 {
-                    client.Headers.Add("Authorization", User);
+                    client.Headers.Add("Authorization", user);
                 }
             }
 
@@ -341,14 +350,14 @@ namespace RestWrapper
 
             #region Package-Payload
 
-            if ((String.Compare(Method.ToLower().Trim(), "post") == 0) ||
-                (String.Compare(Method.ToLower().Trim(), "put") == 0) ||
-                (String.Compare(Method.ToLower().Trim(), "delete") == 0))
+            if ((String.Compare(method.ToLower().Trim(), "post") == 0) ||
+                (String.Compare(method.ToLower().Trim(), "put") == 0) ||
+                (String.Compare(method.ToLower().Trim(), "delete") == 0))
             {
                 if (Data != null && Data.Length > 0)
                 {
                     client.ContentLength = Data.Length;
-                    client.ContentType = ContentType;
+                    client.ContentType = contentType;
                     Stream clientStream = client.GetRequestStream();
                     clientStream.Write(Data, 0, Data.Length);
                     clientStream.Close();
@@ -361,6 +370,7 @@ namespace RestWrapper
 
             HttpWebResponse response = (HttpWebResponse)client.GetResponse();
             RestResponse ret = new RestResponse();
+            ret.ProtocolVersion = "HTTP/" + response.ProtocolVersion.ToString();
             ret.ContentEncoding = response.ContentEncoding;
             ret.ContentType = response.ContentType;
             ret.ContentLength = response.ContentLength;
@@ -435,50 +445,51 @@ namespace RestWrapper
         }
 
         private static RestResponse SendRequestInternalSafe(
-           string URL,
-           string ContentType,
-           string Method,
-           string User,
-           string Password,
-           bool EncodeCredentials,
-           bool IgnoreCertErrors,
-           string CertificateFile,
-           string CertificatePassword,
-           Dictionary<string, string> UserHeaders,
-           byte[] Data
+           string url,
+           string contentType,
+           string method,
+           string user,
+           string password,
+           bool encodeCredentials,
+           bool ignoreCertErrors,
+           string certFile,
+           string certPass,
+           Dictionary<string, string> userHeaders,
+           byte[] data
            )
         {
             try
             {
-                return SendRequestInternal(URL, ContentType, Method, User, Password, EncodeCredentials, IgnoreCertErrors, CertificateFile, CertificatePassword, UserHeaders, Data);
+                return SendRequestInternal(url, contentType, method, user, password, encodeCredentials, ignoreCertErrors, certFile, certPass, userHeaders, data);
             }
             catch (WebException we)
             {
                 #region WebException
 
-                RestResponse resp = new RestResponse();
-                resp.Headers = null;
-                resp.ContentEncoding = null;
-                resp.ContentType = null;
-                resp.ContentLength = 0;
-                resp.ResponseURI = null;
-                resp.StatusCode = 0;
-                resp.StatusDescription = null;
-                resp.Data = null;
+                RestResponse ret = new RestResponse();
+                ret.Headers = null;
+                ret.ContentEncoding = null;
+                ret.ContentType = null;
+                ret.ContentLength = 0;
+                ret.ResponseURI = null;
+                ret.StatusCode = 0;
+                ret.StatusDescription = null;
+                ret.Data = null;
 
                 HttpWebResponse exceptionResponse = we.Response as HttpWebResponse;
                 if (exceptionResponse != null)
                 {
-                    resp.ContentEncoding = exceptionResponse.ContentEncoding;
-                    resp.ContentType = exceptionResponse.ContentType;
-                    resp.ContentLength = exceptionResponse.ContentLength;
-                    resp.ResponseURI = exceptionResponse.ResponseUri.ToString();
-                    resp.StatusCode = (int)exceptionResponse.StatusCode;
-                    resp.StatusDescription = exceptionResponse.StatusDescription;
+                    ret.ProtocolVersion = "HTTP/" + exceptionResponse.ProtocolVersion.ToString();
+                    ret.ContentEncoding = exceptionResponse.ContentEncoding;
+                    ret.ContentType = exceptionResponse.ContentType;
+                    ret.ContentLength = exceptionResponse.ContentLength;
+                    ret.ResponseURI = exceptionResponse.ResponseUri.ToString();
+                    ret.StatusCode = (int)exceptionResponse.StatusCode;
+                    ret.StatusDescription = exceptionResponse.StatusDescription;
 
                     if (exceptionResponse.Headers != null && exceptionResponse.Headers.Count > 0)
                     {
-                        resp.Headers = new Dictionary<string, string>();
+                        ret.Headers = new Dictionary<string, string>();
                         for (int i = 0; i < exceptionResponse.Headers.Count; i++)
                         {
                             string key = exceptionResponse.Headers.GetKey(i);
@@ -499,14 +510,14 @@ namespace RestWrapper
                                 }
                             }
 
-                            resp.Headers.Add(key, val);
+                            ret.Headers.Add(key, val);
                         }
                     }
 
-                    resp.Data = StreamToBytes(exceptionResponse.GetResponseStream());
+                    ret.Data = StreamToBytes(exceptionResponse.GetResponseStream());
                 }
 
-                return resp;
+                return ret;
 
                 #endregion
             }
