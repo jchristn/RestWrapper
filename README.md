@@ -5,7 +5,7 @@
 [nuget]:     https://www.nuget.org/packages/RestWrapper/
 [nuget-img]: https://badge.fury.io/nu/Object.svg
 
-A simple C# class library to help simplify RESTful HTTP requests and responses. 
+A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
 ## Test App
 A test project is included which will help you exercise the class library.
