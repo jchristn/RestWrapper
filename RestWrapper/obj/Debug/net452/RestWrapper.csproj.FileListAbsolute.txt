@@ -1,0 +1,7 @@
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\bin\Debug\net452\RestWrapper.dll
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\bin\Debug\net452\RestWrapper.pdb
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.csproj.CoreCompileInputs.cache
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfoInputs.cache
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfo.cs
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.dll
+C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.pdb

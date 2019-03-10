@@ -1,0 +1,10 @@
+C:\Code\Misc\RestWrapperRetarget\Test\bin\Release\RestWrapperTest.exe.config
+C:\Code\Misc\RestWrapperRetarget\Test\bin\Release\RestWrapperTest.exe
+C:\Code\Misc\RestWrapperRetarget\Test\bin\Release\RestWrapperTest.pdb
+C:\Code\Misc\RestWrapperRetarget\Test\bin\Release\RestWrapper.dll
+C:\Code\Misc\RestWrapperRetarget\Test\bin\Release\RestWrapper.pdb
+C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\Test.csprojAssemblyReference.cache
+C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\Test.csproj.CoreCompileInputs.cache
+C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\Test.csproj.CopyComplete
+C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\RestWrapperTest.exe
+C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\RestWrapperTest.pdb

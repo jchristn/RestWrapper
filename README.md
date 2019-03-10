@@ -7,10 +7,14 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
+As of v1.0.9, RestWrapper now targets both .NET Core 2.0 and .NET Framework 4.5.2.
+
 ## Test App
+
 A test project is included which will help you exercise the class library.
 
 ## Available APIs
+
 Two static methods exist: SendRequest and SendRequestSafe.  The differences are as follows:
 - SendRequest will throw any exception encountered to the caller
 - SendRequestSafe will take any WebException and create a RestResponse object from it.  Other exceptions are thrown to the caller
