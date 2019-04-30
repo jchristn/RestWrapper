@@ -7,10 +7,11 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-## New in v2.0.1
+## New in v2.0.x
 
 - Breaking changes, major refactor
 - Support for streams (in addition to byte arrays)
+- Added SendAsync methods for both byte arrays and streams
 
 ## Test App
 
@@ -64,4 +65,8 @@ MemoryStream ms = new MemoryStream(data);
 resp = req.Send(ms, data.Length);
 Console.WriteLine("Status : " + resp.StatusCode);
 // response data is in resp.DataStream
+
+// async methods
+resp = await req.SendAsync(data);
+resp = await req.SendAsync(ms, data.Length);
 ```

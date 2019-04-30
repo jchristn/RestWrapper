@@ -23,7 +23,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\net452\RestWrapper.dll" target="lib\net452\RestWrapper.dll" />
-    <file src="C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\netstandard2.0\RestWrapper.dll" target="lib\netstandard2.0\RestWrapper.dll" />
+    <file src="C:\Code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\net452\RestWrapper.dll" target="lib\net452\RestWrapper.dll" />
+    <file src="C:\Code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\netstandard2.0\RestWrapper.dll" target="lib\netstandard2.0\RestWrapper.dll" />
   </files>
 </package>
