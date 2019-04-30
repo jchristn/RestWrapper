@@ -1,0 +1,13 @@
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Release\net452\TestStream.exe.config
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Release\net452\TestStream.exe
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Release\net452\TestStream.pdb
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Release\net452\Newtonsoft.Json.dll
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Release\net452\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Release\net452\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.exe
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Release\net452\TestStream.pdb

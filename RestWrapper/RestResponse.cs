@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RestWrapper
 {
+    /// <summary>
+    /// RESTful response from the server.
+    /// </summary>
     public class RestResponse
-    {
-        #region Constructor
-
-        /// <summary>
-        /// An organized object containing frequently used response parameters from a RESTful HTTP request.
-        /// </summary>
-        public RestResponse()
-        {
-        }
-
-        #endregion
-
+    { 
         #region Public-Members
 
         /// <summary>
@@ -66,9 +59,25 @@ namespace RestWrapper
         /// </summary>
         public byte[] Data;
 
+        /// <summary>
+        /// The stream containing the response data returned from the server.
+        /// </summary>
+        public Stream DataStream;
+
         #endregion
 
         #region Private-Members
+
+        #endregion
+
+        #region Constructors-and-Factories
+
+        /// <summary>
+        /// An organized object containing frequently used response parameters from a RESTful HTTP request.
+        /// </summary>
+        public RestResponse()
+        {
+        }
 
         #endregion
 

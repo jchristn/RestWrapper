@@ -6,41 +6,95 @@ using System.Text;
 using System.Threading.Tasks;
 using RestWrapper;
 
-namespace RestWrapperTest
+namespace Test
 {
     class Program
     {
+        static bool debug = false;
+
         static void Main(string[] args)
         {
             try
             {
+                RestRequest req = null;
+                RestResponse resp = null;
                 bool runForever = true;
+                byte[] data = null;
+
                 while (runForever)
                 {
                     string userInput = "";
-                    RestResponse resp = new RestResponse();
                     while (String.IsNullOrEmpty(userInput))
                     {
-                        Console.Write("Command [get put post delete head]: ");
+                        Console.Write("Command [? for help]: ");
                         userInput = Console.ReadLine();
                     }
 
                     switch (userInput)
                     {
-                        case "put":
-                        case "post":
-                        case "delete":
-                            resp = RestRequest.SendRequest(
-                                UserInputString("URL", "http://www.google.com/", false),
-                                UserInputString("Content Type", "text/plain", false),
-                                userInput,
-                                UserInputString("User", null, true),
-                                UserInputString("Password", null, true),
-                                UserInputBoolean("Encode Credentials", true),
-                                UserInputBoolean("Ignore Cert Errors", true),
-                                null,
-                                Encoding.UTF8.GetBytes(UserInputString("Data", "{}", false)));
+                        case "quit":
+                        case "q":
+                            runForever = false;
+                            break;
 
+                        case "cls":
+                            Console.Clear();
+                            break;
+
+                        case "?":
+                            Menu();
+                            break;
+
+                        case "put":
+                            req = new RestRequest(
+                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                HttpMethod.PUT,
+                                null,
+                                InputString("Content type:", "text/plain", false),
+                                true);
+                            req.ConsoleDebug = debug;
+                            data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
+                            resp = req.Send(data);
+                            if (resp == null)
+                            {
+                                Console.WriteLine("Null response");
+                            }
+                            else
+                            {
+                                Console.WriteLine(resp.ToString());
+                            }
+                            break;
+
+                        case "post":
+                            req = new RestRequest(
+                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                HttpMethod.POST,
+                                null,
+                                InputString("Content type:", "text/plain", false),
+                                true);
+                            req.ConsoleDebug = debug;
+                            data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
+                            resp = req.Send(data);
+                            if (resp == null)
+                            {
+                                Console.WriteLine("Null response");
+                            }
+                            else
+                            {
+                                Console.WriteLine(resp.ToString());
+                            }
+                            break;
+
+                        case "delete":
+                            req = new RestRequest(
+                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                HttpMethod.DELETE,
+                                null,
+                                InputString("Content type:", "text/plain", false),
+                                true);
+                            req.ConsoleDebug = debug;
+                            data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false)); 
+                            resp = req.Send(data);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -52,18 +106,14 @@ namespace RestWrapperTest
                             break;
 
                         case "head":
-                        case "get":
-                            resp = RestRequest.SendRequest(
-                                UserInputString("URL", "http://www.google.com/", false),
-                                UserInputString("Content Type", "text/plain", false),
-                                userInput,
-                                UserInputString("User", null, true),
-                                UserInputString("Password", null, true),
-                                UserInputBoolean("Encode Credentials", true),
-                                UserInputBoolean("Ignore Cert Errors", true),
+                            req = new RestRequest(
+                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                HttpMethod.HEAD,
                                 null,
-                                null);
-
+                                null,
+                                true);
+                            req.ConsoleDebug = debug;
+                            resp = req.Send(null);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -73,14 +123,28 @@ namespace RestWrapperTest
                                 Console.WriteLine(resp.ToString());
                             }
                             break;
-                            
-                        case "quit":
-                        case "q":
-                            runForever = false;
+
+                        case "get":
+                            req = new RestRequest(
+                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                HttpMethod.GET,
+                                null,
+                                null,
+                                true);
+                            req.ConsoleDebug = debug;
+                            resp = req.Send(null);
+                            if (resp == null)
+                            {
+                                Console.WriteLine("Null response");
+                            }
+                            else
+                            {
+                                Console.WriteLine(resp.ToString());
+                            }
                             break;
 
-                        case "cls":
-                            Console.Clear();
+                        case "debug":
+                            debug = !debug;
                             break;
 
                         default:
@@ -92,6 +156,20 @@ namespace RestWrapperTest
             {
                 ExceptionConsole("Main", "Outer exception", e);
             }
+        }
+
+        static void Menu()
+        {
+            Console.WriteLine("--- Available Commands ---");
+            Console.WriteLine("  ?           Help, this menu");
+            Console.WriteLine("  q           Quit the application");
+            Console.WriteLine("  c           Clear the screen");
+            Console.WriteLine("  get         Submit a GET request");
+            Console.WriteLine("  put         Submit a PUT request");
+            Console.WriteLine("  post        Submit a POST request");
+            Console.WriteLine("  delete      Submit a DELETE request");
+            Console.WriteLine("  head        Submit a HEAD request");
+            Console.WriteLine("  debug       Enable or disable console debugging (currently " + debug + ")");
         }
 
         static string StackToString()
@@ -140,7 +218,7 @@ namespace RestWrapperTest
             return;
         }
 
-        static string UserInputString(string question, string defaultAnswer, bool allowNull)
+        static string InputString(string question, string defaultAnswer, bool allowNull)
         {
             while (true)
             {
@@ -166,7 +244,7 @@ namespace RestWrapperTest
             }
         }
 
-        static int UserInputInt(string question, int defaultAnswer, bool positiveOnly, bool allowZero)
+        static int InputInteger(string question, int defaultAnswer, bool positiveOnly, bool allowZero)
         {
             while (true)
             {
@@ -208,7 +286,7 @@ namespace RestWrapperTest
             }
         }
 
-        static bool UserInputBoolean(string question, bool trueDefault)
+        static bool InputBoolean(string question, bool trueDefault)
         {
             Console.Write(question);
 

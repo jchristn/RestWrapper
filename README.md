@@ -7,57 +7,61 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-As of v1.0.9, RestWrapper now targets both .NET Core 2.0 and .NET Framework 4.5.2.
+## New in v2.0.1
+
+- Breaking changes, major refactor
+- Support for streams (in addition to byte arrays)
 
 ## Test App
 
-A test project is included which will help you exercise the class library.
-
-## Available APIs
-
-Two static methods exist: SendRequest and SendRequestSafe.  The differences are as follows:
-- SendRequest will throw any exception encountered to the caller
-- SendRequestSafe will take any WebException and create a RestResponse object from it.  Other exceptions are thrown to the caller
-
+Two test projects are included which will help you exercise the class library, one using byte arrays for input/output data, and the other for streams.
+ 
 ## Example
 ```
 using RestWrapper;
+using System.IO;
 
-//
-// Simple GET with No Credentials
-//
-RestResponse resp = RestRequest.SendRequest(
-	"http://www.github.com/",	// URL
-	null, 						// content-type
-	"GET",						// verb/method
-	null, null, false, 			// user, password, encode
-	null, 						// headers
-	null);						// byte array data
+RestRequest req = null;
 
-//
-// Enumerate response
-//
-Console.WriteLine(
-	"Received " + resp.StatusCode + " (" + resp.ContentLength + " bytes) " +
-	"with data: " + Encoding.UTF8.GetString(resp.Data));
+// simple GET using byte array for response data
 
-//
-// POST with Headers and Credentials
-//
-Dictionary<string, string> headers = new Dictionary<string, string>();
-headers.Add("x-custom-header", "my-custom-value");
-byte[] data = Encoding.UTF8.GetBytes("some-field=some-value&hello=world");
+req = new RestRequest(
+	"http://www.google.com/",
+	HttpMethod.GET,
+	null, 						// Dictionary<string, string> headers
+	null,						// Content type
+	true						// Read response data into Data
+	);
+resp = req.Send(null);
+Console.WriteLine("Status : " + resp.StatusCode);
+Console.WriteLine("Data   : " + Encoding.UTF8.GetString(resp.Data));
 
-RestResponse resp = RestRequest.SendRequest(
-	"https://my.server.com/form",			// URL
-	"application/x-www-form-urlencoded",	// content-type
-	"POST",									// verb/method
-	"my-username", "my-password", true, 	// user, password, encode
-	headers,								// headers
-	data);									// byte array data
+// simple POST using byte array for request and response data
 
-//
-// Enumerate response
-//
-Console.WriteLine(resp.ToString());		// Easy peasy
+req = new RestRequest(
+	"http://127.0.0.1:8000/api",
+	HttpMethod.POST,
+	null, 						// Dictionary<string, string> headers
+	"text/plain",				// Content type
+	true						// Read response data into Data
+	);
+byte[] data = Encoding.UTF8.GetBytes("Hello, world!");
+resp = req.Send(data);
+Console.WriteLine("Status : " + resp.StatusCode);
+Console.WriteLine("Data   : " + Encoding.UTF8.GetString(resp.Data));
+
+// simple POST using input and output stream
+
+req = new RestRequest(
+	"http://127.0.0.1:8000/api",
+	HttpMethod.POST,
+	null, 						// Dictionary<string, string> headers
+	"text/plain",				// Content type
+	false						// Read response data into Data
+	);
+byte[] data = Encoding.UTF8.GetBytes("Hello, world!");
+MemoryStream ms = new MemoryStream(data);
+resp = req.Send(ms, data.Length);
+Console.WriteLine("Status : " + resp.StatusCode);
+// response data is in resp.DataStream
 ```

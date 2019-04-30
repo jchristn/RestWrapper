@@ -3,16 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.9</Version>
+    <Version>2.0.1</Version>
     <Authors>Joel Christner</Authors>
     <Description>A simple C# wrapper for making REST API requests (RESTful HTTP and HTTPS)</Description>
     <Copyright>(c)2019 Joel Christner</Copyright>
     <PackageTags>rest restful api http https request response webrequest webresponse</PackageTags>
-    <PackageReleaseNotes>Retarget to .NET Core 2.0 and .NET Framework 4.5.2</PackageReleaseNotes>
+    <PackageReleaseNotes>Breaking changes: major refactor, support for Streams.  Please refer to project README for more details.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageLicenseUrl>https://github.com/jchristn/RestWrapper/blob/master/LICENSE.txt</PackageLicenseUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
 
 </Project>

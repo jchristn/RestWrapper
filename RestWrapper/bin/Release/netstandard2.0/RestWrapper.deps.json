@@ -1,15 +1,16 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "cfe1dc2a80602aef150a12815387068463a61a0d"
+    "signature": "ed4fb23ea5aa7f93e1646354b4f7b1f56e6909ed"
   },
   "compilationOptions": {},
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "RestWrapper/1.0.9": {
+      "RestWrapper/2.0.1": {
         "dependencies": {
-          "NETStandard.Library": "2.0.3"
+          "NETStandard.Library": "2.0.3",
+          "Newtonsoft.Json": "12.0.2"
         },
         "runtime": {
           "RestWrapper.dll": {}
@@ -20,11 +21,19 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
+      },
+      "Newtonsoft.Json/12.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.2.23222"
+          }
+        }
       }
     }
   },
   "libraries": {
-    "RestWrapper/1.0.9": {
+    "RestWrapper/2.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -42,6 +51,13 @@
       "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mtweBXPWhp1CMQATtBT7ZfMZrbZBTKfjGwz6Y75NwGjx/GztDaUnfw8GK9KZ2T4fDIqKJyDjc9Rxlw5+G2FcVA==",
+      "path": "newtonsoft.json/12.0.2",
+      "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
     }
   }
 }

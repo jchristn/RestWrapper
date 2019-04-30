@@ -6,3 +6,11 @@ C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\netstandard2.0\RestWrappe
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.AssemblyInfo.cs
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.dll
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\netstandard2.0\RestWrapper.deps.json
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\netstandard2.0\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\netstandard2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.pdb

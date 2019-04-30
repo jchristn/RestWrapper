@@ -8,3 +8,14 @@ C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\Test.csproj.CoreCompileInputs.
 C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\Test.csproj.CopyComplete
 C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\RestWrapperTest.exe
 C:\Code\Misc\RestWrapperRetarget\Test\obj\Release\RestWrapperTest.pdb
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\RestWrapperTest.exe.config
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\RestWrapperTest.exe
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\RestWrapperTest.pdb
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\Newtonsoft.Json.dll
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\Test.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\Test.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\Test.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\RestWrapperTest.exe
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\RestWrapperTest.pdb

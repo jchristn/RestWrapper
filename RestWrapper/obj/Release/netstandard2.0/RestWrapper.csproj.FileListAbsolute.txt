@@ -6,3 +6,12 @@ C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Release\netstandard2.0\RestWrap
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Release\netstandard2.0\RestWrapper.AssemblyInfo.cs
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Release\netstandard2.0\RestWrapper.dll
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Release\netstandard2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Release\netstandard2.0\RestWrapper.deps.json
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Release\netstandard2.0\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Release\netstandard2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Release\netstandard2.0\RestWrapper.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Release\netstandard2.0\RestWrapper.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Release\netstandard2.0\RestWrapper.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Release\netstandard2.0\RestWrapper.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Release\netstandard2.0\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Release\netstandard2.0\RestWrapper.pdb

@@ -1,0 +1,14 @@
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\TestStream.deps.json
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\TestStream.runtimeconfig.json
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\TestStream.runtimeconfig.dev.json
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\TestStream.dll
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\TestStream.pdb
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.dll
+C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\netcoreapp2.0\TestStream.pdb

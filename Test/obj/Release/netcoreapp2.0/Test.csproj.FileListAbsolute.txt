@@ -1,0 +1,14 @@
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\Test.deps.json
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\Test.runtimeconfig.json
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\Test.runtimeconfig.dev.json
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\Test.dll
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\Test.pdb
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\Test\bin\Release\netcoreapp2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.dll
+C:\code\Misc\RestWrapper-2.0\Test\obj\Release\netcoreapp2.0\Test.pdb

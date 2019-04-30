@@ -5,3 +5,13 @@ C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.Assemb
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfo.cs
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.dll
 C:\Code\Misc\RestWrapperRetarget\RestWrapper\obj\Debug\net452\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\net452\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\net452\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\bin\Debug\net452\Newtonsoft.Json.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.csprojAssemblyReference.cache
