@@ -182,7 +182,7 @@ namespace RestWrapper
 
             _Data = null;
             _DataStream = null;
-            _ReturnStream = readResponseData;
+            _ReturnStream = !readResponseData;
         }
 
         #endregion
@@ -204,8 +204,7 @@ namespace RestWrapper
         public RestResponse Send(byte[] data)
         {
             _Data = data;
-            _DataStream = null;
-            _ReturnStream = false;
+            _DataStream = null; 
             return SendInternal();
         }
 
@@ -220,8 +219,7 @@ namespace RestWrapper
 
             _Data = null;
             _DataStream = stream;
-            ContentLength = contentLength;
-            _ReturnStream = true;
+            ContentLength = contentLength; 
             return SendInternal();
         }
 
@@ -233,8 +231,7 @@ namespace RestWrapper
         public async Task<RestResponse> SendAsync(byte[] data)
         {
             _Data = data;
-            _DataStream = null;
-            _ReturnStream = false;
+            _DataStream = null; 
             return await SendInternalAsync();
         }
 
@@ -249,8 +246,7 @@ namespace RestWrapper
 
             _Data = null;
             _DataStream = stream;
-            ContentLength = contentLength;
-            _ReturnStream = true;
+            ContentLength = contentLength; 
             return await SendInternalAsync();
         }
 
