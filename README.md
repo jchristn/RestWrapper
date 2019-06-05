@@ -23,15 +23,16 @@ using RestWrapper;
 using System.IO;
 
 RestRequest req = null;
+RestResponse resp = null;
 
 // simple GET using byte array for response data
 
 req = new RestRequest(
 	"http://www.google.com/",
 	HttpMethod.GET,
-	null, 						// Dictionary<string, string> headers
-	null,						// Content type
-	true						// Read response data into Data
+	null,                     // Dictionary<string, string> headers
+	null,                     // Content type
+	true                      // Read response data into RestResponse.Data
 	);
 resp = req.Send(null);
 Console.WriteLine("Status : " + resp.StatusCode);
@@ -42,9 +43,9 @@ Console.WriteLine("Data   : " + Encoding.UTF8.GetString(resp.Data));
 req = new RestRequest(
 	"http://127.0.0.1:8000/api",
 	HttpMethod.POST,
-	null, 						// Dictionary<string, string> headers
-	"text/plain",				// Content type
-	true						// Read response data into Data
+	null,                         // Dictionary<string, string> headers
+	"text/plain",                 // Content type
+	true                          // Read response data into RestResponse.Data
 	);
 byte[] data = Encoding.UTF8.GetBytes("Hello, world!");
 resp = req.Send(data);
@@ -56,9 +57,9 @@ Console.WriteLine("Data   : " + Encoding.UTF8.GetString(resp.Data));
 req = new RestRequest(
 	"http://127.0.0.1:8000/api",
 	HttpMethod.POST,
-	null, 						// Dictionary<string, string> headers
-	"text/plain",				// Content type
-	false						// Read response data into Data
+	null,                         // Dictionary<string, string> headers
+	"text/plain",                 // Content type
+	false                         // Access response stream from RestResponse.DataStream
 	);
 byte[] data = Encoding.UTF8.GetBytes("Hello, world!");
 MemoryStream ms = new MemoryStream(data);
