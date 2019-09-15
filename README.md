@@ -7,67 +7,84 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-## New in v2.0.x
+## New in v2.1.x
 
-- Breaking changes, major refactor
-- Support for streams (in addition to byte arrays)
-- Added SendAsync methods for both byte arrays and streams
+- Breaking changes
+- Additional Send() methods including strings
+- Better support for async operations and internally using async
 
-## Test App
+## Test Apps
 
-Two test projects are included which will help you exercise the class library, one using byte arrays for input/output data, and the other for streams.
+Test projects are included which will help you exercise the class library.
  
-## Example
+## Examples
+
 ```
+//
+// simple GET example
+//
+
 using RestWrapper;
 using System.IO;
 
-RestRequest req = null;
-RestResponse resp = null;
-
-// simple GET using byte array for response data
-
-req = new RestRequest(
+RestRequest req = new RestRequest(
 	"http://www.google.com/",
 	HttpMethod.GET,
 	null,                     // Dictionary<string, string> headers
-	null,                     // Content type
-	true                      // Read response data into RestResponse.Data
-	);
-resp = req.Send(null);
+	null);                    // Content type
+
+RestResponse resp = req.Send();
 Console.WriteLine("Status : " + resp.StatusCode);
-Console.WriteLine("Data   : " + Encoding.UTF8.GetString(resp.Data));
-
-// simple POST using byte array for request and response data
-
-req = new RestRequest(
-	"http://127.0.0.1:8000/api",
-	HttpMethod.POST,
-	null,                         // Dictionary<string, string> headers
-	"text/plain",                 // Content type
-	true                          // Read response data into RestResponse.Data
-	);
-byte[] data = Encoding.UTF8.GetBytes("Hello, world!");
-resp = req.Send(data);
-Console.WriteLine("Status : " + resp.StatusCode);
-Console.WriteLine("Data   : " + Encoding.UTF8.GetString(resp.Data));
-
-// simple POST using input and output stream
-
-req = new RestRequest(
-	"http://127.0.0.1:8000/api",
-	HttpMethod.POST,
-	null,                         // Dictionary<string, string> headers
-	"text/plain",                 // Content type
-	false                         // Access response stream from RestResponse.DataStream
-	);
-byte[] data = Encoding.UTF8.GetBytes("Hello, world!");
-MemoryStream ms = new MemoryStream(data);
-resp = req.Send(ms, data.Length);
-Console.WriteLine("Status : " + resp.StatusCode);
-// response data is in resp.DataStream
-
-// async methods
-resp = await req.SendAsync(data);
-resp = await req.SendAsync(ms, data.Length);
+// response data is in resp.Data
 ```
+
+```
+//
+// simple POST examples
+//
+
+using RestWrapper;
+using System.IO;
+
+RestRequest req = new RestRequest(
+	"http://127.0.0.1:8000/api",
+	HttpMethod.POST,
+	null,                         // Dictionary<string, string> headers
+	"text/plain");                // Content type
+
+string reqString = "Hello, world!";
+byte[] reqBytes = Encoding.UTF8.GetBytes(reqString);
+MemoryStream reqStream = new MemoryStream(reqBytes);
+reqStream.Seek(0, SeekOrigin.Begin);
+
+RestResponse resp = req.Send(reqData);
+resp = req.Send(reqBytes);
+resp = req.Send(reqBytes.Length, reqStream);
+
+Console.WriteLine("Status : " + resp.StatusCode);
+// response data is in resp.Data
+```
+
+```
+//
+// async methods
+//
+
+using RestWrapper;
+using System.IO;
+using System.Threading.Tasks;
+
+RestRequest req = new RestRequest(
+	"http://127.0.0.1:8000/api",
+	HttpMethod.POST,
+	null,                         // Dictionary<string, string> headers
+	"text/plain");                // Content type
+
+RestResponse resp = await req.SendAsync("Hello, world!");
+Console.WriteLine("Status : " + resp.StatusCode);
+// response data is in resp.Data
+```
+
+## Version History
+
+Please refer to CHANGELOG.md for version history.

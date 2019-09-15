@@ -50,8 +50,7 @@ namespace TestAsync
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.PUT,
                                 null,
-                                InputString("Content type:", "text/plain", false),
-                                true);
+                                InputString("Content type:", "text/plain", false));
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.SendAsync(data).Result;
@@ -70,8 +69,7 @@ namespace TestAsync
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.POST,
                                 null,
-                                InputString("Content type:", "text/plain", false),
-                                true);
+                                InputString("Content type:", "text/plain", false));
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.SendAsync(data).Result;
@@ -90,8 +88,7 @@ namespace TestAsync
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.DELETE,
                                 null,
-                                InputString("Content type:", "text/plain", false),
-                                true);
+                                InputString("Content type:", "text/plain", false));
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.SendAsync(data).Result;
@@ -110,10 +107,9 @@ namespace TestAsync
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.HEAD,
                                 null,
-                                null,
-                                true);
+                                null);
                             req.ConsoleDebug = debug;
-                            resp = req.SendAsync(null).Result;
+                            resp = req.SendAsync().Result;
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -129,10 +125,9 @@ namespace TestAsync
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.GET,
                                 null,
-                                null,
-                                true);
+                                null);
                             req.ConsoleDebug = debug;
-                            resp = req.SendAsync(null).Result;
+                            resp = req.SendAsync().Result;
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");

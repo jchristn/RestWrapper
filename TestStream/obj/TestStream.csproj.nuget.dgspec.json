@@ -1,0 +1,156 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\code\\misc\\RestWrapper-2.1\\TestStream\\TestStream.csproj": {}
+  },
+  "projects": {
+    "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+      "version": "2.1.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
+        "projectName": "RestWrapper",
+        "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
+        "packagesPath": "C:\\Users\\joelc\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\joelc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net452",
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/jchristn/index.json": {},
+          "https://nuget.pkg.github.com/kvpbase/index.json": {}
+        },
+        "frameworks": {
+          "net452": {
+            "projectReferences": {}
+          },
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net452": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            }
+          }
+        },
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\code\\misc\\RestWrapper-2.1\\TestStream\\TestStream.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\misc\\RestWrapper-2.1\\TestStream\\TestStream.csproj",
+        "projectName": "TestStream",
+        "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\TestStream\\TestStream.csproj",
+        "packagesPath": "C:\\Users\\joelc\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\misc\\RestWrapper-2.1\\TestStream\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\joelc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net452",
+          "netcoreapp2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/jchristn/index.json": {},
+          "https://nuget.pkg.github.com/kvpbase/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.0": {
+            "projectReferences": {
+              "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+                "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
+              }
+            }
+          },
+          "net452": {
+            "projectReferences": {
+              "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+                "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.0": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        },
+        "net452": {}
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

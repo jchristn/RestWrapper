@@ -52,12 +52,11 @@ namespace TestStream
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.PUT,
                                 null,
-                                InputString("Content type:", "text/plain", false),
-                                true);
+                                InputString("Content type:", "text/plain", false));
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
-                            resp = req.Send(ms, data.Length);
+                            resp = req.Send(data.Length, ms);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -65,9 +64,9 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.DataStream != null && resp.ContentLength > 0)
+                                if (resp.Data != null && resp.ContentLength > 0)
                                 {
-                                    data = StreamToBytes(resp.DataStream);
+                                    data = StreamToBytes(resp.Data);
                                     Console.WriteLine(Encoding.UTF8.GetString(data));
                                 }
                             }
@@ -78,12 +77,11 @@ namespace TestStream
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.POST,
                                 null,
-                                InputString("Content type:", "text/plain", false),
-                                true);
+                                InputString("Content type:", "text/plain", false));
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
-                            resp = req.Send(ms, data.Length);
+                            resp = req.Send(data.Length, ms);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -91,9 +89,9 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.DataStream != null && resp.ContentLength > 0)
+                                if (resp.Data != null && resp.ContentLength > 0)
                                 {
-                                    data = StreamToBytes(resp.DataStream);
+                                    data = StreamToBytes(resp.Data);
                                     Console.WriteLine(Encoding.UTF8.GetString(data));
                                 }
                             }
@@ -104,12 +102,11 @@ namespace TestStream
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.DELETE,
                                 null,
-                                InputString("Content type:", "text/plain", false),
-                                true);
+                                InputString("Content type:", "text/plain", false));
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
-                            resp = req.Send(ms, data.Length);
+                            resp = req.Send(data.Length, ms);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -117,9 +114,9 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.DataStream != null && resp.ContentLength > 0)
+                                if (resp.Data != null && resp.ContentLength > 0)
                                 {
-                                    data = StreamToBytes(resp.DataStream);
+                                    data = StreamToBytes(resp.Data);
                                     Console.WriteLine(Encoding.UTF8.GetString(data));
                                 }
                             }
@@ -130,10 +127,9 @@ namespace TestStream
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.HEAD,
                                 null,
-                                null,
-                                true);
+                                null);
                             req.ConsoleDebug = debug;
-                            resp = req.Send(null);
+                            resp = req.Send();
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -141,9 +137,9 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.DataStream != null && resp.ContentLength > 0)
+                                if (resp.Data != null && resp.ContentLength > 0)
                                 {
-                                    data = StreamToBytes(resp.DataStream);
+                                    data = StreamToBytes(resp.Data);
                                     Console.WriteLine(Encoding.UTF8.GetString(data));
                                 }
                             }
@@ -154,10 +150,9 @@ namespace TestStream
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.GET,
                                 null,
-                                null,
-                                true);
+                                null);
                             req.ConsoleDebug = debug;
-                            resp = req.Send(null);
+                            resp = req.Send();
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -165,9 +160,9 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.DataStream != null && resp.ContentLength > 0)
+                                if (resp.Data != null && resp.ContentLength > 0)
                                 {
-                                    data = StreamToBytes(resp.DataStream);
+                                    data = StreamToBytes(resp.Data);
                                     Console.WriteLine(Encoding.UTF8.GetString(data));
                                 }
                             }

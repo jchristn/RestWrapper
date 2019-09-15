@@ -206,7 +206,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "RestWrapper/2.0.4": {
+      "RestWrapper/2.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -673,7 +673,7 @@
           "runtimes/win-x86/native/hostfxr.dll": {}
         }
       },
-      "RestWrapper/2.0.4": {
+      "RestWrapper/2.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -697,7 +697,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "RestWrapper/2.0.4": {
+      "RestWrapper/2.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
@@ -721,7 +721,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "RestWrapper/2.0.4": {
+      "RestWrapper/2.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
@@ -1060,7 +1060,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "CCf4NjmDOoise7FAij2VPuHIgKKsu696vkTwhOkPVQfLsTmB2WLFfQ4yeO5Udtk8FD636UBMx6Y9eovzJKT76A==",
+      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
@@ -1506,7 +1506,7 @@
         "version.txt"
       ]
     },
-    "RestWrapper/2.0.4": {
+    "RestWrapper/2.1.0": {
       "type": "project",
       "path": "../RestWrapper/RestWrapper.csproj",
       "msbuildProject": "../RestWrapper/RestWrapper.csproj"
@@ -1515,32 +1515,35 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
-      "RestWrapper >= 2.0.4"
+      "RestWrapper >= 2.1.0"
     ],
     ".NETFramework,Version=v4.5.2": [
-      "RestWrapper >= 2.0.4"
+      "RestWrapper >= 2.1.0"
     ]
   },
   "packageFolders": {
     "C:\\Users\\joelc\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\Misc\\RestWrapper-2.0\\TestAsync\\TestAsync.csproj",
+      "projectUniqueName": "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj",
       "projectName": "TestAsync",
-      "projectPath": "C:\\Code\\Misc\\RestWrapper-2.0\\TestAsync\\TestAsync.csproj",
+      "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj",
       "packagesPath": "C:\\Users\\joelc\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\Misc\\RestWrapper-2.0\\TestAsync\\obj\\",
+      "outputPath": "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\joelc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net452",
@@ -1548,20 +1551,22 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.pkg.github.com/jchristn/index.json": {},
+        "https://nuget.pkg.github.com/kvpbase/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Code\\Misc\\RestWrapper-2.0\\RestWrapper\\RestWrapper.csproj": {
-              "projectPath": "C:\\Code\\Misc\\RestWrapper-2.0\\RestWrapper\\RestWrapper.csproj"
+            "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+              "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
             }
           }
         },
         "net452": {
           "projectReferences": {
-            "C:\\Code\\Misc\\RestWrapper-2.0\\RestWrapper\\RestWrapper.csproj": {
-              "projectPath": "C:\\Code\\Misc\\RestWrapper-2.0\\RestWrapper\\RestWrapper.csproj"
+            "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+              "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
             }
           }
         }

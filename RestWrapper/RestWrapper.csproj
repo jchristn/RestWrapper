@@ -1,23 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.4</Version>
+    <Version>2.1.0</Version>
     <Authors>Joel Christner</Authors>
     <Description>A simple C# wrapper for making REST API requests (RESTful HTTP and HTTPS)</Description>
     <Copyright>(c)2019 Joel Christner</Copyright>
     <PackageTags>rest restful api http https request response webrequest webresponse</PackageTags>
-    <PackageReleaseNotes>Bugfix for stream reading</PackageReleaseNotes>
+    <PackageReleaseNotes>Breaking changes, method signature changes, better async support, more Send() methods</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
-    <PackageLicenseUrl>https://github.com/jchristn/RestWrapper/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/jchristn/restwrapper/master/assets/icon.ico</PackageIconUrl>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
