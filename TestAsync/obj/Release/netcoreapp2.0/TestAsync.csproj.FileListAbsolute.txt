@@ -26,3 +26,4 @@ C:\code\misc\RestWrapper-2.1\TestAsync\obj\Release\netcoreapp2.0\TestAsync.Assem
 C:\code\misc\RestWrapper-2.1\TestAsync\obj\Release\netcoreapp2.0\TestAsync.csproj.CopyComplete
 C:\code\misc\RestWrapper-2.1\TestAsync\obj\Release\netcoreapp2.0\TestAsync.dll
 C:\code\misc\RestWrapper-2.1\TestAsync\obj\Release\netcoreapp2.0\TestAsync.pdb
+C:\Code\Misc\RestWrapper-2.1\TestAsync\bin\Release\netcoreapp2.0\RestWrapper.xml

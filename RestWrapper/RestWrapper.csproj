@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>Joel Christner</Authors>
-    <Description>A simple C# wrapper for making REST API requests (RESTful HTTP and HTTPS)</Description>
+    <Description>RestWrapper is the easiest and fastest way to integrate and consume RESTful APIs and services in C#.</Description>
     <Copyright>(c)2019 Joel Christner</Copyright>
     <PackageTags>rest restful api http https request response webrequest webresponse</PackageTags>
     <PackageReleaseNotes>Breaking changes, method signature changes, better async support, more Send() methods</PackageReleaseNotes>
@@ -15,6 +15,10 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/jchristn/restwrapper/master/assets/icon.ico</PackageIconUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>C:\Code\Misc\RestWrapper-2.1\RestWrapper\RestWrapper.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

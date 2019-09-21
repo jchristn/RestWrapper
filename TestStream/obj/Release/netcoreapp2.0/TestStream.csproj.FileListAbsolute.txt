@@ -26,3 +26,4 @@ C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\netcoreapp2.0\TestStream.Ass
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\netcoreapp2.0\TestStream.csproj.CopyComplete
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\netcoreapp2.0\TestStream.dll
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\netcoreapp2.0\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.1\TestStream\bin\Release\netcoreapp2.0\RestWrapper.xml

@@ -111,7 +111,6 @@ namespace RestWrapper
         /// <param name="method">HTTP method to use.</param>
         /// <param name="headers">HTTP headers to use.</param>
         /// <param name="contentType">Content type to use.</param>
-        /// <param name="readResponseData">Indicate if the response stream should be read fully with the resultant data returned in Data (true), or, if the response stream should be returned in DataStream (false).</param>
         public RestRequest(
             string url,
             HttpMethod method,

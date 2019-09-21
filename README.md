@@ -7,11 +7,9 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-## New in v2.1.x
+## New in v2.1.1
 
-- Breaking changes
-- Additional Send() methods including strings
-- Better support for async operations and internally using async
+- XML documentation
 
 ## Test Apps
 

@@ -2,13 +2,17 @@
 
 ## Current Version
 
+v2.1.1
+
+- XML documentation
+
+## Previous Versions
+
 v2.1.0
 
 - Breaking changes
 - Additional Send() methods including strings
 - Better support for async operations and internally using async
-
-## Previous Versions
 
 v2.0.x
 

@@ -78,6 +78,10 @@ namespace RestWrapper
 
         #region Public-Methods
 
+        /// <summary>
+        /// Creates a human-readable string of the object.
+        /// </summary>
+        /// <returns>String.</returns>
         public override string ToString()
         {
             string ret = "";
