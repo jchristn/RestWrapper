@@ -109,7 +109,7 @@
             The content type of the payload (i.e. Data or DataStream).
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.aContentLength">
+        <member name="P:RestWrapper.RestRequest.ContentLength">
             <summary>
             The content length of the payload (i.e. Data or DataStream).
             </summary>

@@ -71,7 +71,7 @@ namespace RestWrapper
         /// <summary>
         /// The content length of the payload (i.e. Data or DataStream).
         /// </summary>
-        public long aContentLength { get; set; }
+        public long ContentLength { get; set; }
          
         /// <summary>
         /// The size of the buffer to use while reading from the DataStream and the response stream from the server.

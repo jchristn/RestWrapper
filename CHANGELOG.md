@@ -2,11 +2,15 @@
 
 ## Current Version
 
+v2.1.2
+
+- Fix misnamed content-length parameter
+
+## Previous Versions
+
 v2.1.1
 
 - XML documentation
-
-## Previous Versions
 
 v2.1.0
 

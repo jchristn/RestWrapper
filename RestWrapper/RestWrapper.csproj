@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <Authors>Joel Christner</Authors>
     <Description>RestWrapper is the easiest and fastest way to integrate and consume RESTful APIs and services in C#.</Description>
     <Copyright>(c)2019 Joel Christner</Copyright>
     <PackageTags>rest restful api http https request response webrequest webresponse</PackageTags>
-    <PackageReleaseNotes>Breaking changes, method signature changes, better async support, more Send() methods</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix misnamed content length parameter.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>

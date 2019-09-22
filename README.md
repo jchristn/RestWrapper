@@ -7,9 +7,9 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-## New in v2.1.1
+## New in v2.1.2
 
-- XML documentation
+- Fix misnamed content-length parameter
 
 ## Test Apps
 

@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
-      "version": "2.1.1",
+      "version": "2.1.2",
       "restore": {
         "projectUniqueName": "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
         "projectName": "RestWrapper",
