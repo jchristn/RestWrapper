@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Code\\Misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj": {}
+    "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj": {}
   },
   "projects": {
-    "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
-      "version": "2.1.2",
+    "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+      "version": "2.1.3",
       "restore": {
-        "projectUniqueName": "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
+        "projectUniqueName": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
         "projectName": "RestWrapper",
-        "projectPath": "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
+        "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj",
         "packagesPath": "C:\\Users\\joelc\\.nuget\\packages\\",
-        "outputPath": "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\obj\\",
+        "outputPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -30,8 +30,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/jchristn/index.json": {},
-          "https://nuget.pkg.github.com/kvpbase/index.json": {}
+          "https://nuget.pkg.github.com/jchristn/index.json": {}
         },
         "frameworks": {
           "net452": {
@@ -54,7 +53,8 @@
               "target": "Package",
               "version": "[12.0.2, )"
             }
-          }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.0": {
           "dependencies": {
@@ -70,21 +70,27 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Code\\Misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj": {
+    "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Code\\Misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj",
+        "projectUniqueName": "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj",
         "projectName": "TestAsync",
-        "projectPath": "C:\\Code\\Misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj",
+        "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\TestAsync.csproj",
         "packagesPath": "C:\\Users\\joelc\\.nuget\\packages\\",
-        "outputPath": "C:\\Code\\Misc\\RestWrapper-2.1\\TestAsync\\obj\\",
+        "outputPath": "C:\\code\\misc\\RestWrapper-2.1\\TestAsync\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -103,21 +109,20 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/jchristn/index.json": {},
-          "https://nuget.pkg.github.com/kvpbase/index.json": {}
+          "https://nuget.pkg.github.com/jchristn/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.0": {
             "projectReferences": {
-              "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
-                "projectPath": "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
+              "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+                "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
               }
             }
           },
           "net452": {
             "projectReferences": {
-              "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
-                "projectPath": "C:\\Code\\Misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
+              "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj": {
+                "projectPath": "C:\\code\\misc\\RestWrapper-2.1\\RestWrapper\\RestWrapper.csproj"
               }
             }
           }
@@ -139,12 +144,20 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         },
-        "net452": {}
+        "net452": {
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
       },
       "runtimes": {
         "win7-x86": {

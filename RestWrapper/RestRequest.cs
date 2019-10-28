@@ -90,6 +90,22 @@ namespace RestWrapper
         }
 
         /// <summary>
+        /// The number of milliseconds to wait before assuming the request has timed out.
+        /// </summary>
+        public int Timeout
+        {
+            get
+            {
+                return _Timeout;
+            }
+            set
+            {
+                if (value < 1) throw new ArgumentException("Timeout must be greater than 1ms.");
+                _Timeout = value;
+            }
+        }
+
+        /// <summary>
         /// Enable console debugging.
         /// </summary>
         public bool ConsoleDebug = false;
@@ -98,7 +114,8 @@ namespace RestWrapper
 
         #region Private-Members
          
-        private int _StreamReadBufferSize = 65536; 
+        private int _StreamReadBufferSize = 65536;
+        private int _Timeout = 30000;
 
         #endregion
 
@@ -268,7 +285,7 @@ namespace RestWrapper
                 client.KeepAlive = false;
                 client.Method = Method.ToString();
                 client.AllowAutoRedirect = true;
-                client.Timeout = 30000;
+                client.Timeout = _Timeout;
                 client.ContentLength = 0;
                 client.ContentType = ContentType;
                 client.UserAgent = "RestWrapper (https://www.github.com/jchristn/RestWrapper)";

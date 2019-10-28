@@ -16,7 +16,6 @@ C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.dll
 C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.pdb
 C:\code\Misc\RestWrapper-2.0\RestWrapper\obj\Debug\net452\RestWrapper.csprojAssemblyReference.cache
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Debug\net452\RestWrapper.csprojAssemblyReference.cache
-C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Debug\net452\RestWrapper.csproj.CoreCompileInputs.cache
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfoInputs.cache
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Debug\net452\RestWrapper.AssemblyInfo.cs
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Debug\net452\RestWrapper.dll

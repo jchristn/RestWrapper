@@ -1,14 +1,14 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "4bf20b3f4b187ddd01af96ea47dda577c5263775"
+    "signature": ""
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "TestAsync/1.0.0": {
         "dependencies": {
-          "RestWrapper": "2.1.2"
+          "RestWrapper": "2.1.3"
         },
         "runtime": {
           "TestAsync.dll": {}
@@ -22,7 +22,7 @@
           }
         }
       },
-      "RestWrapper/2.1.2": {
+      "RestWrapper/2.1.3": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.2"
         },
@@ -41,11 +41,11 @@
     "Newtonsoft.Json/12.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-mtweBXPWhp1CMQATtBT7ZfMZrbZBTKfjGwz6Y75NwGjx/GztDaUnfw8GK9KZ2T4fDIqKJyDjc9Rxlw5+G2FcVA==",
+      "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "path": "newtonsoft.json/12.0.2",
       "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
     },
-    "RestWrapper/2.1.2": {
+    "RestWrapper/2.1.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

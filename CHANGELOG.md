@@ -2,11 +2,15 @@
 
 ## Current Version
 
+v2.1.3
+
+- Added RestRequest.Timeout parameter (in milliseconds)
+
+## Previous Versions
+
 v2.1.2
 
 - Fix misnamed content-length parameter
-
-## Previous Versions
 
 v2.1.1
 

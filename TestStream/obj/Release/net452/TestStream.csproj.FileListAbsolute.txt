@@ -18,7 +18,6 @@ C:\code\misc\RestWrapper-2.1\TestStream\bin\Release\net452\Newtonsoft.Json.dll
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Release\net452\RestWrapper.dll
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Release\net452\RestWrapper.pdb
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\net452\TestStream.csprojAssemblyReference.cache
-C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\net452\TestStream.csproj.CoreCompileInputs.cache
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\net452\TestStream.AssemblyInfoInputs.cache
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\net452\TestStream.AssemblyInfo.cs
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Release\net452\TestStream.csproj.CopyComplete

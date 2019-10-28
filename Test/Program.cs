@@ -11,11 +11,12 @@ namespace Test
     class Program
     {
         static bool debug = false;
+        static int timeout = 10000;
 
         static void Main(string[] args)
         {
             try
-            {
+            { 
                 RestRequest req = null;
                 RestResponse resp = null;
                 bool runForever = true;
@@ -51,6 +52,7 @@ namespace Test
                                 HttpMethod.PUT,
                                 null,
                                 InputString("Content type:", "text/plain", false));
+                            req.Timeout = timeout;
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
@@ -70,6 +72,7 @@ namespace Test
                                 HttpMethod.POST,
                                 null,
                                 InputString("Content type:", "text/plain", false));
+                            req.Timeout = timeout;
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
@@ -89,6 +92,7 @@ namespace Test
                                 HttpMethod.DELETE,
                                 null,
                                 InputString("Content type:", "text/plain", false));
+                            req.Timeout = timeout;
                             req.ConsoleDebug = debug;
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false)); 
                             resp = req.Send(data);
@@ -108,6 +112,7 @@ namespace Test
                                 HttpMethod.HEAD,
                                 null,
                                 null);
+                            req.Timeout = timeout;
                             req.ConsoleDebug = debug;
                             resp = req.Send();
                             if (resp == null)
@@ -126,6 +131,7 @@ namespace Test
                                 HttpMethod.GET,
                                 null,
                                 null);
+                            req.Timeout = timeout;
                             req.ConsoleDebug = debug;
                             resp = req.Send();
                             if (resp == null)
@@ -142,6 +148,11 @@ namespace Test
                             debug = !debug;
                             break;
 
+                        case "timeout":
+                            Console.Write("Timeout (ms): ");
+                            timeout = Convert.ToInt32(Console.ReadLine());
+                            break;
+
                         default:
                             break;
                     }
@@ -155,6 +166,7 @@ namespace Test
 
         static void Menu()
         {
+            Console.WriteLine("");
             Console.WriteLine("--- Available Commands ---");
             Console.WriteLine("  ?           Help, this menu");
             Console.WriteLine("  q           Quit the application");
@@ -165,6 +177,8 @@ namespace Test
             Console.WriteLine("  delete      Submit a DELETE request");
             Console.WriteLine("  head        Submit a HEAD request");
             Console.WriteLine("  debug       Enable or disable console debugging (currently " + debug + ")");
+            Console.WriteLine("  timeout     Set timeout milliseconds (currently " + timeout + "ms)");
+            Console.WriteLine("");
         }
 
         static string StackToString()

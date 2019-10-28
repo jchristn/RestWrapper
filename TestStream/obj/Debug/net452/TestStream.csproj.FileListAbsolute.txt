@@ -12,7 +12,6 @@ C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\net452\TestStream.csproj.CopyC
 C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\net452\TestStream.exe
 C:\code\Misc\RestWrapper-2.0\TestStream\obj\Debug\net452\TestStream.pdb
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\net452\TestStream.csprojAssemblyReference.cache
-C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\net452\TestStream.csproj.CoreCompileInputs.cache
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\net452\TestStream.AssemblyInfoInputs.cache
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\net452\TestStream.AssemblyInfo.cs
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\net452\TestStream.exe

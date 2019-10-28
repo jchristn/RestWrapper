@@ -19,7 +19,6 @@ C:\code\misc\RestWrapper-2.1\RestWrapper\bin\Release\netstandard2.0\RestWrapper.
 C:\code\misc\RestWrapper-2.1\RestWrapper\bin\Release\netstandard2.0\RestWrapper.dll
 C:\code\misc\RestWrapper-2.1\RestWrapper\bin\Release\netstandard2.0\RestWrapper.pdb
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Release\netstandard2.0\RestWrapper.csprojAssemblyReference.cache
-C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Release\netstandard2.0\RestWrapper.csproj.CoreCompileInputs.cache
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Release\netstandard2.0\RestWrapper.AssemblyInfoInputs.cache
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Release\netstandard2.0\RestWrapper.AssemblyInfo.cs
 C:\code\misc\RestWrapper-2.1\RestWrapper\obj\Release\netstandard2.0\RestWrapper.dll

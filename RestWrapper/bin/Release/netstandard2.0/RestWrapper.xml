@@ -119,6 +119,11 @@
             The size of the buffer to use while reading from the DataStream and the response stream from the server.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestRequest.Timeout">
+            <summary>
+            The number of milliseconds to wait before assuming the request has timed out.
+            </summary>
+        </member>
         <member name="F:RestWrapper.RestRequest.ConsoleDebug">
             <summary>
             Enable console debugging.
