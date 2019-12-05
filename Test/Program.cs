@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +64,11 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                if (resp.Data != null && resp.ContentLength > 0)
+                                {
+                                    Console.WriteLine("Content:");
+                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                }
                             }
                             break;
 
@@ -83,6 +89,11 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                if (resp.Data != null && resp.ContentLength > 0)
+                                {
+                                    Console.WriteLine("Content:");
+                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                }
                             }
                             break;
 
@@ -103,6 +114,11 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                if (resp.Data != null && resp.ContentLength > 0)
+                                {
+                                    Console.WriteLine("Content:");
+                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                }
                             }
                             break;
 
@@ -122,6 +138,11 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                if (resp.Data != null && resp.ContentLength > 0)
+                                {
+                                    Console.WriteLine("Content:");
+                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                }
                             }
                             break;
 
@@ -141,6 +162,11 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                if (resp.Data != null && resp.ContentLength > 0)
+                                {
+                                    Console.WriteLine("Content:");
+                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                }
                             }
                             break;
 
@@ -337,5 +363,21 @@ namespace Test
                 return false;
             }
         }
+
+        static byte[] StreamToBytes(Stream input)
+        {
+            if (input == null) return null;
+            if (!input.CanRead) return null;
+
+            if (input is MemoryStream)
+                return ((MemoryStream)input).ToArray();
+
+            using (var memoryStream = new MemoryStream())
+            {
+                input.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+
     }
 }

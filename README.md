@@ -7,9 +7,9 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-## New in v2.1.3
+## New in v2.1.4
 
-- Added RestRequest.Timeout parameter (in milliseconds)
+- ToString() method on RestRequest
 
 ## Test Apps
 

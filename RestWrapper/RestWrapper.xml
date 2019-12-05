@@ -138,6 +138,12 @@
             <param name="headers">HTTP headers to use.</param>
             <param name="contentType">Content type to use.</param>
         </member>
+        <member name="M:RestWrapper.RestRequest.ToString">
+            <summary>
+            Creates a human-readable string of the object.
+            </summary>
+            <returns>String.</returns>
+        </member>
         <member name="M:RestWrapper.RestRequest.Send">
             <summary>
             Send the HTTP request with no data.

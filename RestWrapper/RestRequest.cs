@@ -150,6 +150,44 @@ namespace RestWrapper
         #region Public-Methods
 
         /// <summary>
+        /// Creates a human-readable string of the object.
+        /// </summary>
+        /// <returns>String.</returns>
+        public override string ToString()
+        {
+            string ret = "";
+            ret += "REST Request" + Environment.NewLine;
+            ret += "  Method             : " + Method.ToString() + Environment.NewLine;
+            ret += "  URL                : " + Url + Environment.NewLine;
+
+            if (!String.IsNullOrEmpty(User))
+                ret += "  User               : " + User + Environment.NewLine;
+            if (!String.IsNullOrEmpty(ContentType))
+                ret += "  Content Type       : " + ContentType + Environment.NewLine;
+            if (ContentLength > 0)
+                ret += "  Content Length     : " + ContentLength + Environment.NewLine;
+            if (!String.IsNullOrEmpty(Password))
+                ret += "  Password           : (set)" + Environment.NewLine;
+            if (!String.IsNullOrEmpty(CertificateFilename))
+                ret += "  Certificate File   : " + CertificateFilename + Environment.NewLine;
+            if (!String.IsNullOrEmpty(CertificateFilename))
+                ret += "  Certificate Pass   : (set)" + Environment.NewLine;
+
+            if (Headers != null && Headers.Count > 0)
+            {
+                ret += "  Headers" + Environment.NewLine;
+                foreach (KeyValuePair<string, string> curr in Headers)
+                {
+                    ret += "    " + curr.Key + ": " + curr.Value + Environment.NewLine;
+                }
+            }
+              
+            ret += Environment.NewLine;
+             
+            return ret;
+        }
+
+        /// <summary>
         /// Send the HTTP request with no data.
         /// </summary>
         /// <returns>RestResponse.</returns>
