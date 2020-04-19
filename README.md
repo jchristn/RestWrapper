@@ -1,9 +1,6 @@
 # RestWrapper
 
-[![][nuget-img]][nuget]
-
-[nuget]:     https://www.nuget.org/packages/RestWrapper/
-[nuget-img]: https://badge.fury.io/nu/Object.svg
+[![NuGet Version](https://img.shields.io/nuget/v/RestWrapper.svg?style=flat)](https://www.nuget.org/packages/RestWrapper/) [![NuGet](https://img.shields.io/nuget/dt/RestWrapper.svg)](https://www.nuget.org/packages/RestWrapper) 
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
