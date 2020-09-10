@@ -7,6 +7,7 @@ A simple C# class library to help simplify REST API requests and responses (REST
 ## New in v2.1.4
 
 - ToString() method on RestRequest
+- Retarget to support .NET Standard 2.0, .NET Core 2.0, and .NET Framework 4.5.1
 
 ## Test Apps
 
