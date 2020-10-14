@@ -15,11 +15,8 @@ Test projects are included which will help you exercise the class library.
  
 ## Examples
 
-```
-//
+```csharp
 // simple GET example
-//
-
 using RestWrapper;
 using System.IO;
 
@@ -30,15 +27,12 @@ RestRequest req = new RestRequest(
 	null);                    // Content type
 
 RestResponse resp = req.Send();
-Console.WriteLine("Status : " + resp.StatusCode);
+Console.WriteLine("Status: " + resp.StatusCode);
 // response data is in resp.Data
 ```
 
-```
-//
-// simple POST examples
-//
-
+```csharp
+// simple POST example
 using RestWrapper;
 using System.IO;
 
@@ -49,23 +43,13 @@ RestRequest req = new RestRequest(
 	"text/plain");                // Content type
 
 string reqString = "Hello, world!";
-byte[] reqBytes = Encoding.UTF8.GetBytes(reqString);
-MemoryStream reqStream = new MemoryStream(reqBytes);
-reqStream.Seek(0, SeekOrigin.Begin);
-
 RestResponse resp = req.Send(reqData);
-resp = req.Send(reqBytes);
-resp = req.Send(reqBytes.Length, reqStream);
-
 Console.WriteLine("Status : " + resp.StatusCode);
 // response data is in resp.Data
 ```
 
-```
-//
+```csharp
 // async methods
-//
-
 using RestWrapper;
 using System.IO;
 using System.Threading.Tasks;
