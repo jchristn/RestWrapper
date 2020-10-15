@@ -1,0 +1,8 @@
+C:\code\Misc\RestWrapper-2.1\RestWrapper\bin\Debug\net451\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.1\RestWrapper\bin\Debug\net451\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.1\RestWrapper\bin\Debug\net451\Newtonsoft.Json.dll
+C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\net451\RestWrapper.AssemblyInfoInputs.cache
+C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\net451\RestWrapper.AssemblyInfo.cs
+C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\net451\RestWrapper.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\net451\RestWrapper.dll
+C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\net451\RestWrapper.pdb

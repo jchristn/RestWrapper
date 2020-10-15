@@ -11,53 +11,53 @@ namespace RestWrapper
     /// RESTful response from the server.
     /// </summary>
     public class RestResponse
-    { 
+    {
         #region Public-Members
 
         /// <summary>
         /// The protocol and version.
         /// </summary>
-        public string ProtocolVersion;
+        public string ProtocolVersion = null;
 
         /// <summary>
         /// User-supplied headers.
         /// </summary>
-        public Dictionary<string, string> Headers;
+        public Dictionary<string, string> Headers = new Dictionary<string, string>();
 
         /// <summary>
         /// The content encoding returned from the server.
         /// </summary>
-        public string ContentEncoding;
+        public string ContentEncoding = null;
 
         /// <summary>
         /// The content type returned from the server.
         /// </summary>
-        public string ContentType;
+        public string ContentType = null;
 
         /// <summary>
         /// The number of bytes contained in the response body byte array.
         /// </summary>
-        public long ContentLength;
+        public long ContentLength = 0;
 
         /// <summary>
         /// The response URI of the responder.
         /// </summary>
-        public string ResponseURI;
-        
+        public string ResponseURI = null;
+
         /// <summary>
         /// The HTTP status code returned with the response.
         /// </summary>
-        public int StatusCode;
+        public int StatusCode = 0;
 
         /// <summary>
         /// The HTTP status description associated with the HTTP status code.
         /// </summary>
-        public string StatusDescription;
-         
+        public string StatusDescription = null;
+
         /// <summary>
         /// The stream containing the response data returned from the server.
         /// </summary>
-        public Stream Data;
+        public Stream Data = null;
 
         #endregion
 

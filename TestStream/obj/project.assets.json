@@ -206,7 +206,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "RestWrapper/2.1.4.2": {
+      "RestWrapper/2.1.5": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
@@ -673,7 +673,7 @@
           "runtimes/win-x86/native/hostfxr.dll": {}
         }
       },
-      "RestWrapper/2.1.4.2": {
+      "RestWrapper/2.1.5": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
@@ -697,7 +697,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "RestWrapper/2.1.4.2": {
+      "RestWrapper/2.1.5": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -721,7 +721,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "RestWrapper/2.1.4.2": {
+      "RestWrapper/2.1.5": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1507,7 +1507,7 @@
         "version.txt"
       ]
     },
-    "RestWrapper/2.1.4.2": {
+    "RestWrapper/2.1.5": {
       "type": "project",
       "path": "../RestWrapper/RestWrapper.csproj",
       "msbuildProject": "../RestWrapper/RestWrapper.csproj"
@@ -1516,10 +1516,10 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
-      "RestWrapper >= 2.1.4.2"
+      "RestWrapper >= 2.1.5"
     ],
     ".NETFramework,Version=v4.5.2": [
-      "RestWrapper >= 2.1.4.2"
+      "RestWrapper >= 2.1.5"
     ]
   },
   "packageFolders": {

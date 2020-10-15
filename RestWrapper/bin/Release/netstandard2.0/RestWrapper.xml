@@ -59,42 +59,47 @@
             RESTful HTTP request to be sent to a server.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.Url">
+        <member name="F:RestWrapper.RestRequest.Logger">
+            <summary>
+            Method to invoke when sending log messages.
+            </summary>
+        </member>
+        <member name="F:RestWrapper.RestRequest.Url">
             <summary>
             The URL to which the request should be directed.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.Method">
+        <member name="F:RestWrapper.RestRequest.Method">
             <summary>
             The HTTP method to use, also known as a verb (GET, PUT, POST, DELETE, etc).
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.User">
+        <member name="F:RestWrapper.RestRequest.User">
             <summary>
             The username to use in the authorization header, if any.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.Password">
+        <member name="F:RestWrapper.RestRequest.Password">
             <summary>
             The password to use in the authorization header, if any.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.EncodeCredentials">
+        <member name="F:RestWrapper.RestRequest.EncodeCredentials">
             <summary>
             Enable to encode credentials in the authorization header.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.IgnoreCertificateErrors">
+        <member name="F:RestWrapper.RestRequest.IgnoreCertificateErrors">
             <summary>
             Ignore certificate errors such as expired certificates, self-signed certificates, or those that cannot be validated.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.CertificateFilename">
+        <member name="F:RestWrapper.RestRequest.CertificateFilename">
             <summary>
             The filename of the file containing the certificate.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.CertificatePassword">
+        <member name="F:RestWrapper.RestRequest.CertificatePassword">
             <summary>
             The password to the certificate file.
             </summary>
@@ -104,7 +109,7 @@
             The HTTP headers to attach to the request.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.ContentType">
+        <member name="F:RestWrapper.RestRequest.ContentType">
             <summary>
             The content type of the payload (i.e. Data or DataStream).
             </summary>
@@ -124,10 +129,18 @@
             The number of milliseconds to wait before assuming the request has timed out.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.ConsoleDebug">
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String)">
             <summary>
-            Enable console debugging.
+            A simple RESTful HTTP client.
             </summary>
+            <param name="url">URL to access on the server.</param> 
+        </member>
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod)">
+            <summary>
+            A simple RESTful HTTP client.
+            </summary>
+            <param name="url">URL to access on the server.</param> 
+            <param name="method">HTTP method to use.</param>
         </member>
         <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
             <summary>

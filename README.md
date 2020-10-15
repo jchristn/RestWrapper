@@ -4,10 +4,9 @@
 
 A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
 
-## New in v2.1.4
+## New in v2.1.5
 
-- ToString() method on RestRequest
-- Retarget to support .NET Standard 2.0, .NET Core 2.0, and .NET Framework 4.5.1
+- Additional constructors
 
 ## Test Apps
 
@@ -20,12 +19,7 @@ Test projects are included which will help you exercise the class library.
 using RestWrapper;
 using System.IO;
 
-RestRequest req = new RestRequest(
-	"http://www.google.com/",
-	HttpMethod.GET,
-	null,                     // Dictionary<string, string> headers
-	null);                    // Content type
-
+RestRequest req = new RestRequest("http://www.google.com/");
 RestResponse resp = req.Send();
 Console.WriteLine("Status: " + resp.StatusCode);
 // response data is in resp.Data
@@ -36,14 +30,8 @@ Console.WriteLine("Status: " + resp.StatusCode);
 using RestWrapper;
 using System.IO;
 
-RestRequest req = new RestRequest(
-	"http://127.0.0.1:8000/api",
-	HttpMethod.POST,
-	null,                         // Dictionary<string, string> headers
-	"text/plain");                // Content type
-
-string reqString = "Hello, world!";
-RestResponse resp = req.Send(reqData);
+RestRequest req = new RestRequest("http://127.0.0.1:8000/api", HttpMethod.POST);
+RestResponse resp = req.Send("Hello, world!");
 Console.WriteLine("Status : " + resp.StatusCode);
 // response data is in resp.Data
 ```

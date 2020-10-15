@@ -2,12 +2,16 @@
 
 ## Current Version
 
+v2.1.5
+
+- Additional constructors
+
+## Previous Versions
+
 v2.1.4
 
 - ToString() method on RestRequest
 - Retarget to support .NET Standard 2.0, .NET Core 2.0, and .NET Framework 4.5.1
-
-## Previous Versions
 
 v2.1.3
 

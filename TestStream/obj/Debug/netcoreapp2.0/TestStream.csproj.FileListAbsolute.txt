@@ -25,3 +25,4 @@ C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\netcoreapp2.0\TestStream.pdb
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.dll
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.pdb
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\netcoreapp2.0\TestStream.csproj.CopyComplete
+C:\code\Misc\RestWrapper-2.1\TestStream\obj\Debug\netcoreapp2.0\TestStream.genruntimeconfig.cache

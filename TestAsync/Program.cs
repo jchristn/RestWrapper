@@ -51,7 +51,9 @@ namespace TestAsync
                                 HttpMethod.PUT,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.SendAsync(data).Result;
                             if (resp == null)
@@ -70,7 +72,9 @@ namespace TestAsync
                                 HttpMethod.POST,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.SendAsync(data).Result;
                             if (resp == null)
@@ -89,7 +93,9 @@ namespace TestAsync
                                 HttpMethod.DELETE,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.SendAsync(data).Result;
                             if (resp == null)
@@ -108,7 +114,9 @@ namespace TestAsync
                                 HttpMethod.HEAD,
                                 null,
                                 null);
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             resp = req.SendAsync().Result;
                             if (resp == null)
                             {
@@ -126,7 +134,9 @@ namespace TestAsync
                                 HttpMethod.GET,
                                 null,
                                 null);
-                            req.ConsoleDebug = debug;
+                            
+                            if (debug) req.Logger = Console.WriteLine;
+
                             resp = req.SendAsync().Result;
                             if (resp == null)
                             {

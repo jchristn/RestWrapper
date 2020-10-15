@@ -22,3 +22,4 @@ C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.As
 C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.AssemblyInfo.cs
 C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.dll
 C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.1\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.csprojAssemblyReference.cache

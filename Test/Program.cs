@@ -54,7 +54,8 @@ namespace Test
                                 null,
                                 InputString("Content type:", "text/plain", false));
                             req.Timeout = timeout;
-                            req.ConsoleDebug = debug;
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
                             if (resp == null)
@@ -79,7 +80,9 @@ namespace Test
                                 null,
                                 InputString("Content type:", "text/plain", false));
                             req.Timeout = timeout;
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
                             if (resp == null)
@@ -103,8 +106,9 @@ namespace Test
                                 HttpMethod.DELETE,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.Timeout = timeout;
-                            req.ConsoleDebug = debug;
+                            req.Timeout = timeout; 
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false)); 
                             resp = req.Send(data);
                             if (resp == null)
@@ -129,7 +133,9 @@ namespace Test
                                 null,
                                 null);
                             req.Timeout = timeout;
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             resp = req.Send();
                             if (resp == null)
                             {
@@ -153,7 +159,9 @@ namespace Test
                                 null,
                                 null);
                             req.Timeout = timeout;
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             resp = req.Send();
                             if (resp == null)
                             {

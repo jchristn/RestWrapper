@@ -53,7 +53,9 @@ namespace TestStream
                                 HttpMethod.PUT,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
                             resp = req.Send(data.Length, ms);
@@ -78,7 +80,9 @@ namespace TestStream
                                 HttpMethod.POST,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
                             resp = req.Send(data.Length, ms);
@@ -103,7 +107,9 @@ namespace TestStream
                                 HttpMethod.DELETE,
                                 null,
                                 InputString("Content type:", "text/plain", false));
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
                             resp = req.Send(data.Length, ms);
@@ -128,7 +134,9 @@ namespace TestStream
                                 HttpMethod.HEAD,
                                 null,
                                 null);
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             resp = req.Send();
                             if (resp == null)
                             {
@@ -151,7 +159,9 @@ namespace TestStream
                                 HttpMethod.GET,
                                 null,
                                 null);
-                            req.ConsoleDebug = debug;
+
+                            if (debug) req.Logger = Console.WriteLine;
+
                             resp = req.Send();
                             if (resp == null)
                             {
