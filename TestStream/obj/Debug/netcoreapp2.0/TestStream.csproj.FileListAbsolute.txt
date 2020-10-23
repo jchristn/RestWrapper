@@ -26,3 +26,17 @@ C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.dll
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.pdb
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\netcoreapp2.0\TestStream.csproj.CopyComplete
 C:\code\Misc\RestWrapper-2.1\TestStream\obj\Debug\netcoreapp2.0\TestStream.genruntimeconfig.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\TestStream.deps.json
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\TestStream.runtimeconfig.json
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\TestStream.runtimeconfig.dev.json
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\TestStream.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.csprojAssemblyReference.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.AssemblyInfoInputs.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.csproj.CopyComplete
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.genruntimeconfig.cache

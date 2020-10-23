@@ -2,11 +2,13 @@
 
 [![NuGet Version](https://img.shields.io/nuget/v/RestWrapper.svg?style=flat)](https://www.nuget.org/packages/RestWrapper/) [![NuGet](https://img.shields.io/nuget/dt/RestWrapper.svg)](https://www.nuget.org/packages/RestWrapper) 
 
-A simple C# class library to help simplify REST API requests and responses (RESTful HTTP and HTTPS)
+A simple C# class library to help simplify sending REST API requests and retrieving responses (RESTful HTTP and HTTPS)
 
-## New in v2.1.5
+## New in v2.2.0
 
 - Additional constructors
+- Support for sending ```x-www-form-urlencoded``` data (```Send(Dictionary<string, string>)```)
+- Dependency update
 
 ## Test Apps
 
@@ -45,12 +47,25 @@ using System.Threading.Tasks;
 RestRequest req = new RestRequest(
 	"http://127.0.0.1:8000/api",
 	HttpMethod.POST,
-	null,                         // Dictionary<string, string> headers
-	"text/plain");                // Content type
+	"text/plain"); // Content type
 
 RestResponse resp = await req.SendAsync("Hello, world!");
 Console.WriteLine("Status : " + resp.StatusCode);
 // response data is in resp.Data
+```
+
+```csharp
+// sending form data
+using RestWrapper;
+
+RestRequest req = new RestRequest("http://127.0.0.1:8000/api", HttpMethod.POST);
+
+Dictionary<string, string> form = new Dictionary<string, string>();
+form.Add("foo", "bar");
+form.Add("hello", "world how are you");
+
+RestResponse resp = req.Send(form);
+Console.WriteLine("Status : " + resp.StatusCode);
 ```
 
 ## Version History

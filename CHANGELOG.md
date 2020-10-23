@@ -2,11 +2,17 @@
 
 ## Current Version
 
+v2.2.0
+
+- Additional constructors
+- Support for sending ```x-www-form-urlencoded``` data (```Send(Dictionary<string, string>)```)
+- Dependency update
+
+## Previous Versions
+
 v2.1.5
 
 - Additional constructors
-
-## Previous Versions
 
 v2.1.4
 

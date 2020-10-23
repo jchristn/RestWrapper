@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.0;net451</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.5</Version>
+    <Version>2.2.0</Version>
     <Authors>Joel Christner</Authors>
     <Description>RestWrapper is a simple and easy client for integrating and consuming REST, HTTP, and HTTPS APIs and services quickly in C#.</Description>
     <Copyright>(c)2020 Joel Christner</Copyright>
     <PackageTags>rest restful api http https request response webrequest webresponse client</PackageTags>
-    <PackageReleaseNotes>Removal of console logging in favor of callback, additional Send APIs</PackageReleaseNotes>
+    <PackageReleaseNotes>Consolidated authorization headers, added bearer support, added form encoding data.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>

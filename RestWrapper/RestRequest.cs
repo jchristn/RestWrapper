@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
@@ -34,19 +35,20 @@ namespace RestWrapper
         public HttpMethod Method = HttpMethod.GET;
 
         /// <summary>
-        /// The username to use in the authorization header, if any.
+        /// Authorization header parameters.
         /// </summary>
-        public string User = null;
-
-        /// <summary>
-        /// The password to use in the authorization header, if any.
-        /// </summary>
-        public string Password = null;
-
-        /// <summary>
-        /// Enable to encode credentials in the authorization header.
-        /// </summary>
-        public bool EncodeCredentials = true;
+        public AuthorizationHeader Authorization
+        {
+            get
+            {
+                return _Authorization;
+            }
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(Authorization));
+                _Authorization = value;
+            }
+        }
 
         /// <summary>
         /// Ignore certificate errors such as expired certificates, self-signed certificates, or those that cannot be validated.
@@ -74,7 +76,7 @@ namespace RestWrapper
             }
             set
             {
-                if (value == null) _Headers = new Dictionary<string, string>();
+                if (value == null) throw new ArgumentNullException(nameof(Headers));
                 else _Headers = value;
             }
         }
@@ -92,7 +94,7 @@ namespace RestWrapper
         /// <summary>
         /// The size of the buffer to use while reading from the DataStream and the response stream from the server.
         /// </summary>
-        public int StreamReadBufferSize
+        public int BufferSize
         {
             get
             {
@@ -129,6 +131,7 @@ namespace RestWrapper
         private int _StreamReadBufferSize = 65536;
         private int _Timeout = 30000;
         private Dictionary<string, string> _Headers = new Dictionary<string, string>();
+        private AuthorizationHeader _Authorization = new AuthorizationHeader();
 
         #endregion
 
@@ -157,6 +160,24 @@ namespace RestWrapper
 
             Url = url;
             Method = method;
+        }
+
+        /// <summary>
+        /// A simple RESTful HTTP client.
+        /// </summary>
+        /// <param name="url">URL to access on the server.</param>
+        /// <param name="method">HTTP method to use.</param> 
+        /// <param name="contentType">Content type to use.</param>
+        public RestRequest(
+            string url,
+            HttpMethod method, 
+            string contentType)
+        {
+            if (String.IsNullOrEmpty(url)) throw new ArgumentNullException(nameof(url));
+
+            Url = url;
+            Method = method;
+            ContentType = contentType;
         }
 
         /// <summary>
@@ -194,19 +215,15 @@ namespace RestWrapper
             ret += "REST Request" + Environment.NewLine;
             ret += "  Method             : " + Method.ToString() + Environment.NewLine;
             ret += "  URL                : " + Url + Environment.NewLine;
-
-            if (!String.IsNullOrEmpty(User))
-                ret += "  User               : " + User + Environment.NewLine;
-            if (!String.IsNullOrEmpty(ContentType))
-                ret += "  Content Type       : " + ContentType + Environment.NewLine;
-            if (ContentLength > 0)
-                ret += "  Content Length     : " + ContentLength + Environment.NewLine;
-            if (!String.IsNullOrEmpty(Password))
-                ret += "  Password           : (set)" + Environment.NewLine;
-            if (!String.IsNullOrEmpty(CertificateFilename))
-                ret += "  Certificate File   : " + CertificateFilename + Environment.NewLine;
-            if (!String.IsNullOrEmpty(CertificateFilename))
-                ret += "  Certificate Pass   : (set)" + Environment.NewLine;
+            ret += "  Authorization" + Environment.NewLine;
+            ret += "    User             : " + _Authorization.User + Environment.NewLine;
+            ret += "    Password         : " + (!String.IsNullOrEmpty(_Authorization.Password) ? "(set)" : "") + Environment.NewLine;
+            ret += "    Encode           : " + _Authorization.EncodeCredentials + Environment.NewLine;
+            ret += "    Bearer Token     : " + _Authorization.BearerToken + Environment.NewLine;
+            ret += "  Content Type       : " + ContentType + Environment.NewLine;
+            ret += "  Content Length     : " + ContentLength + Environment.NewLine;
+            ret += "  Certificate File   : " + CertificateFilename + Environment.NewLine;
+            ret += "  Certificate Pass   : " + (!String.IsNullOrEmpty(CertificatePassword) ? "(set)" : "") + Environment.NewLine;
 
             if (Headers != null && Headers.Count > 0)
             {
@@ -229,6 +246,22 @@ namespace RestWrapper
         public RestResponse Send()
         { 
             return SendInternal(0, null);
+        }
+
+        /// <summary>
+        /// Send the HTTP request using form-encoded data.
+        /// This method will automatically set the content-type header.
+        /// </summary>
+        /// <param name="form">Dictionary.</param>
+        /// <returns></returns>
+        public RestResponse Send(Dictionary<string, string> form)
+        {
+            if (form == null) form = new Dictionary<string, string>();
+            FormUrlEncodedContent content = new FormUrlEncodedContent(form);
+            byte[] bytes = content.ReadAsByteArrayAsync().Result;
+            ContentLength = bytes.Length;
+            ContentType = "x-www-form-urlencoded";
+            return Send(bytes);
         }
 
         /// <summary>
@@ -280,6 +313,22 @@ namespace RestWrapper
         public async Task<RestResponse> SendAsync()
         {
             return await SendInternalAsync(0, null);
+        }
+
+        /// <summary>
+        /// Send the HTTP request using form-encoded data.
+        /// This method will automatically set the content-type header.
+        /// </summary>
+        /// <param name="form">Dictionary.</param>
+        /// <returns></returns>
+        public async Task<RestResponse> SendAsync(Dictionary<string, string> form)
+        {
+            if (form == null) form = new Dictionary<string, string>();
+            FormUrlEncodedContent content = new FormUrlEncodedContent(form);
+            byte[] bytes = await content.ReadAsByteArrayAsync();
+            ContentLength = bytes.Length;
+            ContentType = "x-www-form-urlencoded";
+            return await SendAsync(bytes);
         }
 
         /// <summary>
@@ -349,7 +398,7 @@ namespace RestWrapper
             {
                 #region Setup-Webrequest
 
-                Logger?.Invoke(_Header + "  - Setting up HttpWebRequest");
+                Logger?.Invoke(_Header + "setting up web request");
 
                 if (IgnoreCertificateErrors) ServicePointManager.ServerCertificateValidationCallback = Validator;
 
@@ -363,9 +412,7 @@ namespace RestWrapper
                 client.ContentLength = 0;
                 client.ContentType = ContentType;
                 client.UserAgent = "RestWrapper (https://www.github.com/jchristn/RestWrapper)";
-
-                Logger?.Invoke(_Header + "  - Setup HttpWebRequest successfully");
-
+                 
                 #endregion
 
                 #region Add-Certificate
@@ -374,14 +421,14 @@ namespace RestWrapper
                 {
                     if (!String.IsNullOrEmpty(CertificatePassword))
                     {
-                        Logger?.Invoke(_Header + "  - Adding certificate using filename and password");
+                        Logger?.Invoke(_Header + "adding certificate including password");
 
                         X509Certificate2 cert = new X509Certificate2(CertificateFilename, CertificatePassword);
                         client.ClientCertificates.Add(cert);
                     }
                     else
                     {
-                        Logger?.Invoke(_Header + "  - Adding certificate using filename only");
+                        Logger?.Invoke(_Header + "adding certificate without password");
 
                         X509Certificate2 cert = new X509Certificate2(CertificateFilename);
                         client.ClientCertificates.Add(cert);
@@ -399,7 +446,7 @@ namespace RestWrapper
                         if (String.IsNullOrEmpty(pair.Key)) continue;
                         if (String.IsNullOrEmpty(pair.Value)) continue;
 
-                        Logger?.Invoke(_Header + "  - Adding header " + pair.Key + ": " + pair.Value);
+                        Logger?.Invoke(_Header + "adding header " + pair.Key + ": " + pair.Value);
 
                         if (pair.Key.ToLower().Trim().Equals("accept"))
                         {
@@ -468,22 +515,26 @@ namespace RestWrapper
 
                 #region Add-Auth-Info
 
-                if (!String.IsNullOrEmpty(User))
+                if (!String.IsNullOrEmpty(_Authorization.User))
                 {
-                    if (EncodeCredentials)
+                    if (_Authorization.EncodeCredentials)
                     {
-                        Logger?.Invoke(_Header + "  - Adding encoded credentials for user " + User);
+                        Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
 
-                        string authInfo = User + ":" + Password;
+                        string authInfo = _Authorization.User + ":" + _Authorization.Password;
                         authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
                         client.Headers.Add("Authorization", "Basic " + authInfo);
                     }
                     else
                     {
-                        Logger?.Invoke(_Header + "  - Adding plaintext credentials");
-
-                        client.Headers.Add("Authorization", User);
+                        Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
+                        client.Headers.Add("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password);
                     }
+                }
+                else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
+                {
+                    Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken); 
+                    client.Headers.Add("Authorization", "Bearer " + _Authorization.BearerToken);
                 }
 
                 #endregion
@@ -496,7 +547,7 @@ namespace RestWrapper
                 {
                     if (contentLength > 0 && stream != null)
                     {
-                        Logger?.Invoke(_Header + "  - Reading stream and writing to request body (" + contentLength + " bytes)");
+                        Logger?.Invoke(_Header + "reading data (" + contentLength + " bytes), writing to request");
 
                         client.ContentLength = contentLength;
                         client.ContentType = ContentType;
@@ -518,7 +569,7 @@ namespace RestWrapper
 
                         clientStream.Close();
 
-                        Logger?.Invoke(_Header + "  - Successfully added " + contentLength + " bytes to request body");
+                        Logger?.Invoke(_Header + "added " + contentLength + " bytes to request");
                     }
                 }
 
@@ -526,11 +577,11 @@ namespace RestWrapper
 
                 #region Submit-Request-and-Build-Response
 
-                Logger?.Invoke(_Header + "  - Submitting web request");
+                Logger?.Invoke(_Header + "submitting");
 
                 HttpWebResponse response = (HttpWebResponse)(await client.GetResponseAsync());
 
-                Logger?.Invoke(_Header + "  - Response received");
+                Logger?.Invoke(_Header + "server returned status code " + (int)response.StatusCode); 
 
                 RestResponse ret = new RestResponse();
                 ret.ProtocolVersion = "HTTP/" + response.ProtocolVersion.ToString();
@@ -545,7 +596,7 @@ namespace RestWrapper
 
                 #region Headers
 
-                Logger?.Invoke(_Header + "  - Processing headers from response");
+                Logger?.Invoke(_Header + "processing response headers");
 
                 if (response.Headers != null && response.Headers.Count > 0)
                 {
@@ -570,7 +621,7 @@ namespace RestWrapper
                             }
                         }
 
-                        Logger?.Invoke(_Header + "  - Adding response header " + key + ": " + val);
+                        Logger?.Invoke(_Header + "adding response header " + key + ": " + val);
                         ret.Headers.Add(key, val);
                     }
                 }
@@ -581,7 +632,7 @@ namespace RestWrapper
 
                 if (response.ContentLength > 0)
                 {
-                    Logger?.Invoke(_Header + "  - Attaching response stream to response with content length " + response.ContentLength + " bytes");
+                    Logger?.Invoke(_Header + "attaching response stream with content length " + response.ContentLength + " bytes");
                     ret.ContentLength = response.ContentLength;
                     ret.Data = response.GetResponseStream();
                 }
@@ -599,7 +650,7 @@ namespace RestWrapper
             {
                 #region WebException
 
-                Logger?.Invoke(_Header + "  - Web exception encountered: " + we.Message);
+                Logger?.Invoke(_Header + "web exception encountered: " + we.Message);
 
                 RestResponse ret = new RestResponse();
                 ret.Headers = null;
@@ -622,7 +673,7 @@ namespace RestWrapper
                     ret.StatusCode = (int)exceptionResponse.StatusCode;
                     ret.StatusDescription = exceptionResponse.StatusDescription;
 
-                    Logger?.Invoke(_Header + "  - Server returned status code " + ret.StatusCode);
+                    Logger?.Invoke(_Header + "server returned status code " + ret.StatusCode);
 
                     if (exceptionResponse.Headers != null && exceptionResponse.Headers.Count > 0)
                     {
@@ -647,14 +698,14 @@ namespace RestWrapper
                                 }
                             }
 
-                            Logger?.Invoke(_Header + "  - Adding exception header " + key + ": " + val);
+                            Logger?.Invoke(_Header + "adding exception header " + key + ": " + val);
                             ret.Headers.Add(key, val);
                         }
                     }
 
                     if (exceptionResponse.ContentLength > 0)
                     {
-                        Logger?.Invoke(_Header + "  - Attaching exception response stream to response with content length " + exceptionResponse.ContentLength + " bytes");
+                        Logger?.Invoke(_Header + "attaching exception response stream to response with content length " + exceptionResponse.ContentLength + " bytes");
                         ret.ContentLength = exceptionResponse.ContentLength;
                         ret.Data = exceptionResponse.GetResponseStream();
                     }

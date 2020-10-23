@@ -23,3 +23,15 @@ C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\net452\Newtonsoft.Json.dll
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\net452\RestWrapper.dll
 C:\code\misc\RestWrapper-2.1\TestStream\bin\Debug\net452\RestWrapper.pdb
 C:\code\misc\RestWrapper-2.1\TestStream\obj\Debug\net452\TestStream.csproj.CopyComplete
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\TestStream.exe.config
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\TestStream.exe
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\Newtonsoft.Json.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.csprojAssemblyReference.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.AssemblyInfoInputs.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.csproj.CopyComplete
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.exe
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.pdb

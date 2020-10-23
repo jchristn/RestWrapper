@@ -50,8 +50,7 @@ namespace Test
                         case "put":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.PUT,
-                                null,
+                                HttpMethod.PUT, 
                                 InputString("Content type:", "text/plain", false));
                             req.Timeout = timeout;
                             if (debug) req.Logger = Console.WriteLine;
@@ -76,8 +75,7 @@ namespace Test
                         case "post":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.POST,
-                                null,
+                                HttpMethod.POST, 
                                 InputString("Content type:", "text/plain", false));
                             req.Timeout = timeout;
 
@@ -100,7 +98,31 @@ namespace Test
                             }
                             break;
 
-                        case "delete":
+                        case "form":
+                            req = new RestRequest(
+                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                HttpMethod.POST);
+                            req.Timeout = timeout;
+
+                            if (debug) req.Logger = Console.WriteLine;
+                             
+                            resp = req.Send(InputDictionary());
+                            if (resp == null)
+                            {
+                                Console.WriteLine("Null response");
+                            }
+                            else
+                            {
+                                Console.WriteLine(resp.ToString());
+                                if (resp.Data != null && resp.ContentLength > 0)
+                                {
+                                    Console.WriteLine("Content:");
+                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                }
+                            }
+                            break;
+
+                        case "del":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.DELETE,
@@ -208,7 +230,8 @@ namespace Test
             Console.WriteLine("  get         Submit a GET request");
             Console.WriteLine("  put         Submit a PUT request");
             Console.WriteLine("  post        Submit a POST request");
-            Console.WriteLine("  delete      Submit a DELETE request");
+            Console.WriteLine("  del         Submit a DELETE request"); 
+            Console.WriteLine("  form        Submit a POST request using form data"); 
             Console.WriteLine("  head        Submit a HEAD request");
             Console.WriteLine("  debug       Enable or disable console debugging (currently " + debug + ")");
             Console.WriteLine("  timeout     Set timeout milliseconds (currently " + timeout + "ms)");
@@ -371,6 +394,24 @@ namespace Test
                 return false;
             }
         }
+        
+        static Dictionary<string, string> InputDictionary()
+        {
+            Console.WriteLine("Build form, press ENTER on 'Key' to exit");
+
+            Dictionary<string, string> ret = new Dictionary<string, string>();
+
+            while (true)
+            {
+                Console.Write("Key   : ");
+                string key = Console.ReadLine();
+                if (String.IsNullOrEmpty(key)) return ret;
+
+                Console.Write("Value : ");
+                string val = Console.ReadLine();
+                ret.Add(key, val);
+            }
+        }
 
         static byte[] StreamToBytes(Stream input)
         {
@@ -386,6 +427,5 @@ namespace Test
                 return memoryStream.ToArray();
             }
         }
-
     }
 }
