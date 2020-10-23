@@ -4,11 +4,9 @@
 
 A simple C# class library to help simplify sending REST API requests and retrieving responses (RESTful HTTP and HTTPS)
 
-## New in v2.2.0
+## New in v2.2.1
 
-- Additional constructors
-- Support for sending ```x-www-form-urlencoded``` data (```Send(Dictionary<string, string>)```)
-- Dependency update
+- RestResponse ```DataAsBytes``` and ```DataAsString``` properties
 
 ## Test Apps
 

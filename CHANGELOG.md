@@ -2,13 +2,17 @@
 
 ## Current Version
 
+v2.2.1
+
+- RestResponse ```DataAsBytes``` and ```DataAsString``` properties
+
+## Previous Versions
+
 v2.2.0
 
 - Additional constructors
 - Support for sending ```x-www-form-urlencoded``` data (```Send(Dictionary<string, string>)```)
 - Dependency update
-
-## Previous Versions
 
 v2.1.5
 

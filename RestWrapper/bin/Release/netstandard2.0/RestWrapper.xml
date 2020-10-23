@@ -307,6 +307,18 @@
             The stream containing the response data returned from the server.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestResponse.DataAsBytes">
+            <summary>
+            Read the data stream fully into a byte array.
+            If you use this property, the 'Data' property will be fully read.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestResponse.DataAsString">
+            <summary>
+            Read the data stream fully into a string.
+            If you use this property, the 'Data' property will be fully read.
+            </summary>
+        </member>
         <member name="M:RestWrapper.RestResponse.#ctor">
             <summary>
             An organized object containing frequently used response parameters from a RESTful HTTP request.

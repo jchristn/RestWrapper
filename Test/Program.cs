@@ -93,7 +93,7 @@ namespace Test
                                 if (resp.Data != null && resp.ContentLength > 0)
                                 {
                                     Console.WriteLine("Content:");
-                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                    Console.WriteLine(resp.DataAsString);
                                 }
                             }
                             break;
@@ -117,7 +117,7 @@ namespace Test
                                 if (resp.Data != null && resp.ContentLength > 0)
                                 {
                                     Console.WriteLine("Content:");
-                                    Console.WriteLine(Encoding.UTF8.GetString(StreamToBytes(resp.Data)));
+                                    Console.WriteLine(resp.DataAsString);
                                 }
                             }
                             break;
@@ -126,7 +126,6 @@ namespace Test
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.DELETE,
-                                null,
                                 InputString("Content type:", "text/plain", false));
                             req.Timeout = timeout; 
                             if (debug) req.Logger = Console.WriteLine;
@@ -151,9 +150,7 @@ namespace Test
                         case "head":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.HEAD,
-                                null,
-                                null);
+                                HttpMethod.HEAD);
                             req.Timeout = timeout;
 
                             if (debug) req.Logger = Console.WriteLine;
@@ -177,9 +174,7 @@ namespace Test
                         case "get":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.GET,
-                                null,
-                                null);
+                                HttpMethod.GET);
                             req.Timeout = timeout;
 
                             if (debug) req.Logger = Console.WriteLine;

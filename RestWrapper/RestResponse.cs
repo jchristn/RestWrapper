@@ -59,9 +59,50 @@ namespace RestWrapper
         /// </summary>
         public Stream Data = null;
 
+        /// <summary>
+        /// Read the data stream fully into a byte array.
+        /// If you use this property, the 'Data' property will be fully read.
+        /// </summary>
+        public byte[] DataAsBytes
+        {
+            get
+            {
+                if (_Data == null && ContentLength > 0 && Data != null && Data.CanRead)
+                {
+                    _Data = StreamToBytes(Data);
+                }
+
+                return _Data;
+            }
+        }
+
+        /// <summary>
+        /// Read the data stream fully into a string.
+        /// If you use this property, the 'Data' property will be fully read.
+        /// </summary>
+        public string DataAsString
+        {
+            get
+            {
+                if (_Data == null && ContentLength > 0 && Data != null && Data.CanRead)
+                {
+                    _Data = StreamToBytes(Data);
+                }
+
+                if (_Data != null)
+                {
+                    return Encoding.UTF8.GetString(_Data);
+                }
+
+                return null;
+            }
+        }
+
         #endregion
 
         #region Private-Members
+
+        private byte[] _Data = null;
 
         #endregion
 
@@ -114,11 +155,28 @@ namespace RestWrapper
 
             return ret;
         }
-         
+
         #endregion
 
         #region Private-Methods
-         
+
+        private byte[] StreamToBytes(Stream input)
+        { 
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+
+                byte[] ret = ms.ToArray();
+                return ret;
+            }
+        }
+
         #endregion
 
         #region Public-Static-Methods

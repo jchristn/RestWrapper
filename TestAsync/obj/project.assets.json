@@ -953,7 +953,7 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.0": {
+      "RestWrapper/2.2.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
@@ -2349,7 +2349,7 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.0": {
+      "RestWrapper/2.2.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
@@ -2386,9 +2386,9 @@
           "lib/net45/_._": {}
         }
       },
-      "RestWrapper/2.2.0": {
+      "RestWrapper/2.2.1": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "System.Net.Http": "4.3.4"
@@ -2423,9 +2423,9 @@
           "lib/net45/_._": {}
         }
       },
-      "RestWrapper/2.2.0": {
+      "RestWrapper/2.2.1": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "System.Net.Http": "4.3.4"
@@ -5862,7 +5862,7 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "RestWrapper/2.2.0": {
+    "RestWrapper/2.2.1": {
       "type": "project",
       "path": "../RestWrapper/RestWrapper.csproj",
       "msbuildProject": "../RestWrapper/RestWrapper.csproj"
@@ -5871,10 +5871,10 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
-      "RestWrapper >= 2.2.0"
+      "RestWrapper >= 2.2.1"
     ],
     ".NETFramework,Version=v4.5.2": [
-      "RestWrapper >= 2.2.0"
+      "RestWrapper >= 2.2.1"
     ]
   },
   "packageFolders": {
