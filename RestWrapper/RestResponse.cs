@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace RestWrapper
 {
@@ -57,12 +58,14 @@ namespace RestWrapper
         /// <summary>
         /// The stream containing the response data returned from the server.
         /// </summary>
+        [JsonIgnore]
         public Stream Data = null;
 
         /// <summary>
         /// Read the data stream fully into a byte array.
         /// If you use this property, the 'Data' property will be fully read.
         /// </summary>
+        [JsonIgnore]
         public byte[] DataAsBytes
         {
             get
@@ -80,6 +83,7 @@ namespace RestWrapper
         /// Read the data stream fully into a string.
         /// If you use this property, the 'Data' property will be fully read.
         /// </summary>
+        [JsonIgnore]
         public string DataAsString
         {
             get

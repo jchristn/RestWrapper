@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace RestWrapper
 {
@@ -22,6 +23,7 @@ namespace RestWrapper
         /// <summary>
         /// Method to invoke when sending log messages.
         /// </summary>
+        [JsonIgnore]
         public Action<string> Logger = null;
 
         /// <summary>
@@ -90,7 +92,7 @@ namespace RestWrapper
         /// The content length of the payload (i.e. Data or DataStream).
         /// </summary>
         public long ContentLength { get; private set; }
-         
+
         /// <summary>
         /// The size of the buffer to use while reading from the DataStream and the response stream from the server.
         /// </summary>
