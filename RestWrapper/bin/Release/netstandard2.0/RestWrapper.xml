@@ -194,7 +194,7 @@
         <member name="M:RestWrapper.RestRequest.Send(System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Send the HTTP request using form-encoded data.
-            This method will automatically set the content-type header.
+            This method will automatically set the content-type header to 'application/x-www-form-urlencoded' if it is not already set.
             </summary>
             <param name="form">Dictionary.</param>
             <returns></returns>

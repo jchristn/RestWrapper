@@ -252,7 +252,7 @@ namespace RestWrapper
 
         /// <summary>
         /// Send the HTTP request using form-encoded data.
-        /// This method will automatically set the content-type header.
+        /// This method will automatically set the content-type header to 'application/x-www-form-urlencoded' if it is not already set.
         /// </summary>
         /// <param name="form">Dictionary.</param>
         /// <returns></returns>
@@ -262,7 +262,7 @@ namespace RestWrapper
             FormUrlEncodedContent content = new FormUrlEncodedContent(form);
             byte[] bytes = content.ReadAsByteArrayAsync().Result;
             ContentLength = bytes.Length;
-            ContentType = "x-www-form-urlencoded";
+            if (String.IsNullOrEmpty(ContentType)) ContentType = "application/x-www-form-urlencoded";
             return Send(bytes);
         }
 

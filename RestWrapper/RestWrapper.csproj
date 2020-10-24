@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.0;netcoreapp3.0;netcoreapp3.1;net452</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.2.1.1</Version>
+    <Version>2.2.1.2</Version>
     <Authors>Joel Christner</Authors>
     <Description>RestWrapper is a simple and easy client for integrating and consuming REST, HTTP, and HTTPS APIs and services quickly in C#.</Description>
     <Copyright>(c)2020 Joel Christner</Copyright>
