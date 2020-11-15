@@ -14,3 +14,4 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp2.0\RestWrapper.A
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp2.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp2.0\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp2.0\RestWrapper.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp2.0\RestWrapper.csproj.CoreCompileInputs.cache

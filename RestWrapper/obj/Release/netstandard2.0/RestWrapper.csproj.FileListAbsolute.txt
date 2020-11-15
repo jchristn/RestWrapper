@@ -33,3 +33,4 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.AssemblyInfo.cs
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.csproj.CoreCompileInputs.cache

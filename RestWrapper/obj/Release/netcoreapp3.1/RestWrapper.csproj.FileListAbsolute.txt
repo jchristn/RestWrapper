@@ -6,3 +6,4 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.A
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.AssemblyInfo.cs
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.csproj.CoreCompileInputs.cache
