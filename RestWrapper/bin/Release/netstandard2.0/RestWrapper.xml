@@ -221,40 +221,45 @@
             <param name="stream">Stream containing the data you wish to send to the server (does not work with GET requests).</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with no data.
             </summary>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request using form-encoded data.
             This method will automatically set the content-type header.
             </summary>
             <param name="form">Dictionary.</param>
-            <returns></returns>
+            <param name="token">Cancellation token.</param>
+            <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.String)">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with the supplied data.
             </summary>
             <param name="data">A string containing the data you wish to send to the server (does not work with GET requests).</param>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.Byte[])">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Byte[],System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with the supplied data.
             </summary>
             <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.Int64,System.IO.Stream)">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Int64,System.IO.Stream,System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with the supplied data.
             </summary>
             <param name="contentLength">The number of bytes to read from the input stream.</param>
             <param name="stream">A stream containing the data you wish to send to the server (does not work with GET requests).</param>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
         <member name="T:RestWrapper.RestResponse">

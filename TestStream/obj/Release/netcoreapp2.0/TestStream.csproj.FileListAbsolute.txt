@@ -40,3 +40,4 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp2.0\TestStream.csp
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp2.0\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp2.0\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp2.0\TestStream.genruntimeconfig.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp2.0\TestStream.csproj.CoreCompileInputs.cache

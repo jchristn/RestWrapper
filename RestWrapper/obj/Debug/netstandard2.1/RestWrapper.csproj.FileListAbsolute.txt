@@ -1,0 +1,9 @@
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netstandard2.1\RestWrapper.deps.json
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netstandard2.1\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netstandard2.1\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.1\RestWrapper.AssemblyInfoInputs.cache
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.1\RestWrapper.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.1\RestWrapper.csproj.CoreCompileInputs.cache
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.1\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.1\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.1\RestWrapper.csprojAssemblyReference.cache

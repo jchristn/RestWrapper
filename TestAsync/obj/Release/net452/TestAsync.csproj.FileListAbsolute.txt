@@ -35,3 +35,4 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.AssemblyInfo
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.exe
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.pdb
+C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.csproj.CoreCompileInputs.cache

@@ -32,6 +32,7 @@ C:\Code\Misc\RestWrapper-2.2\Test\bin\Debug\net452\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.csproj.CoreCompileInputs.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.exe
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.pdb

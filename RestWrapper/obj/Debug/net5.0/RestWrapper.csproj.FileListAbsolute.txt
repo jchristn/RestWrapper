@@ -1,0 +1,12 @@
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\RestWrapper.deps.json
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\ref\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.csprojAssemblyReference.cache
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.AssemblyInfoInputs.cache
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.csproj.CoreCompileInputs.cache
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\ref\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.pdb

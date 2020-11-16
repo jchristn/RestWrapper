@@ -32,6 +32,7 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\net452\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.csproj.CoreCompileInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.exe
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\net452\TestAsync.pdb

@@ -1,0 +1,17 @@
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\TestStream.exe
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\TestStream.deps.json
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\TestStream.runtimeconfig.json
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\TestStream.runtimeconfig.dev.json
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\TestStream.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\RestWrapper.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.0\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.csprojAssemblyReference.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.AssemblyInfoInputs.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.csproj.CoreCompileInputs.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.csproj.CopyComplete
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.dll
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.0\TestStream.genruntimeconfig.cache

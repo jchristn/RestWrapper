@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3h0mC1f5W232jiBjXqWgXNhc8VMrqYvGgf35cMFh1ExVEqG1mJ6XYxq42PzGvIy0zO6G5SaZh37C9TV6/VqnGg==",
+  "dgSpecHash": "bP8DHQKjrRUIUb4EV9iw2sOLrlN4dMB+Vw3nv+RcVMSdsU5UwnWgs4+PXZTSjXWuMaeCYI8beHfMGzgX7U1LSA==",
   "success": true,
-  "projectFilePath": "C:\\code\\Misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj",
+  "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.0\\microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",

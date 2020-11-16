@@ -4,6 +4,36 @@
         <name>RestWrapper</name>
     </assembly>
     <members>
+        <member name="T:RestWrapper.AuthorizationHeader">
+            <summary>
+            Authorization header options.
+            </summary>
+        </member>
+        <member name="F:RestWrapper.AuthorizationHeader.User">
+            <summary>
+            The username to use in the authorization header, if any.
+            </summary>
+        </member>
+        <member name="F:RestWrapper.AuthorizationHeader.Password">
+            <summary>
+            The password to use in the authorization header, if any.
+            </summary>
+        </member>
+        <member name="F:RestWrapper.AuthorizationHeader.BearerToken">
+            <summary>
+            The bearer token to use in the authorization header, if any.
+            </summary>
+        </member>
+        <member name="F:RestWrapper.AuthorizationHeader.EncodeCredentials">
+            <summary>
+            Enable to encode credentials in the authorization header.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.AuthorizationHeader.#ctor">
+            <summary>
+            Instantiate the object.
+            </summary>
+        </member>
         <member name="T:RestWrapper.HttpMethod">
             <summary>
             HTTP methods, i.e. GET, PUT, POST, DELETE, etc.
@@ -74,19 +104,9 @@
             The HTTP method to use, also known as a verb (GET, PUT, POST, DELETE, etc).
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.User">
+        <member name="P:RestWrapper.RestRequest.Authorization">
             <summary>
-            The username to use in the authorization header, if any.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.RestRequest.Password">
-            <summary>
-            The password to use in the authorization header, if any.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.RestRequest.EncodeCredentials">
-            <summary>
-            Enable to encode credentials in the authorization header.
+            Authorization header parameters.
             </summary>
         </member>
         <member name="F:RestWrapper.RestRequest.IgnoreCertificateErrors">
@@ -119,7 +139,7 @@
             The content length of the payload (i.e. Data or DataStream).
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.StreamReadBufferSize">
+        <member name="P:RestWrapper.RestRequest.BufferSize">
             <summary>
             The size of the buffer to use while reading from the DataStream and the response stream from the server.
             </summary>
@@ -142,6 +162,14 @@
             <param name="url">URL to access on the server.</param> 
             <param name="method">HTTP method to use.</param>
         </member>
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod,System.String)">
+            <summary>
+            A simple RESTful HTTP client.
+            </summary>
+            <param name="url">URL to access on the server.</param>
+            <param name="method">HTTP method to use.</param> 
+            <param name="contentType">Content type to use.</param>
+        </member>
         <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
             <summary>
             A simple RESTful HTTP client.
@@ -162,6 +190,14 @@
             Send the HTTP request with no data.
             </summary>
             <returns>RestResponse.</returns>
+        </member>
+        <member name="M:RestWrapper.RestRequest.Send(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Send the HTTP request using form-encoded data.
+            This method will automatically set the content-type header to 'application/x-www-form-urlencoded' if it is not already set.
+            </summary>
+            <param name="form">Dictionary.</param>
+            <returns></returns>
         </member>
         <member name="M:RestWrapper.RestRequest.Send(System.String)">
             <summary>
@@ -185,32 +221,45 @@
             <param name="stream">Stream containing the data you wish to send to the server (does not work with GET requests).</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with no data.
             </summary>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.String)">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Collections.Generic.Dictionary{System.String,System.String},System.Threading.CancellationToken)">
+            <summary>
+            Send the HTTP request using form-encoded data.
+            This method will automatically set the content-type header.
+            </summary>
+            <param name="form">Dictionary.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>RestResponse.</returns>
+        </member>
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with the supplied data.
             </summary>
             <param name="data">A string containing the data you wish to send to the server (does not work with GET requests).</param>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.Byte[])">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Byte[],System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with the supplied data.
             </summary>
             <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.SendAsync(System.Int64,System.IO.Stream)">
+        <member name="M:RestWrapper.RestRequest.SendAsync(System.Int64,System.IO.Stream,System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with the supplied data.
             </summary>
             <param name="contentLength">The number of bytes to read from the input stream.</param>
             <param name="stream">A stream containing the data you wish to send to the server (does not work with GET requests).</param>
+            <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
         <member name="T:RestWrapper.RestResponse">
@@ -261,6 +310,18 @@
         <member name="F:RestWrapper.RestResponse.Data">
             <summary>
             The stream containing the response data returned from the server.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestResponse.DataAsBytes">
+            <summary>
+            Read the data stream fully into a byte array.
+            If you use this property, the 'Data' property will be fully read.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestResponse.DataAsString">
+            <summary>
+            Read the data stream fully into a string.
+            If you use this property, the 'Data' property will be fully read.
             </summary>
         </member>
         <member name="M:RestWrapper.RestResponse.#ctor">

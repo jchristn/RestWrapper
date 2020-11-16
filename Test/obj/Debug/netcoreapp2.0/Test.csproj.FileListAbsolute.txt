@@ -36,6 +36,7 @@ C:\Code\Misc\RestWrapper-2.2\Test\bin\Debug\netcoreapp2.0\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.AssemblyInfo.cs
+C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.csproj.CoreCompileInputs.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.dll
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp2.0\Test.pdb

@@ -35,3 +35,4 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.AssemblyIn
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.exe
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.csproj.CoreCompileInputs.cache

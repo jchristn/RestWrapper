@@ -40,3 +40,4 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.csproj.CopyComp
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.dll
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.genruntimeconfig.cache
+C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.csproj.CoreCompileInputs.cache

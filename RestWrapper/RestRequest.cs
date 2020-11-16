@@ -8,6 +8,7 @@ using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -47,8 +48,8 @@ namespace RestWrapper
             }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(Authorization));
-                _Authorization = value;
+                if (value == null) _Authorization = new AuthorizationHeader();
+                else _Authorization = value;
             }
         }
 
@@ -78,7 +79,7 @@ namespace RestWrapper
             }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(Headers));
+                if (value == null) _Headers = new Dictionary<string, string>();
                 else _Headers = value;
             }
         }
@@ -311,10 +312,11 @@ namespace RestWrapper
         /// <summary>
         /// Send the HTTP request with no data.
         /// </summary>
+        /// <param name="token">Cancellation token.</param>
         /// <returns>RestResponse.</returns>
-        public async Task<RestResponse> SendAsync()
+        public Task<RestResponse> SendAsync(CancellationToken token = default)
         {
-            return await SendInternalAsync(0, null);
+            return SendInternalAsync(0, null, token);
         }
 
         /// <summary>
@@ -322,34 +324,37 @@ namespace RestWrapper
         /// This method will automatically set the content-type header.
         /// </summary>
         /// <param name="form">Dictionary.</param>
-        /// <returns></returns>
-        public async Task<RestResponse> SendAsync(Dictionary<string, string> form)
+        /// <param name="token">Cancellation token.</param>
+        /// <returns>RestResponse.</returns>
+        public Task<RestResponse> SendAsync(Dictionary<string, string> form, CancellationToken token = default)
         {
             if (form == null) form = new Dictionary<string, string>();
             FormUrlEncodedContent content = new FormUrlEncodedContent(form);
-            byte[] bytes = await content.ReadAsByteArrayAsync();
+            byte[] bytes = content.ReadAsByteArrayAsync().Result;
             ContentLength = bytes.Length;
             ContentType = "x-www-form-urlencoded";
-            return await SendAsync(bytes);
+            return SendAsync(bytes, token);
         }
 
         /// <summary>
         /// Send the HTTP request with the supplied data.
         /// </summary>
         /// <param name="data">A string containing the data you wish to send to the server (does not work with GET requests).</param>
+        /// <param name="token">Cancellation token.</param>
         /// <returns>RestResponse.</returns>
-        public async Task<RestResponse> SendAsync(string data)
+        public Task<RestResponse> SendAsync(string data, CancellationToken token = default)
         {
-            if (String.IsNullOrEmpty(data)) return await SendAsync();
-            return await SendAsync(Encoding.UTF8.GetBytes(data));
+            if (String.IsNullOrEmpty(data)) return SendAsync(token);
+            return SendAsync(Encoding.UTF8.GetBytes(data), token);
         }
 
         /// <summary>
         /// Send the HTTP request with the supplied data.
         /// </summary>
         /// <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
+        /// <param name="token">Cancellation token.</param>
         /// <returns>RestResponse.</returns>
-        public async Task<RestResponse> SendAsync(byte[] data)
+        public Task<RestResponse> SendAsync(byte[] data, CancellationToken token = default)
         {
             long contentLength = 0;
             MemoryStream stream = new MemoryStream(new byte[0]);
@@ -361,7 +366,7 @@ namespace RestWrapper
                 stream.Seek(0, SeekOrigin.Begin);
             }
 
-            return await SendInternalAsync(contentLength, stream);
+            return SendInternalAsync(contentLength, stream, token);
         }
 
         /// <summary>
@@ -369,10 +374,11 @@ namespace RestWrapper
         /// </summary>
         /// <param name="contentLength">The number of bytes to read from the input stream.</param>
         /// <param name="stream">A stream containing the data you wish to send to the server (does not work with GET requests).</param>
+        /// <param name="token">Cancellation token.</param>
         /// <returns>RestResponse.</returns>
-        public async Task<RestResponse> SendAsync(long contentLength, Stream stream)
+        public Task<RestResponse> SendAsync(long contentLength, Stream stream, CancellationToken token = default)
         {
-            return await SendInternalAsync(contentLength, stream);
+            return SendInternalAsync(contentLength, stream, token);
         }
 
         #endregion
@@ -386,11 +392,11 @@ namespace RestWrapper
 
         private RestResponse SendInternal(long contentLength, Stream stream)
         {
-            RestResponse resp = SendInternalAsync(contentLength, stream).Result;
+            RestResponse resp = SendInternalAsync(contentLength, stream, CancellationToken.None).Result;
             return resp; 
         }
 
-        private async Task<RestResponse> SendInternalAsync(long contentLength, Stream stream)
+        private async Task<RestResponse> SendInternalAsync(long contentLength, Stream stream, CancellationToken token)
         {
             if (String.IsNullOrEmpty(Url)) throw new ArgumentNullException(nameof(Url));
 
@@ -561,11 +567,11 @@ namespace RestWrapper
 
                         while (bytesRemaining > 0)
                         {
-                            bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                            bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
                             if (bytesRead > 0)
                             {
                                 bytesRemaining -= bytesRead;
-                                clientStream.Write(buffer, 0, bytesRead);
+                                await clientStream.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
                             }
                         }
 
@@ -581,7 +587,7 @@ namespace RestWrapper
 
                 Logger?.Invoke(_Header + "submitting");
 
-                HttpWebResponse response = (HttpWebResponse)(await client.GetResponseAsync());
+                HttpWebResponse response = (HttpWebResponse)(await client.GetResponseAsync().ConfigureAwait(false));
 
                 Logger?.Invoke(_Header + "server returned status code " + (int)response.StatusCode); 
 
@@ -648,11 +654,21 @@ namespace RestWrapper
 
                 return ret;
             }
+            catch (TaskCanceledException)
+            {
+                Logger?.Invoke(_Header + "task canceled");
+                return null;
+            }
+            catch (OperationCanceledException)
+            {
+                Logger?.Invoke(_Header + "operation canceled");
+                return null;
+            }
             catch (WebException we)
             {
                 #region WebException
 
-                Logger?.Invoke(_Header + "web exception encountered: " + we.Message);
+                Logger?.Invoke(_Header + "web exception: " + we.Message);
 
                 RestResponse ret = new RestResponse();
                 ret.Headers = null;
