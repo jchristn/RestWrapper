@@ -10,3 +10,6 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.csproj.Cor
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\ref\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\net5.0\RestWrapper.pdb
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\net5.0\RestWrapper.xml

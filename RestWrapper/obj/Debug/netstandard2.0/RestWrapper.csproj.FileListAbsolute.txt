@@ -32,3 +32,6 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.cs
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netstandard2.0\RestWrapper.csprojAssemblyReference.cache
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netstandard2.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netstandard2.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netstandard2.0\RestWrapper.xml

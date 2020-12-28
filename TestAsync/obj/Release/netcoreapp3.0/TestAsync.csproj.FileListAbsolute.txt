@@ -15,3 +15,6 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.0\TestAsync.cspro
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.0\TestAsync.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.0\TestAsync.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.0\TestAsync.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.0\RestWrapper.xml

@@ -15,3 +15,6 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.csproj.
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\RestWrapper.xml

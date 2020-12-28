@@ -41,3 +41,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.cspro
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp2.0\TestStream.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp2.0\RestWrapper.xml

@@ -15,3 +15,6 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp3.0\Test.csproj.CopyComple
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp3.0\Test.dll
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp3.0\Test.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\netcoreapp3.0\Test.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\netcoreapp3.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\netcoreapp3.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\netcoreapp3.0\RestWrapper.xml

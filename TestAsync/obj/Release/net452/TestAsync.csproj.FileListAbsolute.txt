@@ -36,3 +36,6 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.csproj.CopyC
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.exe
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\net452\TestAsync.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\net452\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\net452\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\net452\RestWrapper.xml

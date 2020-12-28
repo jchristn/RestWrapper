@@ -41,3 +41,6 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.dll
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.genruntimeconfig.cache
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp2.0\Test.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.2\Test\bin\Release\netcoreapp2.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\Test\bin\Release\netcoreapp2.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\Test\bin\Release\netcoreapp2.0\RestWrapper.xml

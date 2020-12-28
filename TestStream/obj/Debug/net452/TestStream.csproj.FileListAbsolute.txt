@@ -36,3 +36,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.csproj.CoreC
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.exe
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\net452\TestStream.pdb
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\net452\RestWrapper.xml

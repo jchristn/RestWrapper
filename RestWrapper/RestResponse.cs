@@ -18,48 +18,48 @@ namespace RestWrapper
         /// <summary>
         /// The protocol and version.
         /// </summary>
-        public string ProtocolVersion = null;
+        public string ProtocolVersion { get; internal set; } = null;
 
         /// <summary>
         /// User-supplied headers.
         /// </summary>
-        public Dictionary<string, string> Headers = new Dictionary<string, string>();
+        public Dictionary<string, string> Headers { get; internal set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// The content encoding returned from the server.
         /// </summary>
-        public string ContentEncoding = null;
+        public string ContentEncoding { get; internal set; } = null;
 
         /// <summary>
         /// The content type returned from the server.
         /// </summary>
-        public string ContentType = null;
+        public string ContentType { get; internal set; } = null;
 
         /// <summary>
         /// The number of bytes contained in the response body byte array.
         /// </summary>
-        public long ContentLength = 0;
+        public long ContentLength { get; internal set; } = 0;
 
         /// <summary>
         /// The response URI of the responder.
         /// </summary>
-        public string ResponseURI = null;
+        public string ResponseURI { get; internal set; } = null;
 
         /// <summary>
         /// The HTTP status code returned with the response.
         /// </summary>
-        public int StatusCode = 0;
+        public int StatusCode { get; internal set; } = 0;
 
         /// <summary>
         /// The HTTP status description associated with the HTTP status code.
         /// </summary>
-        public string StatusDescription = null;
+        public string StatusDescription { get; internal set; } = null;
 
         /// <summary>
         /// The stream containing the response data returned from the server.
         /// </summary>
         [JsonIgnore]
-        public Stream Data = null;
+        public Stream Data { get; internal set; } = null;
 
         /// <summary>
         /// Read the data stream fully into a byte array.
@@ -161,7 +161,7 @@ namespace RestWrapper
         }
 
         #endregion
-
+         
         #region Private-Methods
 
         private byte[] StreamToBytes(Stream input)

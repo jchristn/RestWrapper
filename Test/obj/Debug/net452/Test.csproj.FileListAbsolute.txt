@@ -36,3 +36,6 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.csproj.CoreCompileInputs
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.csproj.CopyComplete
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.exe
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net452\Test.pdb
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\net452\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\net452\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\net452\RestWrapper.xml

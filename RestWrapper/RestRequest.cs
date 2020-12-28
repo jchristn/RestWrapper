@@ -25,12 +25,12 @@ namespace RestWrapper
         /// Method to invoke when sending log messages.
         /// </summary>
         [JsonIgnore]
-        public Action<string> Logger = null;
+        public Action<string> Logger { get; set; } = null;
 
         /// <summary>
         /// The URL to which the request should be directed.
         /// </summary>
-        public string Url = null;
+        public string Url { get; set; } = null;
 
         /// <summary>
         /// The HTTP method to use, also known as a verb (GET, PUT, POST, DELETE, etc).
@@ -56,17 +56,17 @@ namespace RestWrapper
         /// <summary>
         /// Ignore certificate errors such as expired certificates, self-signed certificates, or those that cannot be validated.
         /// </summary>
-        public bool IgnoreCertificateErrors = false;
+        public bool IgnoreCertificateErrors { get; set; } = false;
 
         /// <summary>
         /// The filename of the file containing the certificate.
         /// </summary>
-        public string CertificateFilename = null;
+        public string CertificateFilename { get; set; } = null;
 
         /// <summary>
         /// The password to the certificate file.
         /// </summary>
-        public string CertificatePassword = null;
+        public string CertificatePassword { get; set; } = null;
 
         /// <summary>
         /// The HTTP headers to attach to the request.
@@ -87,12 +87,12 @@ namespace RestWrapper
         /// <summary>
         /// The content type of the payload (i.e. Data or DataStream).
         /// </summary>
-        public string ContentType = null;
+        public string ContentType { get; set; } = null;
 
         /// <summary>
         /// The content length of the payload (i.e. Data or DataStream).
         /// </summary>
-        public long ContentLength { get; private set; }
+        public long ContentLength { get; private set; } = 0;
 
         /// <summary>
         /// The size of the buffer to use while reading from the DataStream and the response stream from the server.
@@ -638,7 +638,49 @@ namespace RestWrapper
 
                 #region Payload
 
-                if (response.ContentLength > 0)
+                bool contentLengthHeaderExists = false;
+                if (ret.Headers != null && ret.Headers.Count > 0)
+                {
+                    foreach (KeyValuePair<string, string> header in ret.Headers)
+                    {
+                        if (String.IsNullOrEmpty(header.Key)) continue;
+                        if (header.Key.ToLower().Equals("content-length"))
+                        {
+                            contentLengthHeaderExists = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!contentLengthHeaderExists)
+                {
+                    Logger?.Invoke(_Header + "content-length header not supplied");
+
+                    long totalBytesRead = 0;
+                    int bytesRead = 0;
+                    byte[] buffer = new byte[_StreamReadBufferSize];
+                    MemoryStream ms = new MemoryStream();
+
+                    while (true)
+                    {
+                        bytesRead = await response.GetResponseStream().ReadAsync(buffer, 0, buffer.Length, token).ConfigureAwait(false);
+                        if (bytesRead > 0)
+                        {
+                            await ms.WriteAsync(buffer, 0, bytesRead, token).ConfigureAwait(false);
+                            totalBytesRead += bytesRead;
+                            Logger?.Invoke(_Header + "read " + bytesRead + " bytes, " + totalBytesRead + " total bytes");
+                        }
+                        else
+                        { 
+                            break;
+                        }
+                    }
+
+                    ms.Seek(0, SeekOrigin.Begin);
+                    ret.ContentLength = totalBytesRead;
+                    ret.Data = ms;
+                }
+                else if (response.ContentLength > 0)
                 {
                     Logger?.Invoke(_Header + "attaching response stream with content length " + response.ContentLength + " bytes");
                     ret.ContentLength = response.ContentLength;

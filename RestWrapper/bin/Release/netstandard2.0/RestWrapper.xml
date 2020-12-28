@@ -89,12 +89,12 @@
             RESTful HTTP request to be sent to a server.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.Logger">
+        <member name="P:RestWrapper.RestRequest.Logger">
             <summary>
             Method to invoke when sending log messages.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.Url">
+        <member name="P:RestWrapper.RestRequest.Url">
             <summary>
             The URL to which the request should be directed.
             </summary>
@@ -109,17 +109,17 @@
             Authorization header parameters.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.IgnoreCertificateErrors">
+        <member name="P:RestWrapper.RestRequest.IgnoreCertificateErrors">
             <summary>
             Ignore certificate errors such as expired certificates, self-signed certificates, or those that cannot be validated.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.CertificateFilename">
+        <member name="P:RestWrapper.RestRequest.CertificateFilename">
             <summary>
             The filename of the file containing the certificate.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.CertificatePassword">
+        <member name="P:RestWrapper.RestRequest.CertificatePassword">
             <summary>
             The password to the certificate file.
             </summary>
@@ -129,7 +129,7 @@
             The HTTP headers to attach to the request.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestRequest.ContentType">
+        <member name="P:RestWrapper.RestRequest.ContentType">
             <summary>
             The content type of the payload (i.e. Data or DataStream).
             </summary>
@@ -267,47 +267,47 @@
             RESTful response from the server.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.ProtocolVersion">
+        <member name="P:RestWrapper.RestResponse.ProtocolVersion">
             <summary>
             The protocol and version.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.Headers">
+        <member name="P:RestWrapper.RestResponse.Headers">
             <summary>
             User-supplied headers.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.ContentEncoding">
+        <member name="P:RestWrapper.RestResponse.ContentEncoding">
             <summary>
             The content encoding returned from the server.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.ContentType">
+        <member name="P:RestWrapper.RestResponse.ContentType">
             <summary>
             The content type returned from the server.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.ContentLength">
+        <member name="P:RestWrapper.RestResponse.ContentLength">
             <summary>
             The number of bytes contained in the response body byte array.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.ResponseURI">
+        <member name="P:RestWrapper.RestResponse.ResponseURI">
             <summary>
             The response URI of the responder.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.StatusCode">
+        <member name="P:RestWrapper.RestResponse.StatusCode">
             <summary>
             The HTTP status code returned with the response.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.StatusDescription">
+        <member name="P:RestWrapper.RestResponse.StatusDescription">
             <summary>
             The HTTP status description associated with the HTTP status code.
             </summary>
         </member>
-        <member name="F:RestWrapper.RestResponse.Data">
+        <member name="P:RestWrapper.RestResponse.Data">
             <summary>
             The stream containing the response data returned from the server.
             </summary>

@@ -36,3 +36,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.csproj.Cop
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.exe
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net452\TestStream.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Release\net452\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Release\net452\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Release\net452\RestWrapper.xml

@@ -15,3 +15,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.csp
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\RestWrapper.xml

@@ -18,3 +18,6 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net5.0\Test.dll
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net5.0\ref\Test.dll
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net5.0\Test.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Debug\net5.0\Test.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\net5.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\net5.0\assets\icon.png
+C:\code\Misc\RestWrapper-2.2\Test\bin\Debug\net5.0\RestWrapper.xml

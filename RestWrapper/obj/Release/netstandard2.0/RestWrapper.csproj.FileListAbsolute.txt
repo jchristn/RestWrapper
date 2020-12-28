@@ -34,3 +34,5 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.pdb
 C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.0\RestWrapper.csproj.CoreCompileInputs.cache
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.0\assets\icon.ico
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.0\assets\icon.png
