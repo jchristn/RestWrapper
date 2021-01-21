@@ -101,7 +101,7 @@ namespace RestWrapper
                 return null;
             }
         }
-
+         
         #endregion
 
         #region Private-Members
@@ -158,6 +158,17 @@ namespace RestWrapper
             ret += Environment.NewLine;
 
             return ret;
+        }
+
+        /// <summary>
+        /// Deserialize JSON data to an object type of your choosing.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <returns>Instance.</returns>
+        public T DataFromJson<T>()
+        {
+            if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
+            return JsonConvert.DeserializeObject<T>(DataAsString);
         }
 
         #endregion

@@ -1,4 +1,6 @@
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\TestAsync.exe
+C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\assets\icon.ico
+C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\assets\icon.png
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\TestAsync.deps.json
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\TestAsync.runtimeconfig.json
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\TestAsync.runtimeconfig.dev.json
@@ -7,6 +9,7 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\TestAsync.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\RestWrapper.xml
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.AssemblyInfo.cs
@@ -15,6 +18,3 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.cspro
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Release\netcoreapp3.1\TestAsync.genruntimeconfig.cache
-C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\assets\icon.ico
-C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\assets\icon.png
-C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Release\netcoreapp3.1\RestWrapper.xml

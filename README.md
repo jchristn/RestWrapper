@@ -6,7 +6,7 @@ A simple C# class library to help simplify sending REST API requests and retriev
 
 ## New in v2.2.1
 
-- RestResponse ```DataAsBytes``` and ```DataAsString``` properties
+- RestResponse ```DataAsBytes``` and ```DataAsString``` properties; ```DataFromJson<T>``` method
 
 ## Test Apps
 
@@ -64,6 +64,15 @@ form.Add("hello", "world how are you");
 
 RestResponse resp = req.Send(form);
 Console.WriteLine("Status : " + resp.StatusCode);
+```
+
+```csharp
+// deserializing JSON
+using RestWrapper;
+
+RestRequest req = new RestRequest("http://127.0.0.1:8000/api");
+RestResponse resp = req.Send();
+MyObject obj = resp.DataFromJson<MyObject>();
 ```
 
 ## Version History

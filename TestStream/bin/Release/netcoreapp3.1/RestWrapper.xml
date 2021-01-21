@@ -335,5 +335,12 @@
             </summary>
             <returns>String.</returns>
         </member>
+        <member name="M:RestWrapper.RestResponse.DataFromJson``1">
+            <summary>
+            Deserialize JSON data to an object type of your choosing.
+            </summary>
+            <typeparam name="T">Type.</typeparam>
+            <returns>Instance.</returns>
+        </member>
     </members>
 </doc>

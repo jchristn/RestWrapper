@@ -194,7 +194,7 @@ namespace Test
                                 }
                             }
                             break;
-
+                             
                         case "debug":
                             debug = !debug;
                             break;

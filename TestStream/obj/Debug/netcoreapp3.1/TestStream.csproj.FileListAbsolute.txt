@@ -1,4 +1,6 @@
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\TestStream.exe
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\assets\icon.ico
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\assets\icon.png
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\TestStream.deps.json
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\TestStream.runtimeconfig.json
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\TestStream.runtimeconfig.dev.json
@@ -7,6 +9,7 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.pdb
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.xml
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.AssemblyInfo.cs
@@ -15,6 +18,3 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.cspro
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.genruntimeconfig.cache
-C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\assets\icon.ico
-C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\assets\icon.png
-C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.xml

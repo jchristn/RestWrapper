@@ -1,8 +1,0 @@
-D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Release\RestWrapperTest.exe.config
-D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Release\RestWrapperTest.exe
-D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Release\RestWrapperTest.pdb
-D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Release\RestWrapper.dll
-D:\Code\Misc\RestWrapper\RestWrapperTest\bin\Release\RestWrapper.pdb
-D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Release\RestWrapperTest.csprojResolveAssemblyReference.cache
-D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Release\RestWrapperTest.exe
-D:\Code\Misc\RestWrapper\RestWrapperTest\obj\Release\RestWrapperTest.pdb
