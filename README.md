@@ -1,3 +1,5 @@
+![alt tag](https://raw.githubusercontent.com/jchristn/RestWrapper/master/assets/icon.ico)
+
 # RestWrapper
 
 [![NuGet Version](https://img.shields.io/nuget/v/RestWrapper.svg?style=flat)](https://www.nuget.org/packages/RestWrapper/) [![NuGet](https://img.shields.io/nuget/dt/RestWrapper.svg)](https://www.nuget.org/packages/RestWrapper) 
