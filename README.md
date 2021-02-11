@@ -77,6 +77,10 @@ RestResponse resp = req.Send();
 MyObject obj = resp.DataFromJson<MyObject>();
 ```
 
+## A Note on Performance and 'localhost'
+
+RestWrapper uses the underlying ```HttpWebRequest``` and ```HttpWebResponse``` classes from ```System.Net```.  When using ```localhost``` as the target URL, you may notice in Wireshark that ```HttpWebRequest``` will first attempt to connect to the IPv6 loopback address, and not all services listen on IPv6.  **This can create a material delay of more than 1 second**.  In these cases, it is recommended that you use ```127.0.0.1``` instead of ```localhost``` for these cases.
+
 ## Version History
 
 Please refer to CHANGELOG.md for version history.
