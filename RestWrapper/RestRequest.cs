@@ -125,7 +125,12 @@ namespace RestWrapper
                 _Timeout = value;
             }
         }
-         
+
+        /// <summary>
+        /// The user agent header to set on outbound requests.
+        /// </summary>
+        public string UserAgent { get; set; } = "RestWrapper (https://www.github.com/jchristn/RestWrapper)";
+
         #endregion
 
         #region Private-Members
@@ -400,6 +405,8 @@ namespace RestWrapper
         {
             if (String.IsNullOrEmpty(Url)) throw new ArgumentNullException(nameof(Url));
 
+            Timestamps ts = new Timestamps();
+
             Logger?.Invoke(_Header + Method.ToString() + " " + Url);
 
             try
@@ -413,14 +420,17 @@ namespace RestWrapper
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                 HttpWebRequest client = (HttpWebRequest)WebRequest.Create(Url);
+                client.UserAgent = UserAgent;
                 client.KeepAlive = false;
                 client.Method = Method.ToString();
                 client.AllowAutoRedirect = true;
                 client.Timeout = _Timeout;
                 client.ContentLength = 0;
                 client.ContentType = ContentType;
-                client.UserAgent = "RestWrapper (https://www.github.com/jchristn/RestWrapper)";
-                 
+                client.ServicePoint.Expect100Continue = false;
+                client.ServicePoint.UseNagleAlgorithm = false;
+                client.ServicePoint.ConnectionLimit = 4096; 
+
                 #endregion
 
                 #region Add-Certificate
@@ -584,12 +594,13 @@ namespace RestWrapper
                 #endregion
 
                 #region Submit-Request-and-Build-Response
-
-                Logger?.Invoke(_Header + "submitting");
-
+                 
+                ts.End = DateTime.Now;
+                Logger?.Invoke(_Header + "submitting (" + ts.TotalMs + "ms)");
                 HttpWebResponse response = (HttpWebResponse)(await client.GetResponseAsync().ConfigureAwait(false));
 
-                Logger?.Invoke(_Header + "server returned status code " + (int)response.StatusCode); 
+                ts.End = DateTime.Now;
+                Logger?.Invoke(_Header + "server returned " + (int)response.StatusCode + " (" + ts.TotalMs + "ms)"); 
 
                 RestResponse ret = new RestResponse();
                 ret.ProtocolVersion = "HTTP/" + response.ProtocolVersion.ToString();
@@ -604,7 +615,8 @@ namespace RestWrapper
 
                 #region Headers
 
-                Logger?.Invoke(_Header + "processing response headers");
+                ts.End = DateTime.Now;
+                Logger?.Invoke(_Header + "processing response headers (" + ts.TotalMs + "ms)");
 
                 if (response.Headers != null && response.Headers.Count > 0)
                 {
@@ -779,6 +791,11 @@ namespace RestWrapper
                 return ret;
 
                 #endregion
+            }
+            finally
+            {
+                ts.End = DateTime.Now;
+                Logger?.Invoke(_Header + "complete (" + ts.TotalMs + "ms)");
             }
         }
          

@@ -11,8 +11,11 @@ namespace Test
 {
     class Program
     {
-        static bool debug = false;
-        static int timeout = 10000;
+        static bool _Debug = false;
+        static int _Timeout = 10000;
+        static string _Username = null;
+        static string _Password = null;
+        static bool _Encode = true;
 
         static void Main(string[] args)
         {
@@ -47,13 +50,29 @@ namespace Test
                             Menu();
                             break;
 
+                        case "user":
+                            _Username = InputString("Username:", null, true);
+                            break;
+
+                        case "pass":
+                            _Password = InputString("Password:", null, true);
+                            break;
+
+                        case "encode":
+                            _Encode = !_Encode;
+                            break;
+
                         case "put":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.PUT, 
                                 InputString("Content type:", "text/plain", false));
-                            req.Timeout = timeout;
-                            if (debug) req.Logger = Console.WriteLine;
+                            req.Timeout = _Timeout;
+                            req.Authorization.User = _Username;
+                            req.Authorization.Password = _Password;
+                            req.Authorization.EncodeCredentials = _Encode;
+
+                            if (_Debug) req.Logger = Console.WriteLine;
 
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
@@ -77,9 +96,13 @@ namespace Test
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.POST, 
                                 InputString("Content type:", "text/plain", false));
-                            req.Timeout = timeout;
+                            req.UserAgent = null;
+                            req.Timeout = _Timeout;
+                            req.Authorization.User = _Username;
+                            req.Authorization.Password = _Password;
+                            req.Authorization.EncodeCredentials = _Encode;
 
-                            if (debug) req.Logger = Console.WriteLine;
+                            if (_Debug) req.Logger = Console.WriteLine;
 
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
@@ -102,9 +125,13 @@ namespace Test
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.POST);
-                            req.Timeout = timeout;
+                            req.UserAgent = null;
+                            req.Timeout = _Timeout;
+                            req.Authorization.User = _Username;
+                            req.Authorization.Password = _Password;
+                            req.Authorization.EncodeCredentials = _Encode;
 
-                            if (debug) req.Logger = Console.WriteLine;
+                            if (_Debug) req.Logger = Console.WriteLine;
                              
                             resp = req.Send(InputDictionary());
                             if (resp == null)
@@ -127,8 +154,13 @@ namespace Test
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.DELETE,
                                 InputString("Content type:", "text/plain", false));
-                            req.Timeout = timeout; 
-                            if (debug) req.Logger = Console.WriteLine;
+                            req.UserAgent = null;
+                            req.Timeout = _Timeout;
+                            req.Authorization.User = _Username;
+                            req.Authorization.Password = _Password;
+                            req.Authorization.EncodeCredentials = _Encode;
+
+                            if (_Debug) req.Logger = Console.WriteLine;
 
                             data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false)); 
                             resp = req.Send(data);
@@ -151,9 +183,13 @@ namespace Test
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.HEAD);
-                            req.Timeout = timeout;
+                            req.UserAgent = null;
+                            req.Timeout = _Timeout;
+                            req.Authorization.User = _Username;
+                            req.Authorization.Password = _Password;
+                            req.Authorization.EncodeCredentials = _Encode;
 
-                            if (debug) req.Logger = Console.WriteLine;
+                            if (_Debug) req.Logger = Console.WriteLine;
 
                             resp = req.Send();
                             if (resp == null)
@@ -175,9 +211,13 @@ namespace Test
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
                                 HttpMethod.GET);
-                            req.Timeout = timeout;
+                            req.UserAgent = null;
+                            req.Timeout = _Timeout;
+                            req.Authorization.User = _Username;
+                            req.Authorization.Password = _Password;
+                            req.Authorization.EncodeCredentials = _Encode;
 
-                            if (debug) req.Logger = Console.WriteLine;
+                            if (_Debug) req.Logger = Console.WriteLine;
 
                             resp = req.Send();
                             if (resp == null)
@@ -196,12 +236,12 @@ namespace Test
                             break;
                              
                         case "debug":
-                            debug = !debug;
+                            _Debug = !_Debug;
                             break;
 
                         case "timeout":
                             Console.Write("Timeout (ms): ");
-                            timeout = Convert.ToInt32(Console.ReadLine());
+                            _Timeout = Convert.ToInt32(Console.ReadLine());
                             break;
 
                         default:
@@ -222,14 +262,17 @@ namespace Test
             Console.WriteLine("  ?           Help, this menu");
             Console.WriteLine("  q           Quit the application");
             Console.WriteLine("  c           Clear the screen");
+            Console.WriteLine("  user        Set basic auth username");
+            Console.WriteLine("  pass        Set basic auth password");
+            Console.WriteLine("  encode      Enable or disable credential encoding (currently " + _Encode + ")");
             Console.WriteLine("  get         Submit a GET request");
             Console.WriteLine("  put         Submit a PUT request");
             Console.WriteLine("  post        Submit a POST request");
             Console.WriteLine("  del         Submit a DELETE request"); 
             Console.WriteLine("  form        Submit a POST request using form data"); 
             Console.WriteLine("  head        Submit a HEAD request");
-            Console.WriteLine("  debug       Enable or disable console debugging (currently " + debug + ")");
-            Console.WriteLine("  timeout     Set timeout milliseconds (currently " + timeout + "ms)");
+            Console.WriteLine("  debug       Enable or disable console debugging (currently " + _Debug + ")");
+            Console.WriteLine("  timeout     Set timeout milliseconds (currently " + _Timeout + "ms)");
             Console.WriteLine("");
         }
 
