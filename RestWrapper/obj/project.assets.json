@@ -5324,7 +5324,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "2.2.1.7",
+    "version": "2.2.1.8",
     "restore": {
       "projectUniqueName": "C:\\Code\\Misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj",
       "projectName": "RestWrapper",

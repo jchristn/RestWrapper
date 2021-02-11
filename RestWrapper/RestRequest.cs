@@ -559,9 +559,8 @@ namespace RestWrapper
 
                 #region Write-Request-Body-Data
 
-                if (Method == HttpMethod.POST ||
-                    Method == HttpMethod.PUT ||
-                    Method == HttpMethod.DELETE)
+                if (Method != HttpMethod.GET 
+                    && Method != HttpMethod.HEAD)
                 {
                     if (contentLength > 0 && stream != null)
                     {
