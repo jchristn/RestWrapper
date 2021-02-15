@@ -705,6 +705,8 @@ namespace RestWrapper
 
                 #endregion
 
+                ts.End = DateTime.Now;
+                ret.Time = ts;
                 return ret;
             }
             catch (TaskCanceledException)
@@ -787,6 +789,8 @@ namespace RestWrapper
                     }
                 }
 
+                ts.End = DateTime.Now;
+                ret.Time = ts;
                 return ret;
 
                 #endregion

@@ -16,6 +16,11 @@ namespace RestWrapper
         #region Public-Members
 
         /// <summary>
+        /// Information related to the start, end, and total time for the operation.
+        /// </summary>
+        public Timestamps Time { get; internal set; } = new Timestamps();
+
+        /// <summary>
         /// The protocol and version.
         /// </summary>
         public string ProtocolVersion { get; internal set; } = null;
@@ -137,7 +142,7 @@ namespace RestWrapper
                 ret += "  Headers" + Environment.NewLine;
                 foreach (KeyValuePair<string, string> curr in Headers)
                 {
-                    ret += "    " + curr.Key + ": " + curr.Value + Environment.NewLine;
+                    ret += "  | " + curr.Key + ": " + curr.Value + Environment.NewLine;
                 }
             }
 
@@ -151,6 +156,10 @@ namespace RestWrapper
             ret += "  Status Code        : " + StatusCode + Environment.NewLine;
             ret += "  Status Description : " + StatusDescription + Environment.NewLine;
             ret += "  Content Length     : " + ContentLength + Environment.NewLine;
+            ret += "  Time" + Environment.NewLine;
+            ret += "  | Start (UTC)      : " + Time.Start.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
+            ret += "  | End (UTC)        : " + Time.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
+            ret += "  | Total            : " + Time.TotalMs + "ms" + Environment.NewLine;
 
             ret += "  Data               : ";
             if (Data != null && ContentLength > 0) ret += "[stream]";

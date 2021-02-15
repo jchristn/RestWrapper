@@ -272,6 +272,11 @@
             RESTful response from the server.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestResponse.Time">
+            <summary>
+            Information related to the start, end, and total time for the operation.
+            </summary>
+        </member>
         <member name="P:RestWrapper.RestResponse.ProtocolVersion">
             <summary>
             The protocol and version.
