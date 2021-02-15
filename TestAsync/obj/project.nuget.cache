@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0mCic8GIpZjXn3lwR5c1FfU6R3KqWgKJOiD/USAI/KA5KjXm0FYEC1IZYVyFfcrf24eZOXPtTUKMtXq8TtA4uw==",
+  "dgSpecHash": "ReOFdrAQxDCOBG1GIBEwVXvH801F69tLkwie7+2Cu9GqGF97/5sW0qALBy2/hNLLPFxr2UbppzASB8BM90Z/Ug==",
   "success": true,
-  "projectFilePath": "C:\\code\\misc\\restwrapper-2.2\\TestAsync\\TestAsync.csproj",
+  "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.2\\TestAsync\\TestAsync.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
