@@ -337,7 +337,7 @@ namespace RestWrapper
             FormUrlEncodedContent content = new FormUrlEncodedContent(form);
             byte[] bytes = content.ReadAsByteArrayAsync().Result;
             ContentLength = bytes.Length;
-            ContentType = "x-www-form-urlencoded";
+            if (String.IsNullOrEmpty(ContentType)) ContentType = "application/x-www-form-urlencoded";
             return SendAsync(bytes, token);
         }
 

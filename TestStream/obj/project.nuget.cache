@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FzP5XrN73jpeAa+rdIAPWOVJPZKAMKfwWabonAl+dEoSaJNaSwXYzdYbtb8y9RlwwSkuq0iKGZ+w5I8Er4uDbQ==",
+  "dgSpecHash": "DlMlvmvtf7JJpKO0TJ2olwo/+HO8j018ObyFohwXp6PHy7DrJT0/+uNKXFOIHqvbjB9rfcZXU25n9yQ/n7088A==",
   "success": true,
   "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.2\\TestStream\\TestStream.csproj",
   "expectedPackageFiles": [
@@ -78,7 +78,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\joelc\\.nuget\\packages\\system.threading.overlapped\\4.3.0\\system.threading.overlapped.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],
   "logs": []
 }

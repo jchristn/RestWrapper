@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "RestWrapper/2.2.1.10": {
+      "RestWrapper/2.2.1.11": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "System.Net.Http": "4.3.4"
@@ -467,7 +467,7 @@
     }
   },
   "libraries": {
-    "RestWrapper/2.2.1.10": {
+    "RestWrapper/2.2.1.11": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
