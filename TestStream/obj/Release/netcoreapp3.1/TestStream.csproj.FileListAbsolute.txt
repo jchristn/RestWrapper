@@ -10,7 +10,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\Newtonsoft.Jso
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\RestWrapper.xml
-C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.AssemblyInfo.cs
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.csproj.CoreCompileInputs.cache
@@ -18,3 +17,5 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.csp
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.genruntimeconfig.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\netcoreapp3.1\LICENSE.md
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\netcoreapp3.1\TestStream.csproj.AssemblyReference.cache

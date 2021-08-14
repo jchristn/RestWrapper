@@ -264,9 +264,11 @@ namespace RestWrapper
         /// <returns></returns>
         public RestResponse Send(Dictionary<string, string> form)
         {
+            // refer to https://github.com/dotnet/runtime/issues/22811
             if (form == null) form = new Dictionary<string, string>();
-            FormUrlEncodedContent content = new FormUrlEncodedContent(form);
-            byte[] bytes = content.ReadAsByteArrayAsync().Result;
+            var items = form.Select(i => WebUtility.UrlEncode(i.Key) + "=" + WebUtility.UrlEncode(i.Value));
+            var content = new StringContent(String.Join("&", items), null, "application/x-www-form-urlencoded");
+            byte[] bytes = Encoding.UTF8.GetBytes(content.ReadAsStringAsync().Result);
             ContentLength = bytes.Length;
             if (String.IsNullOrEmpty(ContentType)) ContentType = "application/x-www-form-urlencoded";
             return Send(bytes);
@@ -333,9 +335,11 @@ namespace RestWrapper
         /// <returns>RestResponse.</returns>
         public Task<RestResponse> SendAsync(Dictionary<string, string> form, CancellationToken token = default)
         {
+            // refer to https://github.com/dotnet/runtime/issues/22811
             if (form == null) form = new Dictionary<string, string>();
-            FormUrlEncodedContent content = new FormUrlEncodedContent(form);
-            byte[] bytes = content.ReadAsByteArrayAsync().Result;
+            var items = form.Select(i => WebUtility.UrlEncode(i.Key) + "=" + WebUtility.UrlEncode(i.Value));
+            var content = new StringContent(String.Join("&", items), null, "application/x-www-form-urlencoded");
+            byte[] bytes = Encoding.UTF8.GetBytes(content.ReadAsStringAsync().Result);
             ContentLength = bytes.Length;
             if (String.IsNullOrEmpty(ContentType)) ContentType = "application/x-www-form-urlencoded";
             return SendAsync(bytes, token);

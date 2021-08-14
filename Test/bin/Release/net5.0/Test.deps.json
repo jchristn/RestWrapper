@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "Test/1.0.0": {
         "dependencies": {
-          "RestWrapper": "2.2.1.11"
+          "RestWrapper": "2.2.1.12"
         },
         "runtime": {
           "Test.dll": {}
@@ -414,7 +414,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "RestWrapper/2.2.1.11": {
+      "RestWrapper/2.2.1.12": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "System.Net.Http": "4.3.4"
@@ -781,7 +781,7 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "RestWrapper/2.2.1.11": {
+    "RestWrapper/2.2.1.12": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

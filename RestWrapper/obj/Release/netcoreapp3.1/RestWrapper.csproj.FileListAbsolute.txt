@@ -1,7 +1,6 @@
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\RestWrapper.deps.json
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\RestWrapper.pdb
-C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.AssemblyInfo.cs
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.dll
@@ -10,3 +9,5 @@ C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.c
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\assets\icon.ico
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\assets\icon.png
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\RestWrapper.xml
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\LICENSE.md
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.csproj.AssemblyReference.cache

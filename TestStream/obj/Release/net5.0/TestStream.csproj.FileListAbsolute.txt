@@ -11,7 +11,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\net5.0\Newtonsoft.Json.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\net5.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\net5.0\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\net5.0\RestWrapper.xml
-C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.GeneratedMSBuildEditorConfig.editorconfig
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.AssemblyInfo.cs
@@ -21,3 +20,5 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\ref\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.genruntimeconfig.cache
+C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Release\net5.0\LICENSE.md
+C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Release\net5.0\TestStream.csproj.AssemblyReference.cache

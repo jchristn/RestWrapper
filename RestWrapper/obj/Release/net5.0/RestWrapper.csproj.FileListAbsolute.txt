@@ -2,7 +2,6 @@ C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\RestWrapper.deps.jso
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\RestWrapper.dll
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\ref\RestWrapper.dll
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\RestWrapper.pdb
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.csprojAssemblyReference.cache
 C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.GeneratedMSBuildEditorConfig.editorconfig
 C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.AssemblyInfoInputs.cache
 C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.AssemblyInfo.cs
@@ -13,3 +12,5 @@ C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.pdb
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\assets\icon.ico
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\assets\icon.png
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\RestWrapper.xml
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\LICENSE.md
+C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.csproj.AssemblyReference.cache

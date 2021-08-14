@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net452;net5.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.2.1.11</Version>
+    <Version>2.2.1.12</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
     <Copyright>(c)2020 Joel Christner</Copyright>
     <PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
-    <PackageReleaseNotes>Consolidated authorization headers, added bearer support, added form encoding data.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix while sending form data.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
@@ -71,6 +71,7 @@
     <None Include="LICENSE.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="assets\icon.png">
       <Pack>True</Pack>
