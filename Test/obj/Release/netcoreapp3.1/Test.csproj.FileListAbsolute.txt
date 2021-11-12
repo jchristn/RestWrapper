@@ -19,3 +19,4 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp3.1\Test.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp3.1\Test.genruntimeconfig.cache
 C:\Code\Misc\RestWrapper-2.2\Test\bin\Release\netcoreapp3.1\LICENSE.md
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp3.1\Test.csproj.AssemblyReference.cache
+C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\netcoreapp3.1\Test.GeneratedMSBuildEditorConfig.editorconfig

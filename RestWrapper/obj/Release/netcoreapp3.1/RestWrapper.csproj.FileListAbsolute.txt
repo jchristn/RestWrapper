@@ -10,4 +10,4 @@ C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\assets\icon.i
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\assets\icon.png
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\RestWrapper.xml
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netcoreapp3.1\LICENSE.md
-C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.csproj.AssemblyReference.cache
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netcoreapp3.1\RestWrapper.GeneratedMSBuildEditorConfig.editorconfig

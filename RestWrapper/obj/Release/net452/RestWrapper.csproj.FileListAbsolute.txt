@@ -37,4 +37,5 @@ C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net452\assets\icon.ico
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net452\assets\icon.png
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net452\RestWrapper.xml
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net452\LICENSE.md
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net452\RestWrapper.GeneratedMSBuildEditorConfig.editorconfig
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net452\RestWrapper.csproj.AssemblyReference.cache

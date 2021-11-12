@@ -10,7 +10,6 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\Newtonsoft.Json.d
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\RestWrapper.xml
-C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.AssemblyInfo.cs
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.csproj.CoreCompileInputs.cache
@@ -18,3 +17,6 @@ C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.csproj.
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.dll
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.pdb
 C:\Code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\TestAsync\bin\Debug\netcoreapp3.1\LICENSE.md
+C:\code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.csproj.AssemblyReference.cache
+C:\code\Misc\RestWrapper-2.2\TestAsync\obj\Debug\netcoreapp3.1\TestAsync.GeneratedMSBuildEditorConfig.editorconfig

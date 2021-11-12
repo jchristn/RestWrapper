@@ -10,7 +10,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\Newtonsoft.Json.
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\RestWrapper.xml
-C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.csprojAssemblyReference.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.AssemblyInfoInputs.cache
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.AssemblyInfo.cs
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.csproj.CoreCompileInputs.cache
@@ -18,3 +17,6 @@ C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.cspro
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.dll
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.pdb
 C:\Code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.genruntimeconfig.cache
+C:\code\Misc\RestWrapper-2.2\TestStream\bin\Debug\netcoreapp3.1\LICENSE.md
+C:\code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.csproj.AssemblyReference.cache
+C:\code\Misc\RestWrapper-2.2\TestStream\obj\Debug\netcoreapp3.1\TestStream.GeneratedMSBuildEditorConfig.editorconfig

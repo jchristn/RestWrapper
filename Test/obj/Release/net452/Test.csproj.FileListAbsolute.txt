@@ -15,3 +15,5 @@ C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\net452\Test.exe
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\net452\Test.pdb
 C:\Code\Misc\RestWrapper-2.2\Test\bin\Release\net452\LICENSE.md
 C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\net452\Test.csproj.AssemblyReference.cache
+C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\net452\Test.csproj.SuggestedBindingRedirects.cache
+C:\Code\Misc\RestWrapper-2.2\Test\obj\Release\net452\Test.GeneratedMSBuildEditorConfig.editorconfig

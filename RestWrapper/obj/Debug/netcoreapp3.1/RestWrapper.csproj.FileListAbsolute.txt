@@ -6,7 +6,9 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.Ass
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.csproj.CoreCompileInputs.cache
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.pdb
-C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.csprojAssemblyReference.cache
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netcoreapp3.1\assets\icon.ico
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netcoreapp3.1\assets\icon.png
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netcoreapp3.1\RestWrapper.xml
+C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Debug\netcoreapp3.1\LICENSE.md
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.csproj.AssemblyReference.cache
+C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Debug\netcoreapp3.1\RestWrapper.GeneratedMSBuildEditorConfig.editorconfig
