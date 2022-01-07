@@ -13,3 +13,4 @@ C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net6.0\RestWrapper.csproj.C
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net6.0\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net6.0\ref\RestWrapper.dll
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\net6.0\RestWrapper.pdb
+C:\code\misc\RestWrapper-2.2\RestWrapper\obj\Release\net6.0\RestWrapper.csproj.AssemblyReference.cache

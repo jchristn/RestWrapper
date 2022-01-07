@@ -13,3 +13,4 @@ C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\assets\icon.ico
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\assets\icon.png
 C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\RestWrapper.xml
 C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\net5.0\LICENSE.md
+C:\code\misc\RestWrapper-2.2\RestWrapper\obj\Release\net5.0\RestWrapper.csproj.AssemblyReference.cache
