@@ -20,7 +20,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -767,11 +767,11 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -813,7 +813,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -1729,11 +1729,11 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -1745,7 +1745,7 @@
       }
     },
     ".NETFramework,Version=v4.5.2": {
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -1766,11 +1766,11 @@
           "lib/net45/_._": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -1782,7 +1782,7 @@
       }
     },
     ".NETFramework,Version=v4.5.2/win7-x86": {
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -1803,11 +1803,11 @@
           "lib/net45/_._": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -1837,7 +1837,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -2584,11 +2584,11 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -2630,7 +2630,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -3546,11 +3546,11 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -3580,7 +3580,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -4327,11 +4327,11 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -4373,7 +4373,7 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -5289,11 +5289,11 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "RestWrapper/2.2.1.14": {
+      "RestWrapper/2.2.1.15": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "System.Net.Http": "4.3.4"
         },
         "compile": {
@@ -5373,10 +5373,10 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Newtonsoft.Json/12.0.3": {
-      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.3",
+      "path": "newtonsoft.json/13.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5395,11 +5395,7 @@
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
@@ -8009,7 +8005,7 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "RestWrapper/2.2.1.14": {
+    "RestWrapper/2.2.1.15": {
       "type": "project",
       "path": "../RestWrapper/RestWrapper.csproj",
       "msbuildProject": "../RestWrapper/RestWrapper.csproj"
@@ -8017,44 +8013,39 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "RestWrapper >= 2.2.1.14"
+      "RestWrapper >= 2.2.1.15"
     ],
     ".NETFramework,Version=v4.5.2": [
-      "RestWrapper >= 2.2.1.14"
+      "RestWrapper >= 2.2.1.15"
     ],
     "net5.0": [
-      "RestWrapper >= 2.2.1.14"
+      "RestWrapper >= 2.2.1.15"
     ],
     "net6.0": [
-      "RestWrapper >= 2.2.1.14"
+      "RestWrapper >= 2.2.1.15"
     ]
   },
   "packageFolders": {
     "C:\\Users\\joelc\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\code\\misc\\RestWrapper-2.2\\Test\\Test.csproj",
+      "projectUniqueName": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\Test\\Test.csproj",
       "projectName": "Test",
-      "projectPath": "C:\\code\\misc\\RestWrapper-2.2\\Test\\Test.csproj",
+      "projectPath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\Test\\Test.csproj",
       "packagesPath": "C:\\Users\\joelc\\.nuget\\packages\\",
-      "outputPath": "C:\\code\\misc\\RestWrapper-2.2\\Test\\obj\\",
+      "outputPath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\Test\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\joelc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net452",
@@ -8063,39 +8054,39 @@
         "netcoreapp3.1"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.pkg.github.com/jchristn/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj": {
-              "projectPath": "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj"
+            "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj": {
+              "projectPath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj"
             }
           }
         },
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj": {
-              "projectPath": "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj"
+            "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj": {
+              "projectPath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj"
             }
           }
         },
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj": {
-              "projectPath": "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj"
+            "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj": {
+              "projectPath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj"
             }
           }
         },
         "net452": {
           "targetAlias": "net452",
           "projectReferences": {
-            "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj": {
-              "projectPath": "C:\\code\\misc\\RestWrapper-2.2\\RestWrapper\\RestWrapper.csproj"
+            "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj": {
+              "projectPath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj"
             }
           }
         }
@@ -8119,12 +8110,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.25, 3.1.25]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       },
       "net5.0": {
         "targetAlias": "net5.0",
@@ -8143,7 +8140,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       },
       "net6.0": {
         "targetAlias": "net6.0",
@@ -8162,11 +8159,11 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       },
       "net452": {
         "targetAlias": "net452",
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

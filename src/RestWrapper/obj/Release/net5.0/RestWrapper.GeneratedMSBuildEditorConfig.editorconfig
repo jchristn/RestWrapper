@@ -7,4 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RestWrapper
-build_property.ProjectDir = C:\code\misc\RestWrapper-2.2\RestWrapper\
+build_property.ProjectDir = C:\Code\Misc\RestWrapper-2.2\src\RestWrapper\
