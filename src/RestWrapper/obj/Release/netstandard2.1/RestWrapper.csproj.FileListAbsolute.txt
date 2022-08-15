@@ -1,17 +1,3 @@
-C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\RestWrapper.deps.json
-C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\RestWrapper.dll
-C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\RestWrapper.pdb
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.AssemblyInfoInputs.cache
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.AssemblyInfo.cs
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.csproj.CoreCompileInputs.cache
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.dll
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.pdb
-C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\assets\icon.ico
-C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\assets\icon.png
-C:\code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\RestWrapper.xml
-C:\Code\Misc\RestWrapper-2.2\RestWrapper\bin\Release\netstandard2.1\LICENSE.md
-C:\Code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.csproj.AssemblyReference.cache
-C:\code\Misc\RestWrapper-2.2\RestWrapper\obj\Release\netstandard2.1\RestWrapper.GeneratedMSBuildEditorConfig.editorconfig
 C:\Code\Misc\RestWrapper-2.2\src\RestWrapper\bin\Release\netstandard2.1\assets\icon.ico
 C:\Code\Misc\RestWrapper-2.2\src\RestWrapper\bin\Release\netstandard2.1\assets\icon.png
 C:\Code\Misc\RestWrapper-2.2\src\RestWrapper\bin\Release\netstandard2.1\RestWrapper.xml

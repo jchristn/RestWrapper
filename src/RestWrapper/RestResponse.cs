@@ -4,7 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace RestWrapper
 {
@@ -106,12 +107,30 @@ namespace RestWrapper
                 return null;
             }
         }
-         
+
+        /// <summary>
+        /// JSON serialization helper.
+        /// </summary>
+        [JsonIgnore]
+        public ISerializationHelper SerializationHelper
+        {
+            get
+            {
+                return _SerializationHelper;
+            }
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(SerializationHelper));
+                _SerializationHelper = value;
+            }
+        }
+
         #endregion
 
         #region Private-Members
 
         private byte[] _Data = null;
+        private ISerializationHelper _SerializationHelper = new DefaultSerializationHelper();
 
         #endregion
 
@@ -177,7 +196,7 @@ namespace RestWrapper
         public T DataFromJson<T>()
         {
             if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
-            return JsonConvert.DeserializeObject<T>(DataAsString);
+            return _SerializationHelper.DeserializeJson<T>(DataAsString);
         }
 
         #endregion

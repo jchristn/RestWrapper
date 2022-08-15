@@ -34,6 +34,19 @@
             Instantiate the object.
             </summary>
         </member>
+        <member name="T:RestWrapper.DefaultSerializationHelper">
+            <summary>
+            Default serialization helper.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.DefaultSerializationHelper.DeserializeJson``1(System.String)">
+            <summary>
+            Deserialize JSON to an instance.
+            </summary>
+            <typeparam name="T">Type.</typeparam>
+            <param name="json">JSON string.</param>
+            <returns>Instance.</returns>
+        </member>
         <member name="T:RestWrapper.HttpMethod">
             <summary>
             HTTP methods, i.e. GET, PUT, POST, DELETE, etc.
@@ -83,6 +96,19 @@
             <summary>
             HTTP TRACE request.
             </summary>
+        </member>
+        <member name="T:RestWrapper.ISerializationHelper">
+            <summary>
+            Serialization helper.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ISerializationHelper.DeserializeJson``1(System.String)">
+            <summary>
+            Deserialize from JSON to an object of the specified type.
+            </summary>
+            <typeparam name="T">Type.</typeparam>
+            <param name="json">JSON string.</param>
+            <returns>Instance.</returns>
         </member>
         <member name="T:RestWrapper.RestRequest">
             <summary>
@@ -332,6 +358,11 @@
             <summary>
             Read the data stream fully into a string.
             If you use this property, the 'Data' property will be fully read.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestResponse.SerializationHelper">
+            <summary>
+            JSON serialization helper.
             </summary>
         </member>
         <member name="M:RestWrapper.RestResponse.#ctor">

@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net452;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net461;net5.0;net6.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.2.1.15</Version>
+    <Version>2.3.1</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
     <Copyright>(c)2022 Joel Christner</Copyright>
     <PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
-    <PackageReleaseNotes>Dependency update</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed JSON.NET dependency, added interface for providing your own serializer.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
@@ -63,8 +63,8 @@
 
   
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>

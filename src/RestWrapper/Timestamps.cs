@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace RestWrapper
 {
@@ -15,7 +15,7 @@ namespace RestWrapper
         /// <summary>
         /// The time at which the operation started.
         /// </summary>
-        [JsonProperty(Order = -1)]
+        [JsonPropertyOrder(-1)]
         public DateTime? Start
         {
             get
@@ -85,7 +85,7 @@ namespace RestWrapper
         /// <summary>
         /// The total number of milliseconds that transpired between Start and End.
         /// </summary>
-        [JsonProperty(Order = 990)]
+        [JsonPropertyOrder(999)]
         public double? TotalMs
         {
             get

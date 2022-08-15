@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{845CD291-A8D0-4360-A65B-AD9E07122791}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWrapper", "RestWrapper\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestStream", "TestStream\TestStream.csproj", "{B5D8C0A2-53DA-4EF4-B3A8-EA7AE49BC44C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAsync", "TestAsync\TestAsync.csproj", "{E495A36B-857F-4A40-9EBC-8EF7E8A48E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAsync", "TestAsync\TestAsync.csproj", "{E495A36B-857F-4A40-9EBC-8EF7E8A48E13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSerializer", "TestSerializer\TestSerializer.csproj", "{9918D0E1-32EA-4F49-9B91-D714A707C09E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E495A36B-857F-4A40-9EBC-8EF7E8A48E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E495A36B-857F-4A40-9EBC-8EF7E8A48E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E495A36B-857F-4A40-9EBC-8EF7E8A48E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9918D0E1-32EA-4F49-9B91-D714A707C09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9918D0E1-32EA-4F49-9B91-D714A707C09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9918D0E1-32EA-4F49-9B91-D714A707C09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9918D0E1-32EA-4F49-9B91-D714A707C09E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,11 +2,16 @@
 
 ## Current Version
 
+v2.3.1
+
+- Remove Newtonsoft.JSON dependency, now leveraging ```System.Text.Json``` by default
+- Add support for implementing your own deserializer
+
+## Previous Versions
+
 v2.2.1
 
 - RestResponse ```DataAsBytes``` and ```DataAsString``` properties
-
-## Previous Versions
 
 v2.2.0
 
