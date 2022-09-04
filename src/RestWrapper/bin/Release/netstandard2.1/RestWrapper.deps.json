@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "RestWrapper/2.3.1": {
+      "RestWrapper/2.3.1.1": {
         "dependencies": {
           "System.Net.Http": "4.3.4",
           "System.Text.Json": "6.0.5"
@@ -545,7 +545,7 @@
     }
   },
   "libraries": {
-    "RestWrapper/2.3.1": {
+    "RestWrapper/2.3.1.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

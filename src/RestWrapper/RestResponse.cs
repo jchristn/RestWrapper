@@ -193,7 +193,7 @@ namespace RestWrapper
         /// </summary>
         /// <typeparam name="T">Type.</typeparam>
         /// <returns>Instance.</returns>
-        public T DataFromJson<T>()
+        public T DataFromJson<T>() where T : class, new()
         {
             if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
             return _SerializationHelper.DeserializeJson<T>(DataAsString);

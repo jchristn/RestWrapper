@@ -39,6 +39,21 @@
             Default serialization helper.
             </summary>
         </member>
+        <member name="P:RestWrapper.DefaultSerializationHelper.Pretty">
+            <summary>
+            Enable pretty print.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.DefaultSerializationHelper.IgnoreNull">
+            <summary>
+            Ignore null properties when serializing.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.DefaultSerializationHelper.Options">
+            <summary>
+            Serializer options.
+            </summary>
+        </member>
         <member name="M:RestWrapper.DefaultSerializationHelper.DeserializeJson``1(System.String)">
             <summary>
             Deserialize JSON to an instance.
@@ -46,6 +61,14 @@
             <typeparam name="T">Type.</typeparam>
             <param name="json">JSON string.</param>
             <returns>Instance.</returns>
+        </member>
+        <member name="M:RestWrapper.DefaultSerializationHelper.SerializeJson(System.Object,System.Boolean)">
+            <summary>
+            Serialize an object to a JSON string.
+            </summary>
+            <param name="obj">Object.</param>
+            <param name="pretty">Pretty print.</param>
+            <returns>JSON string.</returns>
         </member>
         <member name="T:RestWrapper.HttpMethod">
             <summary>
@@ -109,6 +132,14 @@
             <typeparam name="T">Type.</typeparam>
             <param name="json">JSON string.</param>
             <returns>Instance.</returns>
+        </member>
+        <member name="M:RestWrapper.ISerializationHelper.SerializeJson(System.Object,System.Boolean)">
+            <summary>
+            Serialize an object to a JSON string.
+            </summary>
+            <param name="obj">Object.</param>
+            <param name="pretty">Pretty print.</param>
+            <returns>JSON string.</returns>
         </member>
         <member name="T:RestWrapper.RestRequest">
             <summary>

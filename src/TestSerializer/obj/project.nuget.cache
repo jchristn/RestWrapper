@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wZjMKBKrSaFMJpjEJE+SaMUgjLe5m3UIw6VL5vjx70qIISrCUakH7L9F2jlF0LpU6utI3n42upIha8GTBsI96Q==",
+  "dgSpecHash": "1TGhmj/xVjLrpuaF7DfpKkxbjNC4vIA9K4f5jlWuFUfXODY4c8P/29X/St1noTClVN9GGtHJzNReAHRgIhOyWQ==",
   "success": true,
-  "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\TestSerializer\\TestSerializer.csproj",
+  "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.3\\src\\TestSerializer\\TestSerializer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",

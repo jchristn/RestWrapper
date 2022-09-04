@@ -35,10 +35,24 @@ namespace TestSerializer
 
     internal class Serializer : ISerializationHelper
     {
-        public T DeserializeJson<T>(string json)
+        public T DeserializeJson<T>(string json) where T : class, new()
         {
             Console.WriteLine("Deserializing using Newtonsoft.JSON");
             return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        public string SerializeJson(object obj, bool pretty)
+        {
+            Console.WriteLine("Serializing using Newtonsoft.JSON");
+
+            if (pretty)
+            {
+                return JsonConvert.SerializeObject(obj, Formatting.Indented);
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(obj);
+            }
         }
     }
 }

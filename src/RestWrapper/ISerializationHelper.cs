@@ -15,6 +15,14 @@ namespace RestWrapper
         /// <typeparam name="T">Type.</typeparam>
         /// <param name="json">JSON string.</param>
         /// <returns>Instance.</returns>
-        T DeserializeJson<T>(string json);
+        T DeserializeJson<T>(string json) where T : class, new();
+
+        /// <summary>
+        /// Serialize an object to a JSON string.
+        /// </summary>
+        /// <param name="obj">Object.</param>
+        /// <param name="pretty">Pretty print.</param>
+        /// <returns>JSON string.</returns>
+        string SerializeJson(object obj, bool pretty = true);
     }
 }

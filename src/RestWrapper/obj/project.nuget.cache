@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j13l5iznmmXcSKYeNPmlx87hu2ZxjBvwiddc25DvVQqUCFwHCnj65kCjRa0SOHlH/yKJ3hvBmRm0ORCSUYAHKw==",
+  "dgSpecHash": "U+Potl+XVAv+8/XYKbwcXoQoBzyifF2bCl/ktskfxEBmfH0mtg7Xo6+0rrAHX/qMtrgmaU0BBvv4rHx3bfCdWA==",
   "success": true,
-  "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.2\\src\\RestWrapper\\RestWrapper.csproj",
+  "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.3\\src\\RestWrapper\\RestWrapper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
