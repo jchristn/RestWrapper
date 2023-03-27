@@ -2,7 +2,7 @@
 
 ## Current Version
 
-v2.3.1
+v2.3.x
 
 - Remove Newtonsoft.JSON dependency, now leveraging ```System.Text.Json``` by default
 - Add support for implementing your own deserializer

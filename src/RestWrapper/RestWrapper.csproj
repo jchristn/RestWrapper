@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net461;net5.0;net6.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.3.1.1</Version>
+    <Version>2.3.2</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
-    <Copyright>(c)2022 Joel Christner</Copyright>
+    <Copyright>(c)2023 Joel Christner</Copyright>
     <PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
     <PackageReleaseNotes>Removed JSON.NET dependency, added interface for providing your own serializer.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>

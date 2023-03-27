@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7k7zXPKNXzxHUjbIMBhUa5Wogj6WErESBKkrNx1YIMg7eVuMZevE/qrfdV68KjOTqBs0JPNlLrcVq8ptr1POmQ==",
+  "dgSpecHash": "vj2slu++xuvNGKkgnyEr49Z2jaD/m9OipQ5acY9qT3IlKlLbQvqGjkqmevIN7MORcRyxL46dW/YdhJ22j39UPw==",
   "success": true,
   "projectFilePath": "C:\\Code\\Misc\\RestWrapper-2.3\\src\\TestAsync\\TestAsync.csproj",
   "expectedPackageFiles": [
@@ -86,8 +86,7 @@
     "C:\\Users\\joelc\\.nuget\\packages\\system.threading.overlapped\\4.3.0\\system.threading.overlapped.4.3.0.nupkg.sha512",
     "C:\\Users\\joelc\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\joelc\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\joelc\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
-    "C:\\Users\\joelc\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.25\\microsoft.netcore.app.host.win-x64.3.1.25.nupkg.sha512"
+    "C:\\Users\\joelc\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

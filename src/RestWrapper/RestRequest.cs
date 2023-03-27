@@ -571,7 +571,10 @@ namespace RestWrapper
                         Logger?.Invoke(_Header + "reading data (" + contentLength + " bytes), writing to request");
 
                         client.ContentLength = contentLength;
-                        client.ContentType = ContentType;
+
+                        if (String.IsNullOrEmpty(client.ContentType) && !String.IsNullOrEmpty(ContentType))
+                            client.ContentType = ContentType;
+
                         Stream clientStream = client.GetRequestStream();
 
                         byte[] buffer = new byte[_StreamReadBufferSize];

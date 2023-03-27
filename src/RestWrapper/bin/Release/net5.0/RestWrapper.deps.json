@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "RestWrapper/2.3.1.1": {
+      "RestWrapper/2.3.2": {
         "dependencies": {
           "System.Net.Http": "4.3.4",
           "System.Text.Json": "6.0.5"
@@ -441,7 +441,7 @@
     }
   },
   "libraries": {
-    "RestWrapper/2.3.1.1": {
+    "RestWrapper/2.3.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
