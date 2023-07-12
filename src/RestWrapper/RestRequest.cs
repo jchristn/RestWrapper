@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -74,7 +76,7 @@ namespace RestWrapper
         /// <summary>
         /// The HTTP headers to attach to the request.
         /// </summary>
-        public Dictionary<string, string> Headers
+        public NameValueCollection Headers
         {
             get
             {
@@ -82,7 +84,7 @@ namespace RestWrapper
             }
             set
             {
-                if (value == null) _Headers = new Dictionary<string, string>();
+                if (value == null) _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
                 else _Headers = value;
             }
         }
@@ -146,7 +148,7 @@ namespace RestWrapper
         private string _Header = "[RestWrapper] ";
         private int _StreamReadBufferSize = 65536;
         private int _TimeoutMilliseconds = 30000;
-        private Dictionary<string, string> _Headers = new Dictionary<string, string>();
+        private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private AuthorizationHeader _Authorization = new AuthorizationHeader();
 
         #endregion
@@ -205,15 +207,15 @@ namespace RestWrapper
         public RestRequest(
             string url,
             HttpMethod method,
-            Dictionary<string, string> headers,
+            NameValueCollection headers,
             string contentType)
         {
             if (String.IsNullOrEmpty(url)) throw new ArgumentNullException(nameof(url));
 
             Url = url;
             Method = method;
+            ContentType = contentType;
             Headers = headers;
-            ContentType = contentType; 
         }
 
         #endregion
@@ -660,7 +662,6 @@ namespace RestWrapper
 
                     if (exceptionResponse.Headers != null && exceptionResponse.Headers.Count > 0)
                     {
-                        ret.Headers = new Dictionary<string, string>();
                         for (int i = 0; i < exceptionResponse.Headers.Count; i++)
                         {
                             string key = exceptionResponse.Headers.GetKey(i);

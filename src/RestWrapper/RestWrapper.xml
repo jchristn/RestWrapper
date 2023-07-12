@@ -187,7 +187,7 @@
             <param name="method">HTTP method to use.</param> 
             <param name="contentType">Content type to use.</param>
         </member>
-        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.Collections.Specialized.NameValueCollection,System.String)">
             <summary>
             A simple RESTful HTTP client.
             </summary>

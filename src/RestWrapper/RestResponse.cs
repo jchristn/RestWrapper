@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,7 +31,18 @@ namespace RestWrapper
         /// <summary>
         /// User-supplied headers.
         /// </summary>
-        public Dictionary<string, string> Headers { get; internal set; } = new Dictionary<string, string>();
+        public NameValueCollection Headers
+        {
+            get
+            {
+                return _Headers;
+            }
+            set
+            {
+                if (value == null) _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
+                else _Headers = value;
+            }
+        }
 
         /// <summary>
         /// The content encoding returned from the server.
@@ -126,6 +139,7 @@ namespace RestWrapper
 
         private byte[] _Data = null;
         private ISerializationHelper _SerializationHelper = new DefaultSerializationHelper();
+        private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
 
         #endregion
 
