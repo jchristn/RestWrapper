@@ -70,56 +70,6 @@
             <param name="pretty">Pretty print.</param>
             <returns>JSON string.</returns>
         </member>
-        <member name="T:RestWrapper.HttpMethod">
-            <summary>
-            HTTP methods, i.e. GET, PUT, POST, DELETE, etc.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.GET">
-            <summary>
-            HTTP GET request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.HEAD">
-            <summary>
-            HTTP HEAD request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.PUT">
-            <summary>
-            HTTP PUT request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.POST">
-            <summary>
-            HTTP POST request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.DELETE">
-            <summary>
-            HTTP DELETE request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.PATCH">
-            <summary>
-            HTTP PATCH request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.CONNECT">
-            <summary>
-            HTTP CONNECT request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.OPTIONS">
-            <summary>
-            HTTP OPTIONS request.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.HttpMethod.TRACE">
-            <summary>
-            HTTP TRACE request.
-            </summary>
-        </member>
         <member name="T:RestWrapper.ISerializationHelper">
             <summary>
             Serialization helper.
@@ -201,7 +151,7 @@
             The size of the buffer to use while reading from the DataStream and the response stream from the server.
             </summary>
         </member>
-        <member name="P:RestWrapper.RestRequest.Timeout">
+        <member name="P:RestWrapper.RestRequest.TimeoutMilliseconds">
             <summary>
             The number of milliseconds to wait before assuming the request has timed out.
             </summary>
@@ -211,20 +161,25 @@
             The user agent header to set on outbound requests.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestRequest.AllowAutoRedirect">
+            <summary>
+            Enable or disable support for automatically handling redirects.
+            </summary>
+        </member>
         <member name="M:RestWrapper.RestRequest.#ctor(System.String)">
             <summary>
             A simple RESTful HTTP client.
             </summary>
             <param name="url">URL to access on the server.</param> 
         </member>
-        <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod)">
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod)">
             <summary>
             A simple RESTful HTTP client.
             </summary>
             <param name="url">URL to access on the server.</param> 
             <param name="method">HTTP method to use.</param>
         </member>
-        <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod,System.String)">
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.String)">
             <summary>
             A simple RESTful HTTP client.
             </summary>
@@ -232,7 +187,7 @@
             <param name="method">HTTP method to use.</param> 
             <param name="contentType">Content type to use.</param>
         </member>
-        <member name="M:RestWrapper.RestRequest.#ctor(System.String,RestWrapper.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
             <summary>
             A simple RESTful HTTP client.
             </summary>
@@ -357,11 +312,6 @@
         <member name="P:RestWrapper.RestResponse.ContentLength">
             <summary>
             The number of bytes contained in the response body byte array.
-            </summary>
-        </member>
-        <member name="P:RestWrapper.RestResponse.ResponseURI">
-            <summary>
-            The response URI of the responder.
             </summary>
         </member>
         <member name="P:RestWrapper.RestResponse.StatusCode">

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using RestWrapper;
@@ -65,9 +66,9 @@ namespace Test
                         case "put":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.PUT, 
+                                HttpMethod.Put, 
                                 InputString("Content type:", "text/plain", false));
-                            req.Timeout = _Timeout;
+                            req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;
@@ -94,10 +95,10 @@ namespace Test
                         case "post":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.POST, 
+                                HttpMethod.Post, 
                                 InputString("Content type:", "text/plain", false));
                             req.UserAgent = null;
-                            req.Timeout = _Timeout;
+                            req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;
@@ -124,9 +125,9 @@ namespace Test
                         case "form":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.POST);
+                                HttpMethod.Post);
                             req.UserAgent = null;
-                            req.Timeout = _Timeout;
+                            req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;
@@ -152,10 +153,10 @@ namespace Test
                         case "del":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.DELETE,
+                                HttpMethod.Delete,
                                 InputString("Content type:", "text/plain", false));
                             req.UserAgent = null;
-                            req.Timeout = _Timeout;
+                            req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;
@@ -182,9 +183,9 @@ namespace Test
                         case "head":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.HEAD);
+                                HttpMethod.Head);
                             req.UserAgent = null;
-                            req.Timeout = _Timeout;
+                            req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;
@@ -210,9 +211,9 @@ namespace Test
                         case "get":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.GET);
+                                HttpMethod.Get);
                             req.UserAgent = null;
-                            req.Timeout = _Timeout;
+                            req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;

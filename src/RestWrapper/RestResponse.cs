@@ -47,11 +47,6 @@ namespace RestWrapper
         public long ContentLength { get; internal set; } = 0;
 
         /// <summary>
-        /// The response URI of the responder.
-        /// </summary>
-        public string ResponseURI { get; internal set; } = null;
-
-        /// <summary>
         /// The HTTP status code returned with the response.
         /// </summary>
         public int StatusCode { get; internal set; } = 0;
@@ -169,8 +164,6 @@ namespace RestWrapper
                 ret += "  Content Encoding   : " + ContentEncoding + Environment.NewLine;
             if (!String.IsNullOrEmpty(ContentType))
                 ret += "  Content Type       : " + ContentType + Environment.NewLine;
-            if (!String.IsNullOrEmpty(ResponseURI))
-                ret += "  Response URI       : " + ResponseURI + Environment.NewLine;
 
             ret += "  Status Code        : " + StatusCode + Environment.NewLine;
             ret += "  Status Description : " + StatusDescription + Environment.NewLine;

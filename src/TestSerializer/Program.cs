@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Net.Http;
 using Newtonsoft.Json;
 using RestWrapper;
 
@@ -10,7 +11,7 @@ namespace TestSerializer
     {
         // Thank you https://random-data-api.com/documentation
         static string _ApiUrl = "https://random-data-api.com/api/stripe/random_stripe";
-        static HttpMethod _Method = HttpMethod.GET;
+        static HttpMethod _Method = HttpMethod.Get;
         static bool _UseDefaultSerializer = true;
 
         static void Main(string[] args)

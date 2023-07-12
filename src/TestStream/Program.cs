@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using RestWrapper;
@@ -50,7 +51,7 @@ namespace TestStream
                         case "put":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.PUT,
+                                HttpMethod.Put,
                                 null,
                                 InputString("Content type:", "text/plain", false));
 
@@ -77,7 +78,7 @@ namespace TestStream
                         case "post":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.POST,
+                                HttpMethod.Post,
                                 null,
                                 InputString("Content type:", "text/plain", false));
 
@@ -104,7 +105,7 @@ namespace TestStream
                         case "delete":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.DELETE,
+                                HttpMethod.Delete,
                                 null,
                                 InputString("Content type:", "text/plain", false));
 
@@ -131,7 +132,7 @@ namespace TestStream
                         case "head":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.HEAD,
+                                HttpMethod.Head,
                                 null,
                                 null);
 
@@ -156,7 +157,7 @@ namespace TestStream
                         case "get":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.GET,
+                                HttpMethod.Get,
                                 null,
                                 null);
 

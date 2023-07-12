@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using RestWrapper;
@@ -48,7 +49,7 @@ namespace TestAsync
                         case "put":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.PUT,
+                                HttpMethod.Put,
                                 null,
                                 InputString("Content type:", "text/plain", false));
 
@@ -63,13 +64,14 @@ namespace TestAsync
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                Console.WriteLine(resp.DataAsString);
                             }
                             break;
 
                         case "post":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.POST,
+                                HttpMethod.Post,
                                 null,
                                 InputString("Content type:", "text/plain", false));
 
@@ -84,13 +86,14 @@ namespace TestAsync
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                Console.WriteLine(resp.DataAsString);
                             }
                             break;
 
                         case "delete":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.DELETE,
+                                HttpMethod.Delete,
                                 null,
                                 InputString("Content type:", "text/plain", false));
 
@@ -105,13 +108,14 @@ namespace TestAsync
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                Console.WriteLine(resp.DataAsString);
                             }
                             break;
 
                         case "head":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.HEAD,
+                                HttpMethod.Head,
                                 null,
                                 null);
 
@@ -125,13 +129,14 @@ namespace TestAsync
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                Console.WriteLine(resp.DataAsString);
                             }
                             break;
 
                         case "get":
                             req = new RestRequest(
                                 InputString("URL:", "http://127.0.0.1:8000/", false),
-                                HttpMethod.GET,
+                                HttpMethod.Get,
                                 null,
                                 null);
                             
@@ -145,6 +150,7 @@ namespace TestAsync
                             else
                             {
                                 Console.WriteLine(resp.ToString());
+                                Console.WriteLine(resp.DataAsString);
                             }
                             break;
 

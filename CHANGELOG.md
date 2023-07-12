@@ -2,19 +2,22 @@
 
 ## Current Version
 
+v3.0.x
+
+- Minor breaking changes
+- Migration from ```HttpWebRequest``` to ```HttpClient```
+- Strong naming
+
+## Previous Versions
+
 v2.3.x
 
 - Remove Newtonsoft.JSON dependency, now leveraging ```System.Text.Json``` by default
 - Add support for implementing your own deserializer
 
-## Previous Versions
-
-v2.2.1
+v2.2.x
 
 - RestResponse ```DataAsBytes``` and ```DataAsString``` properties
-
-v2.2.0
-
 - Additional constructors
 - Support for sending ```x-www-form-urlencoded``` data (```Send(Dictionary<string, string>)```)
 - Dependency update

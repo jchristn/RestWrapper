@@ -6,10 +6,11 @@
 
 A simple C# class library to help simplify sending REST API requests and retrieving responses (RESTful HTTP and HTTPS)
 
-## New in v2.3.x
+## New in v3.0.x
 
-- Remove Newtonsoft.JSON dependency, now leveraging ```System.Text.Json``` by default
-- Add support for implementing your own deserializer
+- Minor breaking changes
+- Migration from ```HttpWebRequest``` to ```HttpClient```
+- Strong naming
 
 ## Test Apps
 
