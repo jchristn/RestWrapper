@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net461;net48;net6.0;net7.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
     <Copyright>(c)2023 Joel Christner</Copyright>

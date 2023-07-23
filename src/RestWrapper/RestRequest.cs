@@ -524,32 +524,35 @@ namespace RestWrapper
 
                 if (Headers != null && Headers.Count > 0)
                 {
-                    foreach (KeyValuePair<string, string> pair in Headers)
+                    for (int i = 0; i < Headers.Count; i++)
                     {
-                        if (String.IsNullOrEmpty(pair.Key)) continue;
-                        if (String.IsNullOrEmpty(pair.Value)) continue;
+                        string key = Headers.GetKey(i);
+                        string val = Headers.Get(i);
 
-                        Logger?.Invoke(_Header + "adding header " + pair.Key + ": " + pair.Value);
+                        if (String.IsNullOrEmpty(key)) continue;
+                        if (String.IsNullOrEmpty(val)) continue;
 
-                        if (pair.Key.ToLower().Trim().Equals("close"))
+                        Logger?.Invoke(_Header + "adding header " + key + ": " + val);
+
+                        if (key.ToLower().Trim().Equals("close"))
                         {
                             // do nothing
                         }
-                        else if (pair.Key.ToLower().Trim().Equals("connection"))
+                        else if (key.ToLower().Trim().Equals("connection"))
                         {
                             // do nothing
                         }
-                        else if (pair.Key.ToLower().Trim().Equals("content-length"))
+                        else if (key.ToLower().Trim().Equals("content-length"))
                         {
                             // do nothing
                         }
-                        else if (pair.Key.ToLower().Trim().Equals("content-type"))
+                        else if (key.ToLower().Trim().Equals("content-type"))
                         {
-                            message.Content.Headers.ContentType = new MediaTypeHeaderValue(pair.Value);
+                            message.Content.Headers.ContentType = new MediaTypeHeaderValue(val);
                         }
                         else
                         {
-                            client.DefaultRequestHeaders.Add(pair.Key, pair.Value);
+                            client.DefaultRequestHeaders.Add(key, val);
                         }
                     }
                 }
