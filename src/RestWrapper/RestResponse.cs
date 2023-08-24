@@ -168,9 +168,9 @@ namespace RestWrapper
             if (Headers != null && Headers.Count > 0)
             {
                 ret += "  Headers" + Environment.NewLine;
-                foreach (KeyValuePair<string, string> curr in Headers)
+                for (int i = 0; i < Headers.Count; i++)
                 {
-                    ret += "  | " + curr.Key + ": " + curr.Value + Environment.NewLine;
+                    ret += "  | " + Headers.GetKey(i) + ": " + Headers.Get(i);
                 }
             }
 

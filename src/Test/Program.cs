@@ -65,7 +65,7 @@ namespace Test
 
                         case "put":
                             req = new RestRequest(
-                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                InputString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Put, 
                                 InputString("Content type:", "text/plain", false));
                             req.TimeoutMilliseconds = _Timeout;
@@ -94,7 +94,7 @@ namespace Test
 
                         case "post":
                             req = new RestRequest(
-                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                InputString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Post, 
                                 InputString("Content type:", "text/plain", false));
                             req.UserAgent = null;
@@ -124,7 +124,7 @@ namespace Test
 
                         case "form":
                             req = new RestRequest(
-                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                InputString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Post);
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
@@ -152,7 +152,7 @@ namespace Test
 
                         case "del":
                             req = new RestRequest(
-                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                InputString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Delete,
                                 InputString("Content type:", "text/plain", false));
                             req.UserAgent = null;
@@ -182,7 +182,7 @@ namespace Test
 
                         case "head":
                             req = new RestRequest(
-                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                InputString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Head);
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
@@ -210,7 +210,7 @@ namespace Test
 
                         case "get":
                             req = new RestRequest(
-                                InputString("URL:", "http://127.0.0.1:8000/", false),
+                                InputString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Get);
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;

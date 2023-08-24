@@ -598,8 +598,11 @@ namespace RestWrapper
 
                 if (response.Content != null && response.Content.Headers != null)
                 {
-                    ret.ContentEncoding = string.Join(",", response.Content.Headers.ContentEncoding);
-                    ret.ContentType = response.Content.Headers.ContentType.ToString();
+                    if (response.Content.Headers.ContentEncoding != null)
+                        ret.ContentEncoding = string.Join(",", response.Content.Headers.ContentEncoding);
+                    
+                    if (response.Content.Headers.ContentType != null)
+                        ret.ContentType = response.Content.Headers.ContentType.ToString();
                     
                     if (response.Content.Headers.ContentLength != null)
                         ret.ContentLength = response.Content.Headers.ContentLength.Value;
