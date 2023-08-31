@@ -131,6 +131,11 @@
             The password to the certificate file.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestRequest.Query">
+            <summary>
+            The query elements attached to the URL.
+            </summary>
+        </member>
         <member name="P:RestWrapper.RestRequest.Headers">
             <summary>
             The HTTP headers to attach to the request.

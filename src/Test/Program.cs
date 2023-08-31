@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using GetSomeInput;
 using RestWrapper;
 
 namespace Test
@@ -52,11 +54,11 @@ namespace Test
                             break;
 
                         case "user":
-                            _Username = InputString("Username:", null, true);
+                            _Username = Inputty.GetString("Username:", null, true);
                             break;
 
                         case "pass":
-                            _Password = InputString("Password:", null, true);
+                            _Password = Inputty.GetString("Password:", null, true);
                             break;
 
                         case "encode":
@@ -65,9 +67,9 @@ namespace Test
 
                         case "put":
                             req = new RestRequest(
-                                InputString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Put, 
-                                InputString("Content type:", "text/plain", false));
+                                Inputty.GetString("URL:", "http://localhost:8888/", false),
+                                HttpMethod.Put,
+                                Inputty.GetString("Content type:", "text/plain", false));
                             req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
@@ -75,7 +77,7 @@ namespace Test
 
                             if (_Debug) req.Logger = Console.WriteLine;
 
-                            data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
+                            data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
                             if (resp == null)
                             {
@@ -94,9 +96,9 @@ namespace Test
 
                         case "post":
                             req = new RestRequest(
-                                InputString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Post, 
-                                InputString("Content type:", "text/plain", false));
+                                Inputty.GetString("URL:", "http://localhost:8888/", false),
+                                HttpMethod.Post,
+                                Inputty.GetString("Content type:", "text/plain", false));
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
@@ -105,7 +107,7 @@ namespace Test
 
                             if (_Debug) req.Logger = Console.WriteLine;
 
-                            data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false));
+                            data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
                             resp = req.Send(data);
                             if (resp == null)
                             {
@@ -124,7 +126,7 @@ namespace Test
 
                         case "form":
                             req = new RestRequest(
-                                InputString("URL:", "http://localhost:8888/", false),
+                                Inputty.GetString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Post);
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
@@ -152,9 +154,9 @@ namespace Test
 
                         case "del":
                             req = new RestRequest(
-                                InputString("URL:", "http://localhost:8888/", false),
+                                Inputty.GetString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Delete,
-                                InputString("Content type:", "text/plain", false));
+                                Inputty.GetString("Content type:", "text/plain", false));
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
@@ -163,7 +165,7 @@ namespace Test
 
                             if (_Debug) req.Logger = Console.WriteLine;
 
-                            data = Encoding.UTF8.GetBytes(InputString("Data:", "Hello, world!", false)); 
+                            data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false)); 
                             resp = req.Send(data);
                             if (resp == null)
                             {
@@ -182,7 +184,7 @@ namespace Test
 
                         case "head":
                             req = new RestRequest(
-                                InputString("URL:", "http://localhost:8888/", false),
+                                Inputty.GetString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Head);
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
@@ -210,7 +212,7 @@ namespace Test
 
                         case "get":
                             req = new RestRequest(
-                                InputString("URL:", "http://localhost:8888/", false),
+                                Inputty.GetString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Get);
                             req.UserAgent = null;
                             req.TimeoutMilliseconds = _Timeout;
@@ -235,7 +237,21 @@ namespace Test
                                 }
                             }
                             break;
-                             
+
+                        case "query":
+                            req = new RestRequest(
+                                Inputty.GetString("URL:", "http://localhost:8888/?foo&bar=baz&another=val1&another=val2&another=val3&key=val", false),
+                                HttpMethod.Get);
+
+                            if (req.Query.AllKeys.Count() > 0)
+                            {
+                                for (int i = 0; i < req.Query.AllKeys.Count(); i++)
+                                {
+                                    Console.WriteLine(req.Query.AllKeys[i] + ": " + req.Query.Get(i));
+                                }
+                            }
+                            break;
+
                         case "debug":
                             _Debug = !_Debug;
                             break;
@@ -272,6 +288,7 @@ namespace Test
             Console.WriteLine("  del         Submit a DELETE request"); 
             Console.WriteLine("  form        Submit a POST request using form data"); 
             Console.WriteLine("  head        Submit a HEAD request");
+            Console.WriteLine("  query       Retrieve the query from a given URL");
             Console.WriteLine("  debug       Enable or disable console debugging (currently " + _Debug + ")");
             Console.WriteLine("  timeout     Set timeout milliseconds (currently " + _Timeout + "ms)");
             Console.WriteLine("");
@@ -323,117 +340,6 @@ namespace Test
             return;
         }
 
-        static string InputString(string question, string defaultAnswer, bool allowNull)
-        {
-            while (true)
-            {
-                Console.Write(question);
-
-                if (!String.IsNullOrEmpty(defaultAnswer))
-                {
-                    Console.Write(" [" + defaultAnswer + "]");
-                }
-
-                Console.Write(" ");
-
-                string userInput = Console.ReadLine();
-
-                if (String.IsNullOrEmpty(userInput))
-                {
-                    if (!String.IsNullOrEmpty(defaultAnswer)) return defaultAnswer;
-                    if (allowNull) return null;
-                    else continue;
-                }
-
-                return userInput;
-            }
-        }
-
-        static int InputInteger(string question, int defaultAnswer, bool positiveOnly, bool allowZero)
-        {
-            while (true)
-            {
-                Console.Write(question);
-                Console.Write(" [" + defaultAnswer + "] ");
-
-                string userInput = Console.ReadLine();
-
-                if (String.IsNullOrEmpty(userInput))
-                {
-                    return defaultAnswer;
-                }
-
-                int ret = 0;
-                if (!Int32.TryParse(userInput, out ret))
-                {
-                    Console.WriteLine("Please enter a valid integer.");
-                    continue;
-                }
-
-                if (ret == 0)
-                {
-                    if (allowZero)
-                    {
-                        return 0;
-                    }
-                }
-
-                if (ret < 0)
-                {
-                    if (positiveOnly)
-                    {
-                        Console.WriteLine("Please enter a value greater than zero.");
-                        continue;
-                    }
-                }
-
-                return ret;
-            }
-        }
-
-        static bool InputBoolean(string question, bool trueDefault)
-        {
-            Console.Write(question);
-
-            if (trueDefault) Console.Write(" [Y/n]? ");
-            else Console.Write(" [y/N]? ");
-
-            string userInput = Console.ReadLine();
-
-            if (String.IsNullOrEmpty(userInput))
-            {
-                if (trueDefault) return true;
-                return false;
-            }
-
-            userInput = userInput.ToLower();
-
-            if (trueDefault)
-            {
-                if (
-                    (String.Compare(userInput, "n") == 0)
-                    || (String.Compare(userInput, "no") == 0)
-                   )
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            else
-            {
-                if (
-                    (String.Compare(userInput, "y") == 0)
-                    || (String.Compare(userInput, "yes") == 0)
-                   )
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-        
         static Dictionary<string, string> InputDictionary()
         {
             Console.WriteLine("Build form, press ENTER on 'Key' to exit");

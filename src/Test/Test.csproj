@@ -15,4 +15,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Inputty" Version="1.0.6" />
+  </ItemGroup>
+
 </Project>

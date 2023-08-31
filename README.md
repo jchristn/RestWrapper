@@ -11,6 +11,7 @@ A simple C# class library to help simplify sending REST API requests and retriev
 - Minor breaking changes
 - Migration from ```HttpWebRequest``` to ```HttpClient```
 - Strong naming
+- Retrieve query elements from ```RestRequest.Query``` property
 
 ## Test Apps
 

@@ -74,6 +74,49 @@ namespace RestWrapper
         public string CertificatePassword { get; set; } = null;
 
         /// <summary>
+        /// The query elements attached to the URL.
+        /// </summary>
+        public NameValueCollection Query
+        {
+            get
+            {
+                NameValueCollection ret = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
+
+                if (!String.IsNullOrEmpty(Url))
+                {
+                    if (Url.Contains("?"))
+                    {
+                        string query = Url.Substring(Url.IndexOf("?") + 1);
+
+                        if (!String.IsNullOrEmpty(query))
+                        {
+                            string[] elements = query.Split('&');
+
+                            if (elements != null && elements.Length > 0)
+                            {
+                                for (int i = 0; i < elements.Length; i++)
+                                {
+                                    string[] elementParts = elements[i].Split(new char[] { '=' }, 2, StringSplitOptions.None);
+
+                                    if (elementParts.Length == 1)
+                                    {
+                                        ret.Add(elementParts[0], null);
+                                    }
+                                    else
+                                    {
+                                        ret.Add(elementParts[0], elementParts[1]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return ret;
+            }
+        }
+
+        /// <summary>
         /// The HTTP headers to attach to the request.
         /// </summary>
         public NameValueCollection Headers

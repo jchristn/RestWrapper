@@ -7,6 +7,7 @@ v3.0.x
 - Minor breaking changes
 - Migration from ```HttpWebRequest``` to ```HttpClient```
 - Strong naming
+- Retrieve query elements from ```RestRequest.Query``` property
 
 ## Previous Versions
 
