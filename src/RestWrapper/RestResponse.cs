@@ -170,7 +170,7 @@ namespace RestWrapper
                 ret += "  Headers" + Environment.NewLine;
                 for (int i = 0; i < Headers.Count; i++)
                 {
-                    ret += "  | " + Headers.GetKey(i) + ": " + Headers.Get(i);
+                    ret += "  | " + Headers.GetKey(i) + ": " + Headers.Get(i) + Environment.NewLine;
                 }
             }
 
