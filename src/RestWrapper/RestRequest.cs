@@ -33,14 +33,19 @@ namespace RestWrapper
         public Action<string> Logger { get; set; } = null;
 
         /// <summary>
-        /// The URL to which the request should be directed.
+        /// UTC timestamp from the request.
         /// </summary>
-        public string Url { get; set; } = null;
+        public DateTimeOffset Timestamp { get; set; } = new DateTimeOffset(DateTime.UtcNow);
 
         /// <summary>
         /// The HTTP method to use, also known as a verb (GET, PUT, POST, DELETE, etc).
         /// </summary>
-        public HttpMethod Method = HttpMethod.Get;
+        public HttpMethod Method { get; set; } = HttpMethod.Get;
+
+        /// <summary>
+        /// The URL to which the request should be directed.
+        /// </summary>
+        public string Url { get; set; } = null;
 
         /// <summary>
         /// Authorization header parameters.
@@ -503,6 +508,7 @@ namespace RestWrapper
                 client.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
                 client.DefaultRequestHeaders.ExpectContinue = false;
                 client.DefaultRequestHeaders.ConnectionClose = true;
+                client.DefaultRequestHeaders.Date = Timestamp;
 
                 HttpRequestMessage message = null;
 

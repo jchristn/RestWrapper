@@ -101,14 +101,19 @@
             Method to invoke when sending log messages.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestRequest.Timestamp">
+            <summary>
+            UTC timestamp from the request.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestRequest.Method">
+            <summary>
+            The HTTP method to use, also known as a verb (GET, PUT, POST, DELETE, etc).
+            </summary>
+        </member>
         <member name="P:RestWrapper.RestRequest.Url">
             <summary>
             The URL to which the request should be directed.
-            </summary>
-        </member>
-        <member name="F:RestWrapper.RestRequest.Method">
-            <summary>
-            The HTTP method to use, also known as a verb (GET, PUT, POST, DELETE, etc).
             </summary>
         </member>
         <member name="P:RestWrapper.RestRequest.Authorization">

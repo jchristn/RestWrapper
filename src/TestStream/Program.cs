@@ -68,10 +68,7 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -94,10 +91,7 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -120,10 +114,7 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -144,10 +135,7 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -168,10 +156,7 @@ namespace TestStream
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 

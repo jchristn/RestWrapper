@@ -19,6 +19,7 @@ namespace Test
         static string _Username = null;
         static string _Password = null;
         static bool _Encode = true;
+        static string _TimestampFormat = "ddd, dd MMM yyy HH:mm:ss zzz";
 
         static void Main(string[] args)
         {
@@ -86,11 +87,7 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine("Content:");
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -116,11 +113,7 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine("Content:");
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -144,11 +137,7 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine("Content:");
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -174,11 +163,7 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine("Content:");
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -202,11 +187,7 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine("Content:");
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
@@ -230,11 +211,7 @@ namespace Test
                             else
                             {
                                 Console.WriteLine(resp.ToString());
-                                if (resp.Data != null && resp.ContentLength > 0)
-                                {
-                                    Console.WriteLine("Content:");
-                                    Console.WriteLine(resp.DataAsString);
-                                }
+                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
                             }
                             break;
 
