@@ -631,6 +631,12 @@ namespace RestWrapper
                     Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _Authorization.BearerToken);
                 }
+                else if (!String.IsNullOrEmpty(_Authorization.Raw))
+                {
+                    Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
+                    if (!client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _Authorization.Raw))
+                        Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
+                }
 
                 #endregion
 

@@ -9,24 +9,29 @@
             Authorization header options.
             </summary>
         </member>
-        <member name="F:RestWrapper.AuthorizationHeader.User">
+        <member name="P:RestWrapper.AuthorizationHeader.User">
             <summary>
             The username to use in the authorization header, if any.
             </summary>
         </member>
-        <member name="F:RestWrapper.AuthorizationHeader.Password">
+        <member name="P:RestWrapper.AuthorizationHeader.Password">
             <summary>
             The password to use in the authorization header, if any.
             </summary>
         </member>
-        <member name="F:RestWrapper.AuthorizationHeader.BearerToken">
+        <member name="P:RestWrapper.AuthorizationHeader.BearerToken">
             <summary>
             The bearer token to use in the authorization header, if any.
             </summary>
         </member>
-        <member name="F:RestWrapper.AuthorizationHeader.EncodeCredentials">
+        <member name="P:RestWrapper.AuthorizationHeader.EncodeCredentials">
             <summary>
             Enable to encode credentials in the authorization header.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.AuthorizationHeader.Raw">
+            <summary>
+            Raw authorization header value.
             </summary>
         </member>
         <member name="M:RestWrapper.AuthorizationHeader.#ctor">

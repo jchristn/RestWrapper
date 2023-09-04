@@ -196,10 +196,12 @@ namespace Test
                                 Inputty.GetString("URL:", "http://localhost:8888/", false),
                                 HttpMethod.Get);
                             req.UserAgent = null;
+                            req.Logger = Console.WriteLine;
                             req.TimeoutMilliseconds = _Timeout;
                             req.Authorization.User = _Username;
                             req.Authorization.Password = _Password;
                             req.Authorization.EncodeCredentials = _Encode;
+                            req.Authorization.Raw = "AWS4-HMAC-SHA256 Credential=AKIA2HLYPTGQDFXYOQBA/20130524/us-west-1/s3/aws4_request, SignedHeaders=host;range;x-amz-date, Signature=fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024";
 
                             if (_Debug) req.Logger = Console.WriteLine;
 
