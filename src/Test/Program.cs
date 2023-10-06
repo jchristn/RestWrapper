@@ -14,21 +14,23 @@ namespace Test
 {
     class Program
     {
-        static bool _Debug = false;
-        static int _Timeout = 10000;
+        static Action<string> _Logger = Console.WriteLine;
+        static int _TimeoutMs = 10000;
         static string _Username = null;
         static string _Password = null;
+        static string _BearerToken = null;
         static bool _Encode = true;
-        static string _TimestampFormat = "ddd, dd MMM yyy HH:mm:ss zzz";
 
         static void Main(string[] args)
         {
             try
             { 
-                RestRequest req = null;
-                RestResponse resp = null;
                 bool runForever = true;
-                byte[] data = null;
+
+                string url;
+                string contentType;
+                string body;
+                Dictionary<string, string> form;
 
                 while (runForever)
                 {
@@ -66,176 +68,76 @@ namespace Test
                             _Encode = !_Encode;
                             break;
 
+                        case "token":
+                            _BearerToken = Inputty.GetString("Bearer Token:", null, true);
+                            break;
+
                         case "put":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Put,
-                                Inputty.GetString("Content type:", "text/plain", false));
-                            req.TimeoutMilliseconds = _Timeout;
-                            req.Authorization.User = _Username;
-                            req.Authorization.Password = _Password;
-                            req.Authorization.EncodeCredentials = _Encode;
-
-                            if (_Debug) req.Logger = Console.WriteLine;
-
-                            data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
-                            resp = req.Send(data);
-                            if (resp == null)
-                            {
-                                Console.WriteLine("Null response");
-                            }
-                            else
-                            {
-                                Console.WriteLine(resp.ToString());
-                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
-                            }
+                            url = Inputty.GetString("URL:", "http://localhost:8888/", true);
+                            if (String.IsNullOrEmpty(url)) break;
+                            contentType = Inputty.GetString("Content-Type:", null, true);
+                            body = Inputty.GetString("Body:", null, true);
+                            Console.WriteLine(GetResponse(url, HttpMethod.Put, contentType, body));
                             break;
 
                         case "post":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Post,
-                                Inputty.GetString("Content type:", "text/plain", false));
-                            req.UserAgent = null;
-                            req.TimeoutMilliseconds = _Timeout;
-                            req.Authorization.User = _Username;
-                            req.Authorization.Password = _Password;
-                            req.Authorization.EncodeCredentials = _Encode;
-
-                            if (_Debug) req.Logger = Console.WriteLine;
-
-                            data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
-                            resp = req.Send(data);
-                            if (resp == null)
-                            {
-                                Console.WriteLine("Null response");
-                            }
-                            else
-                            {
-                                Console.WriteLine(resp.ToString());
-                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
-                            }
+                            url = Inputty.GetString("URL:", "http://localhost:8888/", true);
+                            if (String.IsNullOrEmpty(url)) break;
+                            contentType = Inputty.GetString("Content-Type:", null, true);
+                            body = Inputty.GetString("Body:", null, true);
+                            Console.WriteLine(GetResponse(url, HttpMethod.Post, contentType, body));
                             break;
 
                         case "form":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Post);
-                            req.UserAgent = null;
-                            req.TimeoutMilliseconds = _Timeout;
-                            req.Authorization.User = _Username;
-                            req.Authorization.Password = _Password;
-                            req.Authorization.EncodeCredentials = _Encode;
-
-                            if (_Debug) req.Logger = Console.WriteLine;
-                             
-                            resp = req.Send(InputDictionary());
-                            if (resp == null)
-                            {
-                                Console.WriteLine("Null response");
-                            }
-                            else
-                            {
-                                Console.WriteLine(resp.ToString());
-                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
-                            }
+                            url = Inputty.GetString("URL:", "http://localhost:8888/", true);
+                            if (String.IsNullOrEmpty(url)) break;
+                            contentType = Inputty.GetString("Content-Type:", null, true);
+                            form = Inputty.GetDictionary<string, string>("Key:", "Val:");
+                            Console.WriteLine(GetResponseWithForm(url, HttpMethod.Post, contentType, form));
                             break;
 
                         case "del":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Delete,
-                                Inputty.GetString("Content type:", "text/plain", false));
-                            req.UserAgent = null;
-                            req.TimeoutMilliseconds = _Timeout;
-                            req.Authorization.User = _Username;
-                            req.Authorization.Password = _Password;
-                            req.Authorization.EncodeCredentials = _Encode;
-
-                            if (_Debug) req.Logger = Console.WriteLine;
-
-                            data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false)); 
-                            resp = req.Send(data);
-                            if (resp == null)
-                            {
-                                Console.WriteLine("Null response");
-                            }
-                            else
-                            {
-                                Console.WriteLine(resp.ToString());
-                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
-                            }
+                            url = Inputty.GetString("URL:", "http://localhost:8888/", true);
+                            if (String.IsNullOrEmpty(url)) break;
+                            contentType = Inputty.GetString("Content-Type:", null, true);
+                            body = Inputty.GetString("Body:", null, true);
+                            Console.WriteLine(GetResponse(url, HttpMethod.Delete, contentType, body));
                             break;
 
                         case "head":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Head);
-                            req.UserAgent = null;
-                            req.TimeoutMilliseconds = _Timeout;
-                            req.Authorization.User = _Username;
-                            req.Authorization.Password = _Password;
-                            req.Authorization.EncodeCredentials = _Encode;
-
-                            if (_Debug) req.Logger = Console.WriteLine;
-
-                            resp = req.Send();
-                            if (resp == null)
-                            {
-                                Console.WriteLine("Null response");
-                            }
-                            else
-                            {
-                                Console.WriteLine(resp.ToString());
-                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
-                            }
+                            url = Inputty.GetString("URL:", "http://localhost:8888/", true);
+                            if (String.IsNullOrEmpty(url)) break;
+                            Console.WriteLine(GetResponse(url, HttpMethod.Head));
                             break;
 
                         case "get":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/", false),
-                                HttpMethod.Get);
-                            req.UserAgent = null;
-                            req.TimeoutMilliseconds = _Timeout;
-                            req.Authorization.User = _Username;
-                            req.Authorization.Password = _Password;
-                            req.Authorization.EncodeCredentials = _Encode;
-                            
-                            if (_Debug) req.Logger = Console.WriteLine;
-
-                            resp = req.Send();
-                            if (resp == null)
-                            {
-                                Console.WriteLine("Null response");
-                            }
-                            else
-                            {
-                                Console.WriteLine(resp.ToString());
-                                Console.WriteLine("Content:" + Environment.NewLine + resp.DataAsString);
-                            }
+                            url = Inputty.GetString("URL:", "http://localhost:8888/", true);
+                            if (String.IsNullOrEmpty(url)) break;
+                            Console.WriteLine(GetResponse(url, HttpMethod.Get));
                             break;
 
                         case "query":
-                            req = new RestRequest(
-                                Inputty.GetString("URL:", "http://localhost:8888/?foo&bar=baz&another=val1&another=val2&another=val3&key=val", false),
-                                HttpMethod.Get);
-
-                            if (req.Query.AllKeys.Count() > 0)
+                            url = Inputty.GetString("URL:", "http://localhost:8888?foo=bar", true);
+                            using (RestRequest req = new RestRequest(url))
                             {
-                                for (int i = 0; i < req.Query.AllKeys.Count(); i++)
+                                if (req.Query.AllKeys.Count() > 0)
                                 {
-                                    Console.WriteLine(req.Query.AllKeys[i] + ": " + req.Query.Get(i));
+                                    for (int i = 0; i < req.Query.AllKeys.Count(); i++)
+                                    {
+                                        Console.WriteLine(req.Query.AllKeys[i] + ": " + req.Query.Get(i));
+                                    }
                                 }
                             }
                             break;
 
                         case "debug":
-                            _Debug = !_Debug;
+                            if (_Logger == null) _Logger = Console.WriteLine;
+                            else _Logger = null;
                             break;
 
                         case "timeout":
                             Console.Write("Timeout (ms): ");
-                            _Timeout = Convert.ToInt32(Console.ReadLine());
+                            _TimeoutMs = Convert.ToInt32(Console.ReadLine());
                             break;
 
                         default:
@@ -259,6 +161,7 @@ namespace Test
             Console.WriteLine("  user        Set basic auth username");
             Console.WriteLine("  pass        Set basic auth password");
             Console.WriteLine("  encode      Enable or disable credential encoding (currently " + _Encode + ")");
+            Console.WriteLine("  token       Set bearer token");
             Console.WriteLine("  get         Submit a GET request");
             Console.WriteLine("  put         Submit a PUT request");
             Console.WriteLine("  post        Submit a POST request");
@@ -266,8 +169,8 @@ namespace Test
             Console.WriteLine("  form        Submit a POST request using form data"); 
             Console.WriteLine("  head        Submit a HEAD request");
             Console.WriteLine("  query       Retrieve the query from a given URL");
-            Console.WriteLine("  debug       Enable or disable console debugging (currently " + _Debug + ")");
-            Console.WriteLine("  timeout     Set timeout milliseconds (currently " + _Timeout + "ms)");
+            Console.WriteLine("  debug       Enable or disable console debugging (currently " + (_Logger != null) + ")");
+            Console.WriteLine("  timeout     Set timeout milliseconds (currently " + _TimeoutMs + "ms)");
             Console.WriteLine("");
         }
 
@@ -317,21 +220,155 @@ namespace Test
             return;
         }
 
-        static Dictionary<string, string> InputDictionary()
+        static string GetResponse(string url, HttpMethod method, string contentType = null, string body = null)
         {
-            Console.WriteLine("Build form, press ENTER on 'Key' to exit");
+            Console.WriteLine("");
+            string msg = method.ToString() + " " + url;
+            if (!String.IsNullOrEmpty(contentType)) msg += " (" + contentType + ")";
+            if (!String.IsNullOrEmpty(body)) msg += " (" + body.Length + " bytes)";
+            Console.WriteLine(msg);
 
-            Dictionary<string, string> ret = new Dictionary<string, string>();
-
-            while (true)
+            using (RestRequest req = new RestRequest(url, method, contentType))
             {
-                Console.Write("Key   : ");
-                string key = Console.ReadLine();
-                if (String.IsNullOrEmpty(key)) return ret;
+                req.TimeoutMilliseconds = _TimeoutMs;
+                req.Logger = _Logger;
+                req.Authorization.User = _Username;
+                req.Authorization.Password = _Password;
+                req.Authorization.BearerToken = _BearerToken;
+                req.Authorization.EncodeCredentials = _Encode;
 
-                Console.Write("Value : ");
-                string val = Console.ReadLine();
-                ret.Add(key, val);
+                if (!String.IsNullOrEmpty(req.Authorization.User)
+                    || !String.IsNullOrEmpty(req.Authorization.Password)
+                    || !String.IsNullOrEmpty(req.Authorization.BearerToken))
+                {
+                    Console.WriteLine("Using authentication material:");
+                    if (!String.IsNullOrEmpty(req.Authorization.User))
+                        Console.WriteLine("| User: " + req.Authorization.User);
+                    if (!String.IsNullOrEmpty(req.Authorization.Password))
+                        Console.WriteLine("| Password: " + req.Authorization.Password);
+                    if (!String.IsNullOrEmpty(req.Authorization.BearerToken))
+                        Console.WriteLine("| Bearer Token: " + req.Authorization.BearerToken);
+                }
+
+                if (req.Query.AllKeys.Count() > 0)
+                {
+                    Console.WriteLine("Using query:");
+                    for (int i = 0; i < req.Query.AllKeys.Count(); i++)
+                        Console.WriteLine("| " + req.Query.AllKeys[i] + ": " + req.Query.Get(i));
+                }
+
+                if (String.IsNullOrEmpty(body))
+                {
+                    using (RestResponse resp = req.Send())
+                    {
+                        if (resp == null)
+                        {
+                            Console.WriteLine("*** Null response");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
+                        }
+
+                        Console.WriteLine("");
+                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        else return null;
+                    }
+                }
+                else
+                {
+                    using (RestResponse resp = req.Send(body))
+                    {
+                        if (resp == null)
+                        {
+                            Console.WriteLine("*** Null response");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
+                        }
+
+                        Console.WriteLine("");
+                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        else return null;
+                    }
+                }
+            }
+        }
+
+        static string GetResponseWithForm(string url, HttpMethod method, string contentType, Dictionary<string, string> form)
+        {
+            Console.WriteLine("");
+            string msg = method.ToString() + " " + url;
+            if (!String.IsNullOrEmpty(contentType)) msg += " (" + contentType + ")";
+            if (form != null) msg += " (" + form.Count + " key-value pairs)";
+            Console.WriteLine(msg);
+
+            using (RestRequest req = new RestRequest(url, method, contentType))
+            {
+                req.TimeoutMilliseconds = _TimeoutMs;
+                req.Logger = _Logger;
+                req.Authorization.User = _Username;
+                req.Authorization.Password = _Password;
+                req.Authorization.BearerToken = _BearerToken;
+                req.Authorization.EncodeCredentials = _Encode;
+
+                if (!String.IsNullOrEmpty(req.Authorization.User)
+                    || !String.IsNullOrEmpty(req.Authorization.Password)
+                    || !String.IsNullOrEmpty(req.Authorization.BearerToken))
+                {
+                    Console.WriteLine("Using authentication material:");
+                    if (!String.IsNullOrEmpty(req.Authorization.User))
+                        Console.WriteLine("| User: " + req.Authorization.User);
+                    if (!String.IsNullOrEmpty(req.Authorization.Password))
+                        Console.WriteLine("| Password: " + req.Authorization.Password);
+                    if (!String.IsNullOrEmpty(req.Authorization.BearerToken))
+                        Console.WriteLine("| Bearer Token: " + req.Authorization.BearerToken);
+                }
+
+                if (req.Query.AllKeys.Count() > 0)
+                {
+                    Console.WriteLine("Using query:");
+                    for (int i = 0; i < req.Query.AllKeys.Count(); i++)
+                        Console.WriteLine("| " + req.Query.AllKeys[i] + ": " + req.Query.Get(i));
+                }
+
+                if (form == null)
+                {
+                    using (RestResponse resp = req.Send())
+                    {
+                        if (resp == null)
+                        {
+                            Console.WriteLine("*** Null response");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
+                        }
+
+                        Console.WriteLine("");
+                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        else return null;
+                    }
+                }
+                else
+                {
+                    using (RestResponse resp = req.Send(form))
+                    {
+                        if (resp == null)
+                        {
+                            Console.WriteLine("*** Null response");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
+                        }
+
+                        Console.WriteLine("");
+                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        else return null;
+                    }
+                }
             }
         }
     }

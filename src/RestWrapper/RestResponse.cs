@@ -14,7 +14,7 @@ namespace RestWrapper
     /// <summary>
     /// RESTful response from the server.
     /// </summary>
-    public class RestResponse
+    public class RestResponse : IDisposable
     {
         #region Public-Members
 
@@ -140,6 +140,7 @@ namespace RestWrapper
         private byte[] _Data = null;
         private ISerializationHelper _SerializationHelper = new DefaultSerializationHelper();
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
+        private bool _DisposedValue = false;
 
         #endregion
 
@@ -155,6 +156,43 @@ namespace RestWrapper
         #endregion
 
         #region Public-Methods
+
+        /// <summary>
+        /// Dispose.
+        /// </summary>
+        /// <param name="disposing">Disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_DisposedValue)
+            {
+                if (disposing)
+                {
+                }
+
+                Time = null;
+                ProtocolVersion = null;
+                ContentEncoding = null;
+                ContentType = null;
+                StatusDescription = null;
+                Data = null;
+                
+                _Headers = null;
+                _SerializationHelper = null;
+                _Data = null;
+
+                _DisposedValue = true;
+            }
+        }
+
+        /// <summary>
+        /// Dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
 
         /// <summary>
         /// Creates a human-readable string of the object.

@@ -22,7 +22,7 @@ namespace RestWrapper
     /// <summary>
     /// RESTful HTTP request to be sent to a server.
     /// </summary>
-    public class RestRequest
+    public class RestRequest : IDisposable
     {
         #region Public-Members
 
@@ -198,6 +198,7 @@ namespace RestWrapper
         private int _TimeoutMilliseconds = 30000;
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private AuthorizationHeader _Authorization = new AuthorizationHeader();
+        private bool _DisposedValue = false;
 
         #endregion
 
@@ -269,6 +270,42 @@ namespace RestWrapper
         #endregion
 
         #region Public-Methods
+
+        /// <summary>
+        /// Dispose.
+        /// </summary>
+        /// <param name="disposing">Disposing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_DisposedValue)
+            {
+                if (disposing)
+                {
+                }
+
+                Logger = null;
+                Url = null;
+                CertificateFilename = null;
+                CertificatePassword = null;
+                ContentType = null;
+                UserAgent = null;
+
+                _Headers = null;
+                _Authorization = null;
+
+                _DisposedValue = true;
+            }
+        }
+
+        /// <summary>
+        /// Dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
 
         /// <summary>
         /// Creates a human-readable string of the object.
@@ -778,6 +815,6 @@ namespace RestWrapper
             }
         }
 
-#endregion
+        #endregion
     }
 }

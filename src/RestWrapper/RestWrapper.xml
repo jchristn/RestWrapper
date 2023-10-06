@@ -211,6 +211,17 @@
             <param name="headers">HTTP headers to use.</param>
             <param name="contentType">Content type to use.</param>
         </member>
+        <member name="M:RestWrapper.RestRequest.Dispose(System.Boolean)">
+            <summary>
+            Dispose.
+            </summary>
+            <param name="disposing">Disposing.</param>
+        </member>
+        <member name="M:RestWrapper.RestRequest.Dispose">
+            <summary>
+            Dispose.
+            </summary>
+        </member>
         <member name="M:RestWrapper.RestRequest.ToString">
             <summary>
             Creates a human-readable string of the object.
@@ -364,6 +375,17 @@
         <member name="M:RestWrapper.RestResponse.#ctor">
             <summary>
             An organized object containing frequently used response parameters from a RESTful HTTP request.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.RestResponse.Dispose(System.Boolean)">
+            <summary>
+            Dispose.
+            </summary>
+            <param name="disposing">Disposing.</param>
+        </member>
+        <member name="M:RestWrapper.RestResponse.Dispose">
+            <summary>
+            Dispose.
             </summary>
         </member>
         <member name="M:RestWrapper.RestResponse.ToString">
