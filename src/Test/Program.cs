@@ -271,7 +271,12 @@ namespace Test
                         }
 
                         Console.WriteLine("");
-                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        if (resp.ContentLength > 0)
+                        {
+                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
+                            Console.WriteLine(resp.DataAsString);
+                            return resp.DataAsString;
+                        }
                         else return null;
                     }
                 }
@@ -289,7 +294,12 @@ namespace Test
                         }
 
                         Console.WriteLine("");
-                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        if (resp.ContentLength > 0)
+                        {
+                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
+                            Console.WriteLine(resp.DataAsString);
+                            return resp.DataAsString;
+                        }
                         else return null;
                     }
                 }
@@ -347,7 +357,12 @@ namespace Test
                         }
 
                         Console.WriteLine("");
-                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        if (resp.ContentLength > 0)
+                        {
+                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
+                            Console.WriteLine(resp.DataAsString);
+                            return resp.DataAsString;
+                        }
                         else return null;
                     }
                 }
@@ -365,7 +380,12 @@ namespace Test
                         }
 
                         Console.WriteLine("");
-                        if (resp.ContentLength > 0) return resp.DataAsString;
+                        if (resp.ContentLength > 0)
+                        {
+                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
+                            Console.WriteLine(resp.DataAsString);
+                            return resp.DataAsString;
+                        }
                         else return null;
                     }
                 }
