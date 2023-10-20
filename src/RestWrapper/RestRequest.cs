@@ -504,7 +504,6 @@ namespace RestWrapper
             if (String.IsNullOrEmpty(Url)) throw new ArgumentNullException(nameof(Url));
 
             Timestamps ts = new Timestamps();
-
             Logger?.Invoke(_Header + Method.ToString() + " " + Url);
 
             try
@@ -534,12 +533,15 @@ namespace RestWrapper
                     handler.ClientCertificates.Add(cert);
                 }
 
+                token.ThrowIfCancellationRequested();
+
                 using (HttpClient client = new HttpClient(handler, true))
                 {
                     client.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
                     client.DefaultRequestHeaders.ExpectContinue = false;
                     client.DefaultRequestHeaders.ConnectionClose = true;
                     client.DefaultRequestHeaders.Date = Timestamp;
+                    token.ThrowIfCancellationRequested();
 
                     using (HttpRequestMessage message = new HttpRequestMessage(Method, Url))
                     {
@@ -560,6 +562,7 @@ namespace RestWrapper
                         }
 
                         message.Content = content;
+                        token.ThrowIfCancellationRequested();
 
                         #endregion
 
@@ -600,6 +603,8 @@ namespace RestWrapper
                             }
                         }
 
+                        token.ThrowIfCancellationRequested();
+
                         #endregion
 
                         #region Add-Auth-Info
@@ -632,6 +637,8 @@ namespace RestWrapper
                                 Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
                         }
 
+                        token.ThrowIfCancellationRequested();
+
                         #endregion
 
                         #region Submit-Request-and-Build-Response
@@ -640,6 +647,7 @@ namespace RestWrapper
                         {
                             ts.End = DateTime.Now;
                             Logger?.Invoke(_Header + response.StatusCode + " response received after " + ts.TotalMs + "ms");
+                            token.ThrowIfCancellationRequested();
 
                             RestResponse ret = new RestResponse();
                             ret.ProtocolVersion = "HTTP/" + response.Version.ToString();
@@ -670,6 +678,7 @@ namespace RestWrapper
 
                             if (ret.ContentLength > 0)
                             {
+                                token.ThrowIfCancellationRequested();
                                 Logger?.Invoke(_Header + "retrieving " + ret.ContentLength + " bytes");
                                 ret.Data = new MemoryStream();
                                 await response.Content.CopyToAsync(ret.Data);
