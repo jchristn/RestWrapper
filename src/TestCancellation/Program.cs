@@ -8,7 +8,7 @@ namespace TestCancellation
 {
     public static class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
@@ -16,11 +16,13 @@ namespace TestCancellation
             Server server = new Server("localhost", 8000, false, DefaultRoute);
             server.Start();
 
-            Task.Run(() => RequestSender(token), token);
+            Task unawaited = Task.Run(() => RequestSender(token), token);
 
             string userInput = Inputty.GetString("Press ENTER to cancel", null, true);
             cts.Cancel();
 
+            Console.WriteLine("Press ENTER to cancel");
+            Console.ReadLine();
             Console.WriteLine("Press ENTER to exit");
             Console.ReadLine();
         }
@@ -35,25 +37,25 @@ namespace TestCancellation
                     using (RestRequest req = new RestRequest("http://localhost:8000", System.Net.Http.HttpMethod.Get))
                     {
                         req.Logger = Console.WriteLine;
-                        Console.WriteLine("Sending request");
+                        Console.WriteLine("[RequestSender] sending request");
                         using (RestResponse resp = await req.SendAsync(token))
                         {
-                            Console.WriteLine("Request received");
+                            Console.WriteLine("[RequestSender] response received");
                         }
                     }
                 }
             }   
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine("[RequestSender] exception: " + e.Message);
             }
         }
 
         private static async Task DefaultRoute(HttpContext context)
         {
-            Console.WriteLine("In route");
+            Console.WriteLine("[Webserver] in route");
             await Task.Delay(10000);
-            Console.WriteLine("Sending response");
+            Console.WriteLine("[Webserver] sending response");
             await context.Response.Send();
         }
     }

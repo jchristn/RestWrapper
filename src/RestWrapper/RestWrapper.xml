@@ -401,30 +401,5 @@
             <typeparam name="T">Type.</typeparam>
             <returns>Instance.</returns>
         </member>
-        <member name="T:RestWrapper.Timestamps">
-            <summary>
-            Object used to measure start, end, and total time associated with an operation.
-            </summary>
-        </member>
-        <member name="P:RestWrapper.Timestamps.Start">
-            <summary>
-            The time at which the operation started.
-            </summary>
-        </member>
-        <member name="P:RestWrapper.Timestamps.End">
-            <summary>
-            The time at which the operation ended.
-            </summary>
-        </member>
-        <member name="P:RestWrapper.Timestamps.TotalMs">
-            <summary>
-            The total number of milliseconds that transpired between Start and End.
-            </summary>
-        </member>
-        <member name="M:RestWrapper.Timestamps.#ctor">
-            <summary>
-            Instantiate the object.
-            </summary>
-        </member>
     </members>
 </doc>

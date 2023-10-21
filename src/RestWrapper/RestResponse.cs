@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Timestamps;
 
 namespace RestWrapper
 {
@@ -21,7 +22,7 @@ namespace RestWrapper
         /// <summary>
         /// Information related to the start, end, and total time for the operation.
         /// </summary>
-        public Timestamps Time { get; internal set; } = new Timestamps();
+        public Timestamp Time { get; internal set; } = new Timestamp();
 
         /// <summary>
         /// The protocol and version.
@@ -221,9 +222,13 @@ namespace RestWrapper
             ret += "  Status Description : " + StatusDescription + Environment.NewLine;
             ret += "  Content Length     : " + ContentLength + Environment.NewLine;
             ret += "  Time" + Environment.NewLine;
-            ret += "  | Start (UTC)      : " + Time.Start.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
-            ret += "  | End (UTC)        : " + Time.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
-            ret += "  | Total            : " + Time.TotalMs + "ms" + Environment.NewLine;
+            ret += "  | Start (UTC)      : " + Time.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
+
+            if (Time.End != null)
+            {
+                ret += "  | End (UTC)        : " + Time.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
+                ret += "  | Total            : " + Time.TotalMs + "ms" + Environment.NewLine;
+            }
 
             ret += "  Data               : ";
             if (Data != null && ContentLength > 0) ret += "[stream]";
