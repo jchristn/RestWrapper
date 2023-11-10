@@ -648,7 +648,7 @@ namespace RestWrapper
 
                             using (HttpResponseMessage response = await client.SendAsync(message, token).ConfigureAwait(false))
                             {
-                                ts.End = DateTime.Now;
+                                ts.End = DateTime.UtcNow;
                                 Logger?.Invoke(_Header + response.StatusCode + " response received after " + ts.TotalMs + "ms");
                                 token.ThrowIfCancellationRequested();
 
@@ -657,6 +657,9 @@ namespace RestWrapper
                                 ret.StatusCode = (int)response.StatusCode;
                                 ret.StatusDescription = response.StatusCode.ToString();
 
+                                if (response.Content.Headers.ContentLength != null)
+                                    ret.ContentLength = response.Content.Headers.ContentLength.Value;
+
                                 if (response.Content != null && response.Content.Headers != null)
                                 {
                                     if (response.Content.Headers.ContentEncoding != null)
@@ -664,12 +667,9 @@ namespace RestWrapper
 
                                     if (response.Content.Headers.ContentType != null)
                                         ret.ContentType = response.Content.Headers.ContentType.ToString();
-
-                                    if (response.Content.Headers.ContentLength != null)
-                                        ret.ContentLength = response.Content.Headers.ContentLength.Value;
                                 }
 
-                                ts.End = DateTime.Now;
+                                ts.End = DateTime.UtcNow;
                                 Logger?.Invoke(_Header + "processing response headers after " + ts.TotalMs + "ms");
 
                                 foreach (var header in response.Headers)
@@ -688,7 +688,7 @@ namespace RestWrapper
                                     ret.Data.Seek(0, SeekOrigin.Begin);
                                 }
 
-                                ts.End = DateTime.Now;
+                                ts.End = DateTime.UtcNow;
                                 ret.Time = ts;
 
                                 token.ThrowIfCancellationRequested();
@@ -772,7 +772,7 @@ namespace RestWrapper
                         token.ThrowIfCancellationRequested();
                     }
 
-                    ts.End = DateTime.Now;
+                    ts.End = DateTime.UtcNow;
                     ret.Time = ts;
 
                     token.ThrowIfCancellationRequested();

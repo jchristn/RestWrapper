@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <PackageReference Include="Inputty" Version="1.0.6" />
-    <PackageReference Include="Timestamps" Version="1.0.4" />
   </ItemGroup>
 
 </Project>
