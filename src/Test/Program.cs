@@ -271,6 +271,9 @@ namespace Test
                         }
 
                         Console.WriteLine("");
+                        Console.WriteLine(resp.ToString());
+
+                        Console.WriteLine("");
                         if (resp.ContentLength > 0)
                         {
                             Console.WriteLine("Returning " + resp.ContentLength + " bytes");
@@ -292,6 +295,9 @@ namespace Test
                         {
                             Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
                         }
+
+                        Console.WriteLine("");
+                        Console.WriteLine(resp.ToString());
 
                         Console.WriteLine("");
                         if (resp.ContentLength > 0)

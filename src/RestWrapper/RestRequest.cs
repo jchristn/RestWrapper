@@ -657,11 +657,29 @@ namespace RestWrapper
                                 ret.StatusCode = (int)response.StatusCode;
                                 ret.StatusDescription = response.StatusCode.ToString();
 
-                                if (response.Content.Headers.ContentLength != null)
-                                    ret.ContentLength = response.Content.Headers.ContentLength.Value;
+                                foreach (var header in response.Headers)
+                                {
+                                    if (header.Key.ToLower().Equals("content-type"))
+                                        ContentType = string.Join(", ", header.Value);
+
+                                    if (header.Key.ToLower().Equals("content-length"))
+                                        ContentLength = Convert.ToInt64(header.Value.First());
+                                }
 
                                 if (response.Content != null && response.Content.Headers != null)
                                 {
+                                    foreach (var header in response.Content.Headers)
+                                    {
+                                        if (header.Key.ToLower().Equals("content-type"))
+                                            ContentType = string.Join(", ", header.Value);
+
+                                        if (header.Key.ToLower().Equals("content-length"))
+                                            ContentLength = Convert.ToInt64(header.Value.First());
+                                    }
+
+                                    if (response.Content.Headers.ContentLength != null)
+                                        ret.ContentLength = response.Content.Headers.ContentLength.Value;
+
                                     if (response.Content.Headers.ContentEncoding != null)
                                         ret.ContentEncoding = string.Join(",", response.Content.Headers.ContentEncoding);
 
