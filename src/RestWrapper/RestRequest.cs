@@ -510,10 +510,17 @@ namespace RestWrapper
 
                 try
                 {
-                    if (IgnoreCertificateErrors) ServicePointManager.ServerCertificateValidationCallback = Validator;
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     HttpClientHandler handler = new HttpClientHandler();
                     handler.AllowAutoRedirect = AllowAutoRedirect;
+
+                    if (IgnoreCertificateErrors)
+                    {
+#if NET6_0_OR_GREATER
+                        handler.ServerCertificateCustomValidationCallback = Validator;
+#endif
+                        ServicePointManager.ServerCertificateValidationCallback = Validator;
+                    }
 
                     if (!String.IsNullOrEmpty(CertificateFilename))
                     {
@@ -827,6 +834,6 @@ namespace RestWrapper
             }
         }
 
-        #endregion
+#endregion
     }
 }

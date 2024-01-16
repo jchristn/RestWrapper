@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.17</Version>
+    <Version>3.0.18</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
-    <Copyright>(c)2023 Joel Christner</Copyright>
+    <Copyright>(c)2024 Joel Christner</Copyright>
     <PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
     <PackageReleaseNotes>Retrieve query elements from URL using Query property.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>

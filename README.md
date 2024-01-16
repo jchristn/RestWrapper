@@ -6,6 +6,12 @@
 
 A simple C# class library to help simplify sending REST API requests and retrieving responses (RESTful HTTP and HTTPS)
 
+## Special Thanks
+
+Thanks go out to the community for their help in making this library great!
+
+@nhaberl @jmkinzer @msasanmh @lanwah @nhaberl 
+
 ## New in v3.0.x
 
 - Minor breaking changes
@@ -99,12 +105,6 @@ Console.WriteLine("Total ms : " + resp.Time.TotalMs + "ms");
 ## Deserializing Response Data
 
 The method ```RestResponse.DataFromJson<T>()``` will deserialize using ```System.Text.Json```.  You can override the ```RestResponse.SerializationHelper``` property with your own implementation of ```ISerializationHelper``` if you wish to use your own deserializer.  Thank you @nhaberl for the suggestion.
-
-## Special Thanks
-
-Thanks go out to the community for their help in making this library great!
-
-@nhaberl
 
 ## Version History
 
