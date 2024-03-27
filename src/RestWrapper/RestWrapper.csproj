@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.18</Version>
+    <Version>3.0.19</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
     <Copyright>(c)2024 Joel Christner</Copyright>
@@ -16,8 +16,6 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\RestWrapper.snk</AssemblyOriginatorKeyFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -69,8 +67,8 @@
   
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
-    <PackageReference Include="Timestamps" Version="1.0.6" />
+    <PackageReference Include="System.Text.Json" Version="8.0.3" />
+    <PackageReference Include="Timestamps" Version="1.0.8" />
   </ItemGroup>
 
   <ItemGroup>

@@ -195,7 +195,7 @@ namespace RestWrapper
 
         private string _Header = "[RestWrapper] ";
         private int _StreamReadBufferSize = 65536;
-        private int _TimeoutMilliseconds = 30000;
+        private int _TimeoutMilliseconds = 60000;
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private AuthorizationHeader _Authorization = new AuthorizationHeader();
         private bool _DisposedValue = false;
