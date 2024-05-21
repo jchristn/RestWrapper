@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.19</Version>
+    <Version>3.0.20</Version>
     <Authors>Joel Christner</Authors>
     <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
     <Copyright>(c)2024 Joel Christner</Copyright>
@@ -68,7 +68,7 @@
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
-    <PackageReference Include="Timestamps" Version="1.0.8" />
+    <PackageReference Include="Timestamps" Version="1.0.9" />
   </ItemGroup>
 
   <ItemGroup>
