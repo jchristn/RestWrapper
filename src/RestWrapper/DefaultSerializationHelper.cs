@@ -42,7 +42,7 @@ namespace RestWrapper
 
         #region Private-Members
 
-        private static JsonSerializerOptions _Options = null;
+        private static JsonSerializerOptions _Options = new JsonSerializerOptions();
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace RestWrapper
         /// <returns>Instance.</returns>
         public T DeserializeJson<T>(string json) where T : class, new()
         {
-            return JsonSerializer.Deserialize<T>(json);
+            return JsonSerializer.Deserialize<T>(json, GetOptions(Pretty));
         }
 
         /// <summary>
@@ -80,27 +80,15 @@ namespace RestWrapper
 
         private static JsonSerializerOptions GetOptions(bool pretty)
         {
-            Pretty = pretty;
+            JsonSerializerOptions options = new JsonSerializerOptions(_Options);
 
-            if (Pretty)
-            {
-                _Options.WriteIndented = true;
-            }
-            else
-            {
-                _Options.WriteIndented = false;
-            }
+            if (pretty) options.WriteIndented = true;
+            else options.WriteIndented = false;
 
-            if (IgnoreNull)
-            {
-                _Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-            }
-            else
-            {
-                _Options.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
-            }
+            if (IgnoreNull) options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            else options.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
 
-            return _Options;
+            return options;
         }
 
         #endregion

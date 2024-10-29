@@ -39,6 +39,24 @@
             Instantiate the object.
             </summary>
         </member>
+        <member name="T:RestWrapper.ChunkedStreamReader">
+            <summary>
+            Chunked stream reader.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ChunkedStreamReader.#ctor(System.IO.Stream)">
+            <summary>
+            Instantiate.
+            </summary>
+            <param name="stream">Stream.</param>
+        </member>
+        <member name="M:RestWrapper.ChunkedStreamReader.ReadNextChunkAsync(System.Threading.CancellationToken)">
+            <summary>
+            Read the next chunk.
+            </summary>
+            <param name="token">Cancellation token.</param>
+            <returns>String.</returns>
+        </member>
         <member name="T:RestWrapper.DefaultSerializationHelper">
             <summary>
             Default serialization helper.
@@ -335,9 +353,24 @@
             The content type returned from the server.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestResponse.CharacterSet">
+            <summary>
+            The character set used in the encoding.
+            </summary>
+        </member>
         <member name="P:RestWrapper.RestResponse.ContentLength">
             <summary>
             The number of bytes contained in the response body byte array.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestResponse.ChunkedTransferEncoding">
+            <summary>
+            Boolean indicating if chunked transfer encoding is being used.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestResponse.ServerSentEvents">
+            <summary>
+            Boolean indicating if server-sent events are being used.
             </summary>
         </member>
         <member name="P:RestWrapper.RestResponse.StatusCode">
@@ -374,8 +407,14 @@
         </member>
         <member name="M:RestWrapper.RestResponse.#ctor">
             <summary>
+            Instantiate.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.RestResponse.#ctor(System.Net.Http.HttpResponseMessage)">
+            <summary>
             An organized object containing frequently used response parameters from a RESTful HTTP request.
             </summary>
+            <param name="resp">HTTP response message.</param>
         </member>
         <member name="M:RestWrapper.RestResponse.Dispose(System.Boolean)">
             <summary>
@@ -400,6 +439,79 @@
             </summary>
             <typeparam name="T">Type.</typeparam>
             <returns>Instance.</returns>
+        </member>
+        <member name="M:RestWrapper.RestResponse.ReadEventAsync(System.Threading.CancellationToken)">
+            <summary>
+            Read the next server-sent event.  Only appropriate for responses where ServerSentEvents is true.
+            </summary>
+            <param name="token">Cancellation token.</param>
+            <returns>Server-sent event.</returns>
+        </member>
+        <member name="T:RestWrapper.ServerSentEvent">
+            <summary>
+            Server-sent event.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.ServerSentEvent.Id">
+            <summary>
+            ID.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.ServerSentEvent.Event">
+            <summary>
+            Event.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.ServerSentEvent.Data">
+            <summary>
+            Data.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.ServerSentEvent.Retry">
+            <summary>
+            Retry.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ServerSentEvent.#ctor">
+            <summary>
+            Instantiate.
+            </summary>
+        </member>
+        <member name="T:RestWrapper.ServerSentEventReader">
+            <summary>
+            Server-sent events reader.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ServerSentEventReader.#ctor(System.IO.Stream)">
+            <summary>
+            Instantiate.
+            </summary>
+            <param name="stream">Stream.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:RestWrapper.ServerSentEventReader.ReadNextEventAsync(System.Threading.CancellationToken)">
+            <summary>
+            Read next event.
+            </summary>
+            <param name="token">Cancellation token.</param>
+            <returns>Server-sent event.</returns>
+        </member>
+        <member name="M:RestWrapper.ServerSentEventReader.ReadNextEvent">
+            <summary>
+            Read next event.
+            </summary>
+            <returns>Server-sent event.</returns>
+        </member>
+        <member name="M:RestWrapper.ServerSentEventReader.Dispose(System.Boolean)">
+            <summary>
+            Dispose.
+            </summary>
+            <param name="disposing">Disposing.</param>
+        </member>
+        <member name="M:RestWrapper.ServerSentEventReader.Dispose">
+            <summary>
+            Dispose.
+            </summary>
         </member>
     </members>
 </doc>

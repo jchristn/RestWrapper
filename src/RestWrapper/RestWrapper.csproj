@@ -1,102 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.21</Version>
-    <Authors>Joel Christner</Authors>
-    <Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
-    <Copyright>(c)2024 Joel Christner</Copyright>
-    <PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
-    <PackageReleaseNotes>Retrieve query elements from URL using Query property.</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageIconUrl></PackageIconUrl>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <IncludeSymbols>True</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
+		<Version>3.0.22</Version>
+		<Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
+		<PackageReleaseNotes>Better support for chunked transfer-encoding and server-sent events.</PackageReleaseNotes>
+		<Authors>Joel Christner</Authors>
+		<Copyright>(c)2024 Joel Christner</Copyright>
+		<PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
+		<PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
+		<RepositoryType>Github</RepositoryType>
+		<PackageLicenseUrl></PackageLicenseUrl>
+		<PackageIconUrl></PackageIconUrl>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DocumentationFile>RestWrapper.xml</DocumentationFile>
+	</PropertyGroup>
 
-  
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
+		<PackageReference Include="Timestamps" Version="1.0.9" />
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.1|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="assets\icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  
-  
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.1|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0|AnyCPU'">
-    <DocumentationFile>RestWrapper.xml</DocumentationFile>
-  </PropertyGroup>
-
-  
-  <ItemGroup>
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="System.Text.Json" Version="8.0.4" />
-    <PackageReference Include="Timestamps" Version="1.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="assets\icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="assets\icon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="assets\icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="RestWrapper.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="assets\icon.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="assets\icon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="RestWrapper.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

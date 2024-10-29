@@ -566,7 +566,6 @@ namespace RestWrapper
                                 {
                                     Logger?.Invoke(_Header + "adding " + contentLength + " bytes to request");
                                     content = new StreamContent(stream, _StreamReadBufferSize);
-                                    // content.Headers.ContentLength = ContentLength;
                                     content.Headers.ContentType = new MediaTypeHeaderValue(ContentType);
                                 }
                             }
@@ -653,72 +652,17 @@ namespace RestWrapper
 
                             #region Submit-Request-and-Build-Response
 
-                            using (HttpResponseMessage response = await client.SendAsync(message, token).ConfigureAwait(false))
-                            {
-                                ts.End = DateTime.UtcNow;
-                                Logger?.Invoke(_Header + response.StatusCode + " response received after " + ts.TotalMs + "ms");
-                                token.ThrowIfCancellationRequested();
+                            HttpResponseMessage response = await client.SendAsync(message, HttpCompletionOption.ResponseHeadersRead, token);
+                            RestResponse ret = new RestResponse(response);
 
-                                RestResponse ret = new RestResponse();
-                                ret.ProtocolVersion = "HTTP/" + response.Version.ToString();
-                                ret.StatusCode = (int)response.StatusCode;
-                                ret.StatusDescription = response.StatusCode.ToString();
+                            Logger?.Invoke(_Header + ret.StatusCode + " response received after " + ts.TotalMs + "ms");
+                            token.ThrowIfCancellationRequested();
 
-                                foreach (var header in response.Headers)
-                                {
-                                    if (header.Key.ToLower().Equals("content-type"))
-                                        ContentType = string.Join(", ", header.Value);
+                            ts.End = DateTime.UtcNow;
+                            ret.Time = ts;
 
-                                    if (header.Key.ToLower().Equals("content-length"))
-                                        ContentLength = Convert.ToInt64(header.Value.First());
-                                }
-
-                                if (response.Content != null && response.Content.Headers != null)
-                                {
-                                    foreach (var header in response.Content.Headers)
-                                    {
-                                        if (header.Key.ToLower().Equals("content-type"))
-                                            ContentType = string.Join(", ", header.Value);
-
-                                        if (header.Key.ToLower().Equals("content-length"))
-                                            ContentLength = Convert.ToInt64(header.Value.First());
-                                    }
-
-                                    if (response.Content.Headers.ContentLength != null)
-                                        ret.ContentLength = response.Content.Headers.ContentLength.Value;
-
-                                    if (response.Content.Headers.ContentEncoding != null)
-                                        ret.ContentEncoding = string.Join(",", response.Content.Headers.ContentEncoding);
-
-                                    if (response.Content.Headers.ContentType != null)
-                                        ret.ContentType = response.Content.Headers.ContentType.ToString();
-                                }
-
-                                ts.End = DateTime.UtcNow;
-                                Logger?.Invoke(_Header + "processing response headers after " + ts.TotalMs + "ms");
-
-                                foreach (var header in response.Headers)
-                                {
-                                    string key = header.Key;
-                                    string val = string.Join(",", header.Value);
-                                    ret.Headers.Add(key, val);
-                                }
-
-                                if (ret.ContentLength > 0)
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                    Logger?.Invoke(_Header + "retrieving " + ret.ContentLength + " bytes");
-                                    ret.Data = new MemoryStream();
-                                    await response.Content.CopyToAsync(ret.Data);
-                                    ret.Data.Seek(0, SeekOrigin.Begin);
-                                }
-
-                                ts.End = DateTime.UtcNow;
-                                ret.Time = ts;
-
-                                token.ThrowIfCancellationRequested();
-                                return ret;
-                            }
+                            token.ThrowIfCancellationRequested();
+                            return ret;
 
                             #endregion
                         }

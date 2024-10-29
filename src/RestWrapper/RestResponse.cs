@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Timestamps;
+using System.Net.Http;
+using System.Threading;
 
 namespace RestWrapper
 {
@@ -56,9 +58,24 @@ namespace RestWrapper
         public string ContentType { get; internal set; } = null;
 
         /// <summary>
+        /// The character set used in the encoding.
+        /// </summary>
+        public string CharacterSet { get; internal set; } = null;
+
+        /// <summary>
         /// The number of bytes contained in the response body byte array.
         /// </summary>
-        public long ContentLength { get; internal set; } = 0;
+        public long? ContentLength { get; internal set; } = null;
+
+        /// <summary>
+        /// Boolean indicating if chunked transfer encoding is being used.
+        /// </summary>
+        public bool ChunkedTransferEncoding { get; set; } = false;
+
+        /// <summary>
+        /// Boolean indicating if server-sent events are being used.
+        /// </summary>
+        public bool ServerSentEvents { get; set; } = false;
 
         /// <summary>
         /// The HTTP status code returned with the response.
@@ -74,7 +91,18 @@ namespace RestWrapper
         /// The stream containing the response data returned from the server.
         /// </summary>
         [JsonIgnore]
-        public Stream Data { get; internal set; } = null;
+        public Stream Data
+        {
+            get
+            {
+                if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+                return _Data;
+            }
+            internal set
+            {
+                _Data = value;
+            }
+        }
 
         /// <summary>
         /// Read the data stream fully into a byte array.
@@ -85,12 +113,10 @@ namespace RestWrapper
         {
             get
             {
-                if (_Data == null && ContentLength > 0 && Data != null && Data.CanRead)
-                {
-                    _Data = StreamToBytes(Data);
-                }
-
-                return _Data;
+                if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+                if (_DataAsBytes == null && Data != null && Data.CanRead)
+                    _DataAsBytes = StreamToBytes(Data);
+                return _DataAsBytes;
             }
         }
 
@@ -103,16 +129,14 @@ namespace RestWrapper
         {
             get
             {
-                if (_Data == null && ContentLength > 0 && Data != null && Data.CanRead)
+                if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+                if (_DataAsBytes != null) return Encoding.UTF8.GetString(_DataAsBytes);
+                if (Data == null) return null;
+                if (Data.CanRead)
                 {
-                    _Data = StreamToBytes(Data);
+                    _DataAsBytes = StreamToBytes(Data);
+                    return Encoding.UTF8.GetString(_DataAsBytes);
                 }
-
-                if (_Data != null)
-                {
-                    return Encoding.UTF8.GetString(_Data);
-                }
-
                 return null;
             }
         }
@@ -138,20 +162,70 @@ namespace RestWrapper
 
         #region Private-Members
 
-        private byte[] _Data = null;
+        private HttpResponseMessage _Response = null;
+        private Stream _Data = null;
+        private byte[] _DataAsBytes = null;
         private ISerializationHelper _SerializationHelper = new DefaultSerializationHelper();
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private bool _DisposedValue = false;
+
+        private ChunkedStreamReader _ChunkReader = null;
+        private ServerSentEventReader _ServerSentEventReader = null;
 
         #endregion
 
         #region Constructors-and-Factories
 
         /// <summary>
-        /// An organized object containing frequently used response parameters from a RESTful HTTP request.
+        /// Instantiate.
         /// </summary>
         public RestResponse()
         {
+
+        }
+
+        /// <summary>
+        /// An organized object containing frequently used response parameters from a RESTful HTTP request.
+        /// </summary>
+        /// <param name="resp">HTTP response message.</param>
+        public RestResponse(HttpResponseMessage resp)
+        {
+            _Response = resp ?? throw new ArgumentNullException(nameof(resp));
+
+            ProtocolVersion = "HTTP/" + _Response.Version.ToString();
+            StatusCode = (int)_Response.StatusCode;
+            StatusDescription = _Response.StatusCode.ToString();
+            
+            if (_Response.Content != null && _Response.Content.Headers != null)
+            {
+                ContentType = _Response.Content.Headers.ContentType?.MediaType ?? "application/octet-stream";
+                CharacterSet = _Response.Content.Headers.ContentType?.CharSet ?? "utf-8";
+
+                if (_Response.Content.Headers.ContentLength != null)
+                    ContentLength = _Response.Content.Headers.ContentLength;
+
+                if (_Response.Content.Headers.ContentEncoding != null)
+                    ContentEncoding = string.Join(",", _Response.Content.Headers.ContentEncoding);
+
+                ChunkedTransferEncoding = _Response.Headers.TransferEncoding?.Any(x => x.Value.Equals("chunked", StringComparison.OrdinalIgnoreCase)) ?? false;
+                ServerSentEvents = _Response.Content.Headers.ContentType?.MediaType == "text/event-stream";
+            }
+
+            foreach (KeyValuePair<string, IEnumerable<string>> header in _Response.Headers)
+            {
+                string key = header.Key;
+                string val = string.Join(",", header.Value);
+                Headers.Add(key, val);
+            }
+
+            if (_Response.Content != null)
+                _Data = _Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+
+            if (_Data != null)
+            {
+                _ChunkReader = new ChunkedStreamReader(_Data);
+                _ServerSentEventReader = new ServerSentEventReader(_Data);
+            }
         }
 
         #endregion
@@ -179,7 +253,9 @@ namespace RestWrapper
                 
                 _Headers = null;
                 _SerializationHelper = null;
-                _Data = null;
+                _DataAsBytes = null;
+
+                _Response?.Dispose();
 
                 _DisposedValue = true;
             }
@@ -201,41 +277,50 @@ namespace RestWrapper
         /// <returns>String.</returns>
         public override string ToString()
         {
-            string ret = "";
-            ret += "REST Response" + Environment.NewLine;
+            var sb = new StringBuilder();
+            sb.AppendLine("REST Response");
 
             if (Headers != null && Headers.Count > 0)
             {
-                ret += "  Headers" + Environment.NewLine;
+                sb.AppendLine("  Headers");
                 for (int i = 0; i < Headers.Count; i++)
                 {
-                    ret += "  | " + Headers.GetKey(i) + ": " + Headers.Get(i) + Environment.NewLine;
+                    sb.Append("  | ")
+                      .Append(Headers.GetKey(i))
+                      .Append(": ")
+                      .Append(Headers.Get(i))
+                      .AppendLine();
                 }
             }
 
             if (!String.IsNullOrEmpty(ContentEncoding))
-                ret += "  Content Encoding   : " + ContentEncoding + Environment.NewLine;
-            if (!String.IsNullOrEmpty(ContentType))
-                ret += "  Content Type       : " + ContentType + Environment.NewLine;
+                sb.Append("  Content Encoding   : ").AppendLine(ContentEncoding);
 
-            ret += "  Status Code        : " + StatusCode + Environment.NewLine;
-            ret += "  Status Description : " + StatusDescription + Environment.NewLine;
-            ret += "  Content Length     : " + ContentLength + Environment.NewLine;
-            ret += "  Time" + Environment.NewLine;
-            ret += "  | Start (UTC)      : " + Time.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
+            if (!String.IsNullOrEmpty(ContentType))
+                sb.Append("  Content Type       : ").AppendLine(ContentType);
+
+            sb.Append("  Status Code        : ").AppendLine(StatusCode.ToString())
+              .Append("  Status Description : ").AppendLine(StatusDescription)
+              .Append("  Content Length     : ").AppendLine(ContentLength.ToString())
+              .Append("  Chunked Transfer   : ").AppendLine(ChunkedTransferEncoding.ToString())
+              .Append("  Server-Sent Events : ").AppendLine(ServerSentEvents.ToString())
+              .AppendLine("  Time")
+              .Append("  | Start (UTC)      : ").AppendLine(Time.Start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
 
             if (Time.End != null)
             {
-                ret += "  | End (UTC)        : " + Time.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine;
-                ret += "  | Total            : " + Time.TotalMs + "ms" + Environment.NewLine;
+                sb.Append("  | End (UTC)        : ").AppendLine(Time.End.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"))
+                  .Append("  | Total            : ").Append(Time.TotalMs).AppendLine("ms");
             }
 
-            ret += "  Data               : ";
-            if (Data != null && ContentLength > 0) ret += "[stream]";
-            else ret += "[none]";
-            ret += Environment.NewLine;
+            sb.Append("  Data               : ");
+            if (_Data != null && ContentLength > 0) sb.Append("[stream]");
+            else if (ChunkedTransferEncoding) sb.Append("[chunked]");
+            else if (ServerSentEvents) sb.Append("[server-sent events]");
+            else sb.Append("[none]");
+            sb.AppendLine();
 
-            return ret;
+            return sb.ToString();
         }
 
         /// <summary>
@@ -245,8 +330,20 @@ namespace RestWrapper
         /// <returns>Instance.</returns>
         public T DataFromJson<T>() where T : class, new()
         {
+            if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
             if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
             return _SerializationHelper.DeserializeJson<T>(DataAsString);
+        }
+
+        /// <summary>
+        /// Read the next server-sent event.  Only appropriate for responses where ServerSentEvents is true.
+        /// </summary>
+        /// <param name="token">Cancellation token.</param>
+        /// <returns>Server-sent event.</returns>
+        public async Task<ServerSentEvent> ReadEventAsync(CancellationToken token = default)
+        {
+            if (!ServerSentEvents) throw new InvalidOperationException("The REST response is not configured with server-sent events.");
+            return await _ServerSentEventReader.ReadNextEventAsync(token).ConfigureAwait(false);
         }
 
         #endregion
@@ -254,7 +351,7 @@ namespace RestWrapper
         #region Private-Methods
 
         private byte[] StreamToBytes(Stream input)
-        { 
+        {  
             byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
             {

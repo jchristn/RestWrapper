@@ -20,8 +20,9 @@ namespace Test
         static string _Password = null;
         static string _BearerToken = null;
         static bool _Encode = true;
+        static DefaultSerializationHelper _Serializer = new DefaultSerializationHelper();
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             { 
@@ -77,7 +78,7 @@ namespace Test
                             if (String.IsNullOrEmpty(url)) break;
                             contentType = Inputty.GetString("Content-Type:", null, true);
                             body = Inputty.GetString("Body:", null, true);
-                            Console.WriteLine(GetResponse(url, HttpMethod.Put, contentType, body));
+                            await GetResponse(url, HttpMethod.Put, contentType, body);
                             break;
 
                         case "post":
@@ -85,7 +86,7 @@ namespace Test
                             if (String.IsNullOrEmpty(url)) break;
                             contentType = Inputty.GetString("Content-Type:", null, true);
                             body = Inputty.GetString("Body:", null, true);
-                            Console.WriteLine(GetResponse(url, HttpMethod.Post, contentType, body));
+                            await GetResponse(url, HttpMethod.Post, contentType, body);
                             break;
 
                         case "form":
@@ -93,7 +94,7 @@ namespace Test
                             if (String.IsNullOrEmpty(url)) break;
                             contentType = Inputty.GetString("Content-Type:", null, true);
                             form = Inputty.GetDictionary<string, string>("Key:", "Val:");
-                            Console.WriteLine(GetResponseWithForm(url, HttpMethod.Post, contentType, form));
+                            await GetResponseWithForm(url, HttpMethod.Post, contentType, form);
                             break;
 
                         case "del":
@@ -101,19 +102,19 @@ namespace Test
                             if (String.IsNullOrEmpty(url)) break;
                             contentType = Inputty.GetString("Content-Type:", null, true);
                             body = Inputty.GetString("Body:", null, true);
-                            Console.WriteLine(GetResponse(url, HttpMethod.Delete, contentType, body));
+                            await GetResponse(url, HttpMethod.Delete, contentType, body);
                             break;
 
                         case "head":
                             url = Inputty.GetString("URL:", "http://localhost:8888/", true);
                             if (String.IsNullOrEmpty(url)) break;
-                            Console.WriteLine(GetResponse(url, HttpMethod.Head));
+                            await GetResponse(url, HttpMethod.Head);
                             break;
 
                         case "get":
                             url = Inputty.GetString("URL:", "http://localhost:8888/", true);
                             if (String.IsNullOrEmpty(url)) break;
-                            Console.WriteLine(GetResponse(url, HttpMethod.Get));
+                            await GetResponse(url, HttpMethod.Get);
                             break;
 
                         case "query":
@@ -147,7 +148,7 @@ namespace Test
             }
             catch (Exception e)
             {
-                ExceptionConsole("Main", "Outer exception", e);
+                Console.WriteLine(e.ToString());
             }
         }
 
@@ -174,53 +175,7 @@ namespace Test
             Console.WriteLine("");
         }
 
-        static string StackToString()
-        {
-            string ret = "";
-
-            StackTrace t = new StackTrace();
-            for (int i = 0; i < t.FrameCount; i++)
-            {
-                if (i == 0)
-                {
-                    ret += t.GetFrame(i).GetMethod().Name;
-                }
-                else
-                {
-                    ret += " <= " + t.GetFrame(i).GetMethod().Name;
-                }
-            }
-
-            return ret;
-        }
-
-        static void ExceptionConsole(string method, string text, Exception e)
-        {
-            var st = new StackTrace(e, true);
-            var frame = st.GetFrame(0);
-            int line = frame.GetFileLineNumber();
-            string filename = frame.GetFileName();
-
-            Console.WriteLine("---");
-            Console.WriteLine("An exception was encountered which triggered this message.");
-            Console.WriteLine("  Method: " + method);
-            Console.WriteLine("  Text: " + text);
-            Console.WriteLine("  Type: " + e.GetType().ToString());
-            Console.WriteLine("  Data: " + e.Data);
-            Console.WriteLine("  Inner: " + e.InnerException);
-            Console.WriteLine("  Message: " + e.Message);
-            Console.WriteLine("  Source: " + e.Source);
-            Console.WriteLine("  StackTrace: " + e.StackTrace);
-            Console.WriteLine("  Stack: " + StackToString());
-            Console.WriteLine("  Line: " + line);
-            Console.WriteLine("  File: " + filename);
-            Console.WriteLine("  ToString: " + e.ToString());
-            Console.WriteLine("---");
-
-            return;
-        }
-
-        static string GetResponse(string url, HttpMethod method, string contentType = null, string body = null)
+        static async Task GetResponse(string url, HttpMethod method, string contentType = null, string body = null)
         {
             Console.WriteLine("");
             string msg = method.ToString() + " " + url;
@@ -257,62 +212,51 @@ namespace Test
                         Console.WriteLine("| " + req.Query.AllKeys[i] + ": " + req.Query.Get(i));
                 }
 
-                if (String.IsNullOrEmpty(body))
+                RestResponse resp = null;
+                if (String.IsNullOrEmpty(body)) resp = await req.SendAsync();
+                else resp = await req.SendAsync(body);
+
+                if (resp == null)
                 {
-                    using (RestResponse resp = req.Send())
+                    Console.WriteLine("*** Null response");
+                    return;
+                }
+
+                Console.WriteLine("");
+                Console.WriteLine(resp.ToString());
+                Console.WriteLine("");
+
+                if (resp.ServerSentEvents)
+                {
+                    while (true)
                     {
-                        if (resp == null)
-                        {
-                            Console.WriteLine("*** Null response");
-                        }
+                        ServerSentEvent sse = await resp.ReadEventAsync();
+                        if (sse != null)
+                            Console.WriteLine(_Serializer.SerializeJson(sse, false));
                         else
-                        {
-                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
-                        }
-
-                        Console.WriteLine("");
-                        Console.WriteLine(resp.ToString());
-
-                        Console.WriteLine("");
-                        if (resp.ContentLength > 0)
-                        {
-                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
-                            Console.WriteLine(resp.DataAsString);
-                            return resp.DataAsString;
-                        }
-                        else return null;
+                            return;
                     }
+                }
+                else if (resp.ChunkedTransferEncoding)
+                {
+                    while (true)
+                    {
+                        byte[] bytes = await ReadStreamFullyAsync(resp.Data, 64, true);
+                        if (bytes == null) break;
+                    }
+                    Console.WriteLine("");
                 }
                 else
                 {
-                    using (RestResponse resp = req.Send(body))
-                    {
-                        if (resp == null)
-                        {
-                            Console.WriteLine("*** Null response");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
-                        }
-
-                        Console.WriteLine("");
-                        Console.WriteLine(resp.ToString());
-
-                        Console.WriteLine("");
-                        if (resp.ContentLength > 0)
-                        {
-                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
-                            Console.WriteLine(resp.DataAsString);
-                            return resp.DataAsString;
-                        }
-                        else return null;
-                    }
+                    if (!String.IsNullOrEmpty(resp.DataAsString)) Console.WriteLine(resp.DataAsString);
+                    else Console.WriteLine("(null)");
                 }
+
+                resp.Dispose();
             }
         }
 
-        static string GetResponseWithForm(string url, HttpMethod method, string contentType, Dictionary<string, string> form)
+        static async Task GetResponseWithForm(string url, HttpMethod method, string contentType, Dictionary<string, string> form)
         {
             Console.WriteLine("");
             string msg = method.ToString() + " " + url;
@@ -349,52 +293,71 @@ namespace Test
                         Console.WriteLine("| " + req.Query.AllKeys[i] + ": " + req.Query.Get(i));
                 }
 
-                if (form == null)
-                {
-                    using (RestResponse resp = req.Send())
-                    {
-                        if (resp == null)
-                        {
-                            Console.WriteLine("*** Null response");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
-                        }
+                RestResponse resp = null;
+                if (form == null) resp = await req.SendAsync();
+                else resp = await req.SendAsync(form);
 
-                        Console.WriteLine("");
-                        if (resp.ContentLength > 0)
-                        {
-                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
-                            Console.WriteLine(resp.DataAsString);
-                            return resp.DataAsString;
-                        }
-                        else return null;
+                if (resp == null)
+                {
+                    Console.WriteLine("*** Null response");
+                    return;
+                }
+
+                Console.WriteLine("");
+                Console.WriteLine(resp.ToString());
+                Console.WriteLine("");
+
+                if (resp.ServerSentEvents)
+                {
+                    while (true)
+                    {
+                        ServerSentEvent sse = await resp.ReadEventAsync();
+                        if (sse != null)
+                            Console.WriteLine(_Serializer.SerializeJson(sse, false));
+                        else
+                            return;
                     }
+                }
+                else if (resp.ChunkedTransferEncoding)
+                {
+                    while (true)
+                    {
+                        byte[] bytes = await ReadStreamFullyAsync(resp.Data, 64, true);
+                        if (bytes == null) break;
+                    }
+                    Console.WriteLine("");
                 }
                 else
                 {
-                    using (RestResponse resp = req.Send(form))
-                    {
-                        if (resp == null)
-                        {
-                            Console.WriteLine("*** Null response");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Status: " + resp.StatusCode + " " + resp.ContentLength + " bytes [" + resp.Time.TotalMs + "ms]");
-                        }
+                    if (!String.IsNullOrEmpty(resp.DataAsString)) Console.WriteLine(resp.DataAsString);
+                    else Console.WriteLine("(null)");
+                }
 
-                        Console.WriteLine("");
-                        if (resp.ContentLength > 0)
-                        {
-                            Console.WriteLine("Returning " + resp.ContentLength + " bytes");
-                            Console.WriteLine(resp.DataAsString);
-                            return resp.DataAsString;
-                        }
-                        else return null;
+                resp.Dispose();
+            }
+        }
+
+        static async Task<byte[]> ReadStreamFullyAsync(Stream stream, int bufferSize, bool logToConsole)
+        {
+            if (bufferSize <= 0) throw new ArgumentException("Buffer size must be greater than zero", nameof(bufferSize));
+
+            using (var memoryStream = new MemoryStream())
+            {
+                byte[] buffer = new byte[bufferSize];
+                int bytesRead;
+                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    await memoryStream.WriteAsync(buffer, 0, bytesRead);
+
+                    if (logToConsole)
+                    {
+                        string chunk = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                        Console.Write(chunk);
                     }
                 }
+
+                if (bytesRead > 0) return memoryStream.ToArray();
+                return null;
             }
         }
     }
