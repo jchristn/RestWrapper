@@ -42,7 +42,7 @@
         /// </summary>
         /// <param name="token">Cancellation token.</param>
         /// <returns>String.</returns>
-        public async Task<string> ReadNextChunkAsync(CancellationToken token = default)
+        public async Task<ChunkData> ReadNextChunkAsync(CancellationToken token = default)
         {
             #region Read-Header
 
@@ -53,32 +53,39 @@
             if (!int.TryParse(headerStr, System.Globalization.NumberStyles.HexNumber, null, out size))
                 throw new FormatException("Invalid chunk size format: " + headerStr + ".");
 
-            if (size == 0) return null; // end
+            if (size == 0)
+            {
+                return new ChunkData
+                {
+                    Data = Array.Empty<byte>(),
+                    IsFinal = true
+                };
+            }
 
             #endregion
 
             #region Read-Data
 
             byte[] data = await ReadBytes(size, token).ConfigureAwait(false);
-            string str = Encoding.UTF8.GetString(data);
 
-            #endregion
-
-            #region Read-Following-CRLF
-
+            // and data following CRLF
             byte[] buffer = await ReadBytes(2, token).ConfigureAwait(false);
             if (!IsCrlf(buffer))
                 throw new FormatException("Invalid data read while expecting newline delimiter.");
 
             #endregion
 
-            return str;
+            return new ChunkData
+            {
+                Data = data,
+                IsFinal = false
+            };
         }
 
         #endregion
 
         #region Private-Methods
-        
+
         private async Task<byte[]> ReadBytes(int count, CancellationToken token = default)
         {
             byte[] buffer = new byte[count];

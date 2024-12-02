@@ -1,13 +1,14 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GetSomeInput;
-using RestWrapper;
-using WatsonWebserver;
-
-namespace TestCancellation
+﻿namespace TestCancellation
 {
+    using System;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using GetSomeInput;
+    using RestWrapper;
+    using WatsonWebserver;
+    using WatsonWebserver.Core;
+
     public static class Program
     {
         public static void Main(string[] args)
@@ -15,7 +16,14 @@ namespace TestCancellation
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
 
-            Server server = new Server("localhost", 8000, false, DefaultRoute);
+            Webserver server = new Webserver(
+                new WatsonWebserver.Core.WebserverSettings
+                {
+                    Hostname = "localhost",
+                    Port = 8000
+
+                }, DefaultRoute);
+
             server.Start();
 
             Task unawaited = Task.Run(() => RequestSender(token), token);
@@ -53,7 +61,7 @@ namespace TestCancellation
             }
         }
 
-        private static async Task DefaultRoute(HttpContext context)
+        private static async Task DefaultRoute(HttpContextBase context)
         {
             Console.WriteLine("[Webserver] in route");
             await Task.Delay(10000);

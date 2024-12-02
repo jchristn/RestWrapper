@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Security;
-using System.Net.Sockets;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
-using Timestamps;
-
-namespace RestWrapper
+﻿namespace RestWrapper
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Net.Security;
+    using System.Net.Sockets;
+    using System.Security.Authentication;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Text.Json.Serialization;
+    using Timestamps;
+    using System.Runtime.InteropServices;
+    using System.Runtime.InteropServices.ComTypes;
+
     /// <summary>
     /// RESTful HTTP request to be sent to a server.
+    /// Encapsulate this object in a using block.
     /// </summary>
     public class RestRequest : IDisposable
     {
@@ -145,7 +148,23 @@ namespace RestWrapper
         /// <summary>
         /// The content length of the payload (i.e. Data or DataStream).
         /// </summary>
-        public long ContentLength { get; private set; } = 0;
+        public long? ContentLength
+        {
+            get
+            {
+                return _ContentLength;
+            }
+            set
+            {
+                if (value != null && value.Value < 0) throw new ArgumentOutOfRangeException(nameof(ContentLength));
+                _ContentLength = value;
+            }
+        }
+
+        /// <summary>
+        /// Boolean indicating if chunked transfer encoding is in use.
+        /// </summary>
+        public bool ChunkedTransfer { get; set; } = false;
 
         /// <summary>
         /// The size of the buffer to use while reading from the DataStream and the response stream from the server.
@@ -198,7 +217,13 @@ namespace RestWrapper
         private int _TimeoutMilliseconds = 60000;
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private AuthorizationHeader _Authorization = new AuthorizationHeader();
+        private long? _ContentLength = null;
         private bool _DisposedValue = false;
+
+        private HttpClientHandler _HttpClientHandler = null;
+        private HttpClient _HttpClient = null;
+        private HttpRequestMessage _HttpRequestMessage = null;
+        private ChunkedSender _ChunkedSender = null;
 
         #endregion
 
@@ -281,19 +306,42 @@ namespace RestWrapper
             {
                 if (disposing)
                 {
+                    if (_ChunkedSender != null)
+                    {
+                        _ChunkedSender.Dispose();
+                        _ChunkedSender = null;
+                    }
+
+                    if (_HttpRequestMessage != null)
+                    {
+                        _HttpRequestMessage.Dispose();
+                        _HttpRequestMessage = null;
+                    }
+
+                    if (_HttpClient != null)
+                    {
+                        _HttpClient.Dispose();
+                        _HttpClient = null;
+                    }
+
+                    if (_HttpClientHandler != null)
+                    {
+                        ((IDisposable)_HttpClientHandler).Dispose();
+                        _HttpClientHandler = null;
+                    }
+
+                    Logger = null;
+                    Url = null;
+                    CertificateFilename = null;
+                    CertificatePassword = null;
+                    ContentType = null;
+                    UserAgent = null;
+
+                    _Headers = null;
+                    _Authorization = null;
+
+                    _DisposedValue = true;
                 }
-
-                Logger = null;
-                Url = null;
-                CertificateFilename = null;
-                CertificatePassword = null;
-                ContentType = null;
-                UserAgent = null;
-
-                _Headers = null;
-                _Authorization = null;
-
-                _DisposedValue = true;
             }
         }
 
@@ -302,8 +350,7 @@ namespace RestWrapper
         /// </summary>
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -345,75 +392,6 @@ namespace RestWrapper
         /// <summary>
         /// Send the HTTP request with no data.
         /// </summary>
-        /// <returns>RestResponse.</returns>
-        public RestResponse Send()
-        { 
-            return SendInternal(0, null);
-        }
-
-        /// <summary>
-        /// Send the HTTP request using form-encoded data.
-        /// This method will automatically set the content-type header to 'application/x-www-form-urlencoded' if it is not already set.
-        /// </summary>
-        /// <param name="form">Dictionary.</param>
-        /// <returns></returns>
-        public RestResponse Send(Dictionary<string, string> form)
-        {
-            // refer to https://github.com/dotnet/runtime/issues/22811
-            if (form == null) form = new Dictionary<string, string>();
-            var items = form.Select(i => WebUtility.UrlEncode(i.Key) + "=" + WebUtility.UrlEncode(i.Value));
-            var content = new StringContent(String.Join("&", items), null, "application/x-www-form-urlencoded");
-            byte[] bytes = Encoding.UTF8.GetBytes(content.ReadAsStringAsync().Result);
-            ContentLength = bytes.Length;
-            if (String.IsNullOrEmpty(ContentType)) ContentType = "application/x-www-form-urlencoded";
-            return Send(bytes);
-        }
-
-        /// <summary>
-        /// Send the HTTP request with the supplied data.
-        /// </summary>
-        /// <param name="data">A string containing the data you wish to send to the server (does not work with GET requests).</param>
-        /// <returns>RestResponse.</returns>
-        public RestResponse Send(string data)
-        {
-            if (String.IsNullOrEmpty(data)) return Send();
-            return Send(Encoding.UTF8.GetBytes(data));
-        }
-
-        /// <summary>
-        /// Send the HTTP request with the supplied data.
-        /// </summary>
-        /// <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
-        /// <returns>RestResponse.</returns>
-        public RestResponse Send(byte[] data)
-        {
-            long contentLength = 0;
-            MemoryStream stream = new MemoryStream(new byte[0]);
-
-            if (data != null && data.Length > 0)
-            {
-                contentLength = data.Length;
-                stream = new MemoryStream(data);
-                stream.Seek(0, SeekOrigin.Begin);
-            }
-
-            return SendInternal(contentLength, stream);
-        }
-
-        /// <summary>
-        /// Send the HTTP request with the supplied data.
-        /// </summary>
-        /// <param name="contentLength">The number of bytes to read from the input stream.</param>
-        /// <param name="stream">Stream containing the data you wish to send to the server (does not work with GET requests).</param>
-        /// <returns>RestResponse.</returns>
-        public RestResponse Send(long contentLength, Stream stream)
-        { 
-            return SendInternal(contentLength, stream);
-        }
-
-        /// <summary>
-        /// Send the HTTP request with no data.
-        /// </summary>
         /// <param name="token">Cancellation token.</param>
         /// <returns>RestResponse.</returns>
         public Task<RestResponse> SendAsync(CancellationToken token = default)
@@ -448,7 +426,7 @@ namespace RestWrapper
         /// <returns>RestResponse.</returns>
         public Task<RestResponse> SendAsync(string data, CancellationToken token = default)
         {
-            if (String.IsNullOrEmpty(data)) return SendAsync(token);
+            if (String.IsNullOrEmpty(data)) data = "";
             return SendAsync(Encoding.UTF8.GetBytes(data), token);
         }
 
@@ -485,6 +463,31 @@ namespace RestWrapper
             return SendInternalAsync(contentLength, stream, token);
         }
 
+        /// <summary>
+        /// Send a chunk of data.  A RestResponse object will only be returned when isFinal is set to true.
+        /// </summary>
+        /// <param name="data">Data.</param>
+        /// <param name="isFinal">Boolean indicating if this is the final chunk.</param>
+        /// <param name="token">Cancellation token.</param>
+        /// <returns>RestResponse.</returns>
+        public Task<RestResponse> SendChunkAsync(string data, bool isFinal = false, CancellationToken token = default)
+        {
+            if (String.IsNullOrEmpty(data)) data = "";
+            return SendChunkAsync(Encoding.UTF8.GetBytes(data), isFinal, token);
+        }
+
+        /// <summary>
+        /// Send a chunk of data.  A RestResponse object will only be returned when isFinal is set to true.
+        /// </summary>
+        /// <param name="data">Data.</param>
+        /// <param name="isFinal">Boolean indicating if this is the final chunk.</param>
+        /// <param name="token">Cancellation token.</param>
+        /// <returns>RestResponse.</returns>
+        public Task<RestResponse> SendChunkAsync(byte[] data, bool isFinal = false, CancellationToken token = default)
+        {
+            return SendChunkInternalAsync(data, isFinal, token);
+        }
+
         #endregion
 
         #region Private-Methods
@@ -494,12 +497,213 @@ namespace RestWrapper
             return true;
         }
 
-        private RestResponse SendInternal(long contentLength, Stream stream)
+        private void SetupHttp()
         {
-            return SendInternalAsync(contentLength, stream, CancellationToken.None).Result;
+            if (_HttpClientHandler == null && _HttpClient == null && _HttpRequestMessage == null)
+            {
+                #region HTTP-Handler
+
+                _HttpClientHandler = new HttpClientHandler();
+                _HttpClientHandler.AllowAutoRedirect = AllowAutoRedirect;
+
+                #endregion
+
+                #region Handler-SSL
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                if (IgnoreCertificateErrors)
+                {
+#if NET6_0_OR_GREATER
+                    _HttpClientHandler.ServerCertificateCustomValidationCallback = Validator;
+#endif
+                    ServicePointManager.ServerCertificateValidationCallback = Validator;
+                }
+
+                if (!String.IsNullOrEmpty(CertificateFilename))
+                {
+                    X509Certificate2 cert = null;
+
+                    if (!String.IsNullOrEmpty(CertificatePassword))
+                    {
+                        Logger?.Invoke(_Header + "adding certificate including password");
+                        cert = new X509Certificate2(CertificateFilename, CertificatePassword);
+                    }
+                    else
+                    {
+                        Logger?.Invoke(_Header + "adding certificate without password");
+                        cert = new X509Certificate2(CertificateFilename);
+                    }
+
+                    _HttpClientHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                    _HttpClientHandler.SslProtocols = SslProtocols.Tls12;
+                    _HttpClientHandler.ClientCertificates.Add(cert);
+                }
+
+                #endregion
+
+                #region HTTP-Client
+
+                _HttpClient = new HttpClient(_HttpClientHandler, true);
+
+                _HttpClient.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
+                _HttpClient.DefaultRequestHeaders.ExpectContinue = false;
+                _HttpClient.DefaultRequestHeaders.ConnectionClose = true;
+                _HttpClient.DefaultRequestHeaders.Date = Timestamp;
+                _HttpClient.DefaultRequestHeaders.TransferEncodingChunked = ChunkedTransfer;
+
+                #endregion
+
+                #region Authorization
+
+                if (!String.IsNullOrEmpty(_Authorization.User))
+                {
+                    if (_Authorization.EncodeCredentials)
+                    {
+                        Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
+                        string authInfo = _Authorization.User + ":" + _Authorization.Password;
+                        authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
+                        _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + authInfo);
+                    }
+                    else
+                    {
+                        Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
+                        _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password);
+                    }
+                }
+                else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
+                {
+                    Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
+                    _HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + _Authorization.BearerToken);
+                }
+                else if (!String.IsNullOrEmpty(_Authorization.Raw))
+                {
+                    Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
+                    if (!_HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _Authorization.Raw))
+                        Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
+                }
+
+                #endregion
+
+                #region Request-Message-and-Headers
+
+                _HttpRequestMessage = new HttpRequestMessage(Method, Url);
+
+                if (Headers != null && Headers.Count > 0)
+                {
+                    for (int i = 0; i < Headers.Count; i++)
+                    {
+                        string key = Headers.GetKey(i);
+                        string val = Headers.Get(i);
+
+                        if (String.IsNullOrEmpty(key)) continue;
+                        if (String.IsNullOrEmpty(val)) continue;
+
+                        Logger?.Invoke(_Header + "adding header " + key + ": " + val);
+
+                        if (key.ToLower().Trim().Equals("close"))
+                        {
+                            // do nothing
+                        }
+                        else if (key.ToLower().Trim().Equals("connection"))
+                        {
+                            // do nothing
+                        }
+                        else if (key.ToLower().Trim().Equals("content-length"))
+                        {
+                            // do nothing
+                        }
+                        else if (key.ToLower().Trim().Equals("content-type"))
+                        {
+                            _HttpRequestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(val);
+                        }
+                        else
+                        {
+                            _HttpClient.DefaultRequestHeaders.Add(key, val);
+                        }
+                    }
+                }
+
+                #endregion
+
+                #region Content
+
+                if (_HttpClient.DefaultRequestHeaders.TransferEncodingChunked.Value)
+                {
+                    _ChunkedSender = new ChunkedSender(_HttpClient, _HttpRequestMessage);
+                }
+
+                #endregion
+            }
         }
 
-        private async Task<RestResponse> SendInternalAsync(long contentLength, Stream stream, CancellationToken token)
+        private RestResponse WebExceptionToRestResponse(WebException we)
+        {
+            RestResponse ret = new RestResponse();
+            ret.Headers = null;
+            ret.ContentEncoding = null;
+            ret.ContentType = null;
+            ret.ContentLength = 0;
+            ret.StatusCode = 0;
+            ret.StatusDescription = null;
+            ret.Data = null;
+
+            HttpWebResponse exceptionResponse = we.Response as HttpWebResponse;
+            if (exceptionResponse != null)
+            {
+                ret.ProtocolVersion = "HTTP/" + exceptionResponse.ProtocolVersion.ToString();
+                ret.ContentEncoding = exceptionResponse.ContentEncoding;
+                ret.ContentType = exceptionResponse.ContentType;
+                ret.ContentLength = exceptionResponse.ContentLength;
+                ret.StatusCode = (int)exceptionResponse.StatusCode;
+                ret.StatusDescription = exceptionResponse.StatusDescription;
+
+                Logger?.Invoke(_Header + "server returned status code " + ret.StatusCode);
+
+                if (exceptionResponse.Headers != null && exceptionResponse.Headers.Count > 0)
+                {
+                    for (int i = 0; i < exceptionResponse.Headers.Count; i++)
+                    {
+                        string key = exceptionResponse.Headers.GetKey(i);
+                        string val = "";
+                        int valCount = 0;
+
+                        foreach (string value in exceptionResponse.Headers.GetValues(i))
+                        {
+                            if (valCount == 0)
+                            {
+                                val += value;
+                                valCount++;
+                            }
+                            else
+                            {
+                                val += "," + value;
+                                valCount++;
+                            }
+                        }
+
+                        Logger?.Invoke(_Header + "adding exception header " + key + ": " + val);
+                        ret.Headers.Add(key, val);
+                    }
+                }
+
+                if (exceptionResponse.ContentLength > 0)
+                {
+                    Logger?.Invoke(_Header + "attaching exception response stream to response with content length " + exceptionResponse.ContentLength + " bytes");
+                    ret.ContentLength = exceptionResponse.ContentLength;
+                    ret.Data = exceptionResponse.GetResponseStream();
+                }
+                else
+                {
+                    ret.ContentLength = 0;
+                    ret.Data = null;
+                }
+            }
+
+            return ret;
+        }
+
+        private async Task<RestResponse> SendInternalAsync(long contentLength, Stream stream, CancellationToken token = default)
         {
             if (String.IsNullOrEmpty(Url)) throw new ArgumentNullException(nameof(Url));
             bool canceled = false;
@@ -510,242 +714,46 @@ namespace RestWrapper
 
                 try
                 {
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    HttpClientHandler handler = new HttpClientHandler();
-                    handler.AllowAutoRedirect = AllowAutoRedirect;
+                    SetupHttp();
 
-                    if (IgnoreCertificateErrors)
+                    #region Write-Request-Body-Data
+
+                    HttpContent content = null;
+
+                    if (Method != HttpMethod.Get
+                        && Method != HttpMethod.Head)
                     {
-#if NET6_0_OR_GREATER
-                        handler.ServerCertificateCustomValidationCallback = Validator;
-#endif
-                        ServicePointManager.ServerCertificateValidationCallback = Validator;
-                    }
-
-                    if (!String.IsNullOrEmpty(CertificateFilename))
-                    {
-                        X509Certificate2 cert = null;
-
-                        if (!String.IsNullOrEmpty(CertificatePassword))
+                        if (contentLength > 0 && stream != null)
                         {
-                            Logger?.Invoke(_Header + "adding certificate including password");
-                            cert = new X509Certificate2(CertificateFilename, CertificatePassword);
-                        }
-                        else
-                        {
-                            Logger?.Invoke(_Header + "adding certificate without password");
-                            cert = new X509Certificate2(CertificateFilename);
-                        }
-
-                        handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                        handler.SslProtocols = SslProtocols.Tls12;
-                        handler.ClientCertificates.Add(cert);
-                    }
-
-                    token.ThrowIfCancellationRequested();
-
-                    using (HttpClient client = new HttpClient(handler, true))
-                    {
-                        client.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
-                        client.DefaultRequestHeaders.ExpectContinue = false;
-                        client.DefaultRequestHeaders.ConnectionClose = true;
-                        client.DefaultRequestHeaders.Date = Timestamp;
-
-                        token.ThrowIfCancellationRequested();
-
-                        using (HttpRequestMessage message = new HttpRequestMessage(Method, Url))
-                        {
-                            #region Write-Request-Body-Data
-
-                            HttpContent content = null;
-
-                            if (Method != HttpMethod.Get
-                                && Method != HttpMethod.Head)
-                            {
-                                if (contentLength > 0 && stream != null)
-                                {
-                                    Logger?.Invoke(_Header + "adding " + contentLength + " bytes to request");
-                                    content = new StreamContent(stream, _StreamReadBufferSize);
-                                    content.Headers.ContentType = new MediaTypeHeaderValue(ContentType);
-                                }
-                            }
-
-                            message.Content = content;
-                            token.ThrowIfCancellationRequested();
-
-                            #endregion
-
-                            #region Set-Headers
-
-                            if (Headers != null && Headers.Count > 0)
-                            {
-                                for (int i = 0; i < Headers.Count; i++)
-                                {
-                                    string key = Headers.GetKey(i);
-                                    string val = Headers.Get(i);
-
-                                    if (String.IsNullOrEmpty(key)) continue;
-                                    if (String.IsNullOrEmpty(val)) continue;
-
-                                    Logger?.Invoke(_Header + "adding header " + key + ": " + val);
-
-                                    if (key.ToLower().Trim().Equals("close"))
-                                    {
-                                        // do nothing
-                                    }
-                                    else if (key.ToLower().Trim().Equals("connection"))
-                                    {
-                                        // do nothing
-                                    }
-                                    else if (key.ToLower().Trim().Equals("content-length"))
-                                    {
-                                        // do nothing
-                                    }
-                                    else if (key.ToLower().Trim().Equals("content-type"))
-                                    {
-                                        message.Content.Headers.ContentType = new MediaTypeHeaderValue(val);
-                                    }
-                                    else
-                                    {
-                                        client.DefaultRequestHeaders.Add(key, val);
-                                    }
-                                }
-                            }
-
-                            token.ThrowIfCancellationRequested();
-
-                            #endregion
-
-                            #region Add-Auth-Info
-
-                            if (!String.IsNullOrEmpty(_Authorization.User))
-                            {
-                                if (_Authorization.EncodeCredentials)
-                                {
-                                    Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
-
-                                    string authInfo = _Authorization.User + ":" + _Authorization.Password;
-                                    authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
-                                    client.DefaultRequestHeaders.Add("Authorization", "Basic " + authInfo);
-                                }
-                                else
-                                {
-                                    Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
-                                    client.DefaultRequestHeaders.Add("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password);
-                                }
-                            }
-                            else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
-                            {
-                                Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
-                                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _Authorization.BearerToken);
-                            }
-                            else if (!String.IsNullOrEmpty(_Authorization.Raw))
-                            {
-                                Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
-                                if (!client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _Authorization.Raw))
-                                    Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
-                            }
-
-                            token.ThrowIfCancellationRequested();
-
-                            #endregion
-
-                            #region Submit-Request-and-Build-Response
-
-                            HttpResponseMessage response = await client.SendAsync(message, HttpCompletionOption.ResponseHeadersRead, token);
-                            RestResponse ret = new RestResponse(response);
-
-                            Logger?.Invoke(_Header + ret.StatusCode + " response received after " + ts.TotalMs + "ms");
-                            token.ThrowIfCancellationRequested();
-
-                            ts.End = DateTime.UtcNow;
-                            ret.Time = ts;
-
-                            token.ThrowIfCancellationRequested();
-                            return ret;
-
-                            #endregion
+                            Logger?.Invoke(_Header + "adding " + contentLength + " bytes to request");
+                            content = new StreamContent(stream, _StreamReadBufferSize);
+                            content.Headers.ContentType = new MediaTypeHeaderValue(ContentType);
                         }
                     }
+
+                    _HttpRequestMessage.Content = content;
+
+                    #endregion
+
+                    #region Submit-Request-and-Build-Response
+
+                    HttpResponseMessage response = await _HttpClient.SendAsync(_HttpRequestMessage, HttpCompletionOption.ResponseHeadersRead, token);
+                    RestResponse ret = new RestResponse(response);
+
+                    Logger?.Invoke(_Header + ret.StatusCode + " response received after " + ts.TotalMs + "ms");
+
+                    ts.End = DateTime.UtcNow;
+                    ret.Time = ts;
+                    return ret;
+
+                    #endregion
                 }
                 catch (WebException we)
                 {
                     #region WebException
 
-                    token.ThrowIfCancellationRequested();
                     Logger?.Invoke(_Header + "web exception: " + we.Message);
-
-                    RestResponse ret = new RestResponse();
-                    ret.Headers = null;
-                    ret.ContentEncoding = null;
-                    ret.ContentType = null;
-                    ret.ContentLength = 0;
-                    ret.StatusCode = 0;
-                    ret.StatusDescription = null;
-                    ret.Data = null;
-
-                    HttpWebResponse exceptionResponse = we.Response as HttpWebResponse;
-                    if (exceptionResponse != null)
-                    {
-                        token.ThrowIfCancellationRequested();
-                        ret.ProtocolVersion = "HTTP/" + exceptionResponse.ProtocolVersion.ToString();
-                        ret.ContentEncoding = exceptionResponse.ContentEncoding;
-                        ret.ContentType = exceptionResponse.ContentType;
-                        ret.ContentLength = exceptionResponse.ContentLength;
-                        ret.StatusCode = (int)exceptionResponse.StatusCode;
-                        ret.StatusDescription = exceptionResponse.StatusDescription;
-
-                        Logger?.Invoke(_Header + "server returned status code " + ret.StatusCode);
-
-                        if (exceptionResponse.Headers != null && exceptionResponse.Headers.Count > 0)
-                        {
-                            for (int i = 0; i < exceptionResponse.Headers.Count; i++)
-                            {
-                                string key = exceptionResponse.Headers.GetKey(i);
-                                string val = "";
-                                int valCount = 0;
-
-                                foreach (string value in exceptionResponse.Headers.GetValues(i))
-                                {
-                                    if (valCount == 0)
-                                    {
-                                        val += value;
-                                        valCount++;
-                                    }
-                                    else
-                                    {
-                                        val += "," + value;
-                                        valCount++;
-                                    }
-                                }
-
-                                Logger?.Invoke(_Header + "adding exception header " + key + ": " + val);
-                                ret.Headers.Add(key, val);
-                            }
-                        }
-
-                        token.ThrowIfCancellationRequested();
-
-                        if (exceptionResponse.ContentLength > 0)
-                        {
-                            Logger?.Invoke(_Header + "attaching exception response stream to response with content length " + exceptionResponse.ContentLength + " bytes");
-                            ret.ContentLength = exceptionResponse.ContentLength;
-                            ret.Data = exceptionResponse.GetResponseStream();
-                        }
-                        else
-                        {
-                            ret.ContentLength = 0;
-                            ret.Data = null;
-                        }
-
-                        token.ThrowIfCancellationRequested();
-                    }
-
-                    ts.End = DateTime.UtcNow;
-                    ret.Time = ts;
-
-                    token.ThrowIfCancellationRequested();
-                    return ret;
+                    return WebExceptionToRestResponse(we);
 
                     #endregion
                 }
@@ -770,14 +778,83 @@ namespace RestWrapper
                 {
                     ts.End = DateTime.UtcNow;
 
-                    if (!canceled)
-                        Logger?.Invoke(_Header + "complete (" + ts.TotalMs + "ms)");
-                    else 
-                        Logger?.Invoke(_Header + "canceled (" + ts.TotalMs + "ms)");
+                    if (!canceled) Logger?.Invoke(_Header + "complete (" + ts.TotalMs + "ms)");
+                    else Logger?.Invoke(_Header + "canceled (" + ts.TotalMs + "ms)");
                 }
             }
         }
 
-#endregion
+        private async Task<RestResponse> SendChunkInternalAsync(byte[] data, bool isFinal = false, CancellationToken token = default)
+        {
+            if (String.IsNullOrEmpty(Url)) throw new ArgumentNullException(nameof(Url));
+            bool canceled = false;
+
+            using (Timestamp ts = new Timestamp())
+            {
+                Logger?.Invoke(_Header + Method.ToString() + " " + Url);
+
+                try
+                {
+                    SetupHttp();
+
+                    if (!isFinal)
+                    {
+                        await _ChunkedSender.SendChunk(data);
+                        return null;
+                    }
+                    else
+                    {
+                        RestResponse ret = null;
+
+                        HttpResponseMessage response = await _ChunkedSender.SendChunk(data, isFinal, token).ConfigureAwait(false);
+                        if (response != null)
+                        {
+                            ret = new RestResponse(response);
+                            Logger?.Invoke(_Header + ret.StatusCode + " response received after " + ts.TotalMs + "ms");
+                            ts.End = DateTime.UtcNow;
+                            ret.Time = ts;
+                        }
+
+                        return ret;
+                    }
+
+                }
+                catch (WebException we)
+                {
+                    #region WebException
+
+                    Logger?.Invoke(_Header + "web exception: " + we.Message);
+                    return WebExceptionToRestResponse(we);
+
+                    #endregion
+                }
+                catch (TaskCanceledException)
+                {
+                    Logger?.Invoke(_Header + "task canceled");
+                    canceled = true;
+                    throw;
+                }
+                catch (OperationCanceledException)
+                {
+                    Logger?.Invoke(_Header + "operation canceled");
+                    canceled = true;
+                    throw;
+                }
+                catch (Exception e)
+                {
+                    Logger?.Invoke(_Header + "exception: " + e.Message);
+                    throw;
+                }
+                finally
+                {
+                    ts.End = DateTime.UtcNow;
+
+                    if (!canceled) Logger?.Invoke(_Header + "complete (" + ts.TotalMs + "ms)");
+                    else Logger?.Invoke(_Header + "canceled (" + ts.TotalMs + "ms)");
+                }
+            }
+        }
+
+        #endregion
     }
 }

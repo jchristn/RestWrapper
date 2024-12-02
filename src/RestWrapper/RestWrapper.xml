@@ -39,6 +39,80 @@
             Instantiate the object.
             </summary>
         </member>
+        <member name="T:RestWrapper.ChunkData">
+            <summary>
+            Chunk data.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.ChunkData.Data">
+            <summary>
+            Chunk data.
+            </summary>
+        </member>
+        <member name="P:RestWrapper.ChunkData.IsFinal">
+            <summary>
+            Boolean indicating if the chunk is the final chunk.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ChunkData.#ctor">
+            <summary>
+            Instantiate.
+            </summary>
+        </member>
+        <member name="T:RestWrapper.ChunkedContent">
+            <summary>
+            Chunked content.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.#ctor">
+            <summary>
+            Instantiate.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.TryComputeLength(System.Int64@)">
+            <summary>
+            Try compute length.
+            </summary>
+            <param name="length">Length.</param>
+            <returns>True if successful.</returns>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.Dispose(System.Boolean)">
+            <summary>
+            Dispose.
+            </summary>
+            <param name="disposing">Disposing.</param>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.SendChunk(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Send a chunk.
+            </summary>
+            <param name="data">Data.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.SendChunk(System.Byte[],System.Threading.CancellationToken)">
+            <summary>
+            Send a chunk.
+            </summary>
+            <param name="data">Data.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.SendEmptyChunk(System.Threading.CancellationToken)">
+            <summary>
+            Send an empty chunk.
+            </summary>
+            <param name="token">Cancellation token.</param>
+            <returns>Task.</returns>
+        </member>
+        <member name="M:RestWrapper.ChunkedContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <summary>
+            Serialize to stream.
+            </summary>
+            <param name="stream">Stream.</param>
+            <param name="context">Transport context.</param>
+            <returns>Task.</returns>
+        </member>
         <member name="T:RestWrapper.ChunkedStreamReader">
             <summary>
             Chunked stream reader.
@@ -56,6 +130,47 @@
             </summary>
             <param name="token">Cancellation token.</param>
             <returns>String.</returns>
+        </member>
+        <member name="T:RestWrapper.ChunkedSender">
+            <summary>
+            Chunked sender.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ChunkedSender.#ctor(System.Net.Http.HttpClient,System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Instantiate.
+            </summary>
+            <param name="client">HTTP client.</param>
+            <param name="request">HTTP request message.</param>
+        </member>
+        <member name="M:RestWrapper.ChunkedSender.Dispose(System.Boolean)">
+            <summary>
+            Disposed.
+            </summary>
+            <param name="disposing">Disposing.</param>
+        </member>
+        <member name="M:RestWrapper.ChunkedSender.Dispose">
+            <summary>
+            Dispose.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ChunkedSender.SendChunk(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Send a chunk.
+            </summary>
+            <param name="data">Data.</param>
+            <param name="isFinal">Boolean indicating if the chunk is the final chunk.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>HTTP response message.</returns>
+        </member>
+        <member name="M:RestWrapper.ChunkedSender.SendChunk(System.Byte[],System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Send a chunk.
+            </summary>
+            <param name="data">Data.</param>
+            <param name="isFinal">Boolean indicating if the chunk is the final chunk.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>HTTP response message.</returns>
         </member>
         <member name="T:RestWrapper.DefaultSerializationHelper">
             <summary>
@@ -117,6 +232,7 @@
         <member name="T:RestWrapper.RestRequest">
             <summary>
             RESTful HTTP request to be sent to a server.
+            Encapsulate this object in a using block.
             </summary>
         </member>
         <member name="P:RestWrapper.RestRequest.Logger">
@@ -177,6 +293,11 @@
         <member name="P:RestWrapper.RestRequest.ContentLength">
             <summary>
             The content length of the payload (i.e. Data or DataStream).
+            </summary>
+        </member>
+        <member name="P:RestWrapper.RestRequest.ChunkedTransfer">
+            <summary>
+            Boolean indicating if chunked transfer encoding is in use.
             </summary>
         </member>
         <member name="P:RestWrapper.RestRequest.BufferSize">
@@ -246,42 +367,6 @@
             </summary>
             <returns>String.</returns>
         </member>
-        <member name="M:RestWrapper.RestRequest.Send">
-            <summary>
-            Send the HTTP request with no data.
-            </summary>
-            <returns>RestResponse.</returns>
-        </member>
-        <member name="M:RestWrapper.RestRequest.Send(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Send the HTTP request using form-encoded data.
-            This method will automatically set the content-type header to 'application/x-www-form-urlencoded' if it is not already set.
-            </summary>
-            <param name="form">Dictionary.</param>
-            <returns></returns>
-        </member>
-        <member name="M:RestWrapper.RestRequest.Send(System.String)">
-            <summary>
-            Send the HTTP request with the supplied data.
-            </summary>
-            <param name="data">A string containing the data you wish to send to the server (does not work with GET requests).</param>
-            <returns>RestResponse.</returns>
-        </member>
-        <member name="M:RestWrapper.RestRequest.Send(System.Byte[])">
-            <summary>
-            Send the HTTP request with the supplied data.
-            </summary>
-            <param name="data">A byte array containing the data you wish to send to the server (does not work with GET requests).</param>
-            <returns>RestResponse.</returns>
-        </member>
-        <member name="M:RestWrapper.RestRequest.Send(System.Int64,System.IO.Stream)">
-            <summary>
-            Send the HTTP request with the supplied data.
-            </summary>
-            <param name="contentLength">The number of bytes to read from the input stream.</param>
-            <param name="stream">Stream containing the data you wish to send to the server (does not work with GET requests).</param>
-            <returns>RestResponse.</returns>
-        </member>
         <member name="M:RestWrapper.RestRequest.SendAsync(System.Threading.CancellationToken)">
             <summary>
             Send the HTTP request with no data.
@@ -323,9 +408,28 @@
             <param name="token">Cancellation token.</param>
             <returns>RestResponse.</returns>
         </member>
+        <member name="M:RestWrapper.RestRequest.SendChunkAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Send a chunk of data.  A RestResponse object will only be returned when isFinal is set to true.
+            </summary>
+            <param name="data">Data.</param>
+            <param name="isFinal">Boolean indicating if this is the final chunk.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>RestResponse.</returns>
+        </member>
+        <member name="M:RestWrapper.RestRequest.SendChunkAsync(System.Byte[],System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Send a chunk of data.  A RestResponse object will only be returned when isFinal is set to true.
+            </summary>
+            <param name="data">Data.</param>
+            <param name="isFinal">Boolean indicating if this is the final chunk.</param>
+            <param name="token">Cancellation token.</param>
+            <returns>RestResponse.</returns>
+        </member>
         <member name="T:RestWrapper.RestResponse">
             <summary>
             RESTful response from the server.
+            Encapsulate this object in a using block.
             </summary>
         </member>
         <member name="P:RestWrapper.RestResponse.Time">

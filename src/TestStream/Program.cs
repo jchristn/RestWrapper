@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using GetSomeInput;
-using RestWrapper;
-
-namespace TestStream
+﻿namespace TestStream
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using GetSomeInput;
+    using RestWrapper;
+
     class Program
     {
         static bool debug = false;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace TestStream
 
                             data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
-                            resp = req.Send(data.Length, ms);
+                            resp = await req.SendAsync(data.Length, ms);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -83,7 +83,7 @@ namespace TestStream
 
                             data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
-                            resp = req.Send(data.Length, ms);
+                            resp = await req.SendAsync(data.Length, ms);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -106,7 +106,7 @@ namespace TestStream
 
                             data = Encoding.UTF8.GetBytes(Inputty.GetString("Data:", "Hello, world!", false));
                             ms = new MemoryStream(data);
-                            resp = req.Send(data.Length, ms);
+                            resp = await req.SendAsync(data.Length, ms);
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -127,7 +127,7 @@ namespace TestStream
 
                             if (debug) req.Logger = Console.WriteLine;
 
-                            resp = req.Send();
+                            resp = await req.SendAsync();
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");
@@ -148,7 +148,7 @@ namespace TestStream
 
                             if (debug) req.Logger = Console.WriteLine;
 
-                            resp = req.Send();
+                            resp = await req.SendAsync();
                             if (resp == null)
                             {
                                 Console.WriteLine("Null response");

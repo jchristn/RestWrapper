@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Net.Http;
-using Newtonsoft.Json;
-using RestWrapper;
-
-namespace TestSerializer
+﻿namespace TestSerializer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Dynamic;
+    using System.Threading.Tasks;
+    using System.Net.Http;
+    using Newtonsoft.Json;
+    using RestWrapper;
+
     internal class Program
     {
         // Thank you https://random-data-api.com/documentation
@@ -14,10 +15,10 @@ namespace TestSerializer
         static HttpMethod _Method = HttpMethod.Get;
         static bool _UseDefaultSerializer = true;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             RestRequest req = new RestRequest(_ApiUrl, _Method);
-            RestResponse resp = req.Send();
+            RestResponse resp = await req.SendAsync();
             if (!_UseDefaultSerializer)
             {
                 resp.SerializationHelper = new Serializer();

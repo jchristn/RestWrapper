@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Timestamps;
-using System.Net.Http;
-using System.Threading;
-
-namespace RestWrapper
+﻿namespace RestWrapper
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using Timestamps;
+    using System.Net.Http;
+    using System.Threading;
+
     /// <summary>
     /// RESTful response from the server.
+    /// Encapsulate this object in a using block.
     /// </summary>
     public class RestResponse : IDisposable
     {
@@ -169,7 +170,6 @@ namespace RestWrapper
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private bool _DisposedValue = false;
 
-        private ChunkedStreamReader _ChunkReader = null;
         private ServerSentEventReader _ServerSentEventReader = null;
 
         #endregion
@@ -219,12 +219,12 @@ namespace RestWrapper
             }
 
             if (_Response.Content != null)
+            {
+                Stream responseStream = _Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
+
                 _Data = _Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
 
-            if (_Data != null)
-            {
-                _ChunkReader = new ChunkedStreamReader(_Data);
-                _ServerSentEventReader = new ServerSentEventReader(_Data);
+                if (ServerSentEvents) _ServerSentEventReader = new ServerSentEventReader(_Data);
             }
         }
 
@@ -328,7 +328,7 @@ namespace RestWrapper
         /// </summary>
         /// <typeparam name="T">Type.</typeparam>
         /// <returns>Instance.</returns>
-        public T DataFromJson<T>() where T : class, new()
+        public T DataFromJson<T>()where T : class, new()
         {
             if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
             if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
@@ -366,14 +366,6 @@ namespace RestWrapper
                 return ret;
             }
         }
-
-        #endregion
-
-        #region Public-Static-Methods
-
-        #endregion
-
-        #region Private-Static-Methods
 
         #endregion
     }

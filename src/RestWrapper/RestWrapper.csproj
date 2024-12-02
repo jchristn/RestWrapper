@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net462;net48;net6.0;net7.0;net8.0</TargetFrameworks>
-		<Version>3.0.22</Version>
+		<TargetFrameworks>netstandard2.1;net462;net48;net6.0;net8.0</TargetFrameworks>
+		<Version>3.1.0</Version>
 		<Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
-		<PackageReleaseNotes>Better support for chunked transfer-encoding and server-sent events.</PackageReleaseNotes>
+		<PackageReleaseNotes>Better support for chunked transfer-encoding.</PackageReleaseNotes>
 		<Authors>Joel Christner</Authors>
 		<Copyright>(c)2024 Joel Christner</Copyright>
 		<PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
