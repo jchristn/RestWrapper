@@ -556,31 +556,34 @@
 
                 #region Authorization
 
-                if (!String.IsNullOrEmpty(_Authorization.User))
+                if (_Authorization != null)
                 {
-                    if (_Authorization.EncodeCredentials)
+                    if (!String.IsNullOrEmpty(_Authorization.User))
                     {
-                        Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
-                        string authInfo = _Authorization.User + ":" + _Authorization.Password;
-                        authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
-                        _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + authInfo);
+                        if (_Authorization.EncodeCredentials)
+                        {
+                            Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
+                            string authInfo = _Authorization.User + ":" + _Authorization.Password;
+                            authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
+                            _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + authInfo);
+                        }
+                        else
+                        {
+                            Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
+                            _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password);
+                        }
                     }
-                    else
+                    else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
                     {
-                        Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
-                        _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password);
+                        Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
+                        _HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + _Authorization.BearerToken);
                     }
-                }
-                else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
-                {
-                    Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
-                    _HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + _Authorization.BearerToken);
-                }
-                else if (!String.IsNullOrEmpty(_Authorization.Raw))
-                {
-                    Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
-                    if (!_HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _Authorization.Raw))
-                        Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
+                    else if (!String.IsNullOrEmpty(_Authorization.Raw))
+                    {
+                        Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
+                        if (!_HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _Authorization.Raw))
+                            Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
+                    }
                 }
 
                 #endregion
@@ -588,6 +591,7 @@
                 #region Request-Message-and-Headers
 
                 _HttpRequestMessage = new HttpRequestMessage(Method, Url);
+                _HttpRequestMessage.Content = new ByteArrayContent(Array.Empty<byte>());
 
                 if (Headers != null && Headers.Count > 0)
                 {
@@ -598,8 +602,6 @@
 
                         if (String.IsNullOrEmpty(key)) continue;
                         if (String.IsNullOrEmpty(val)) continue;
-
-                        Logger?.Invoke(_Header + "adding header " + key + ": " + val);
 
                         if (key.ToLower().Trim().Equals("close"))
                         {
@@ -628,7 +630,7 @@
 
                 #region Content
 
-                if (_HttpClient.DefaultRequestHeaders.TransferEncodingChunked.Value)
+                if (ChunkedTransfer)
                 {
                     _ChunkedSender = new ChunkedSender(_HttpClient, _HttpRequestMessage);
                 }
