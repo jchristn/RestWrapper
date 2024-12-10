@@ -729,7 +729,11 @@
                         {
                             Logger?.Invoke(_Header + "adding " + contentLength + " bytes to request");
                             content = new StreamContent(stream, _StreamReadBufferSize);
-                            content.Headers.ContentType = new MediaTypeHeaderValue(ContentType);
+
+                            if (!String.IsNullOrEmpty(ContentType))
+                                content.Headers.ContentType = new MediaTypeHeaderValue(ContentType);
+                            else
+                                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                         }
                     }
 
