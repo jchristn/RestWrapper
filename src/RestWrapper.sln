@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCancellation", "TestCan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChunkedTransfer", "TestChunkedTransfer\TestChunkedTransfer.csproj", "{03BFC9C0-EB6C-4A9F-9744-F18664F9AF71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServerSentEvents", "TestServerSentEvents\TestServerSentEvents.csproj", "{7843DE27-C39F-4574-A2A7-975F49ECA457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{03BFC9C0-EB6C-4A9F-9744-F18664F9AF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03BFC9C0-EB6C-4A9F-9744-F18664F9AF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BFC9C0-EB6C-4A9F-9744-F18664F9AF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

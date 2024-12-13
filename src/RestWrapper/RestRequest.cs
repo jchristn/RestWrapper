@@ -592,6 +592,7 @@
 
                 _HttpRequestMessage = new HttpRequestMessage(Method, Url);
                 _HttpRequestMessage.Content = new ByteArrayContent(Array.Empty<byte>());
+                _HttpRequestMessage.Version = new Version(1, 1);
 
                 if (Headers != null && Headers.Count > 0)
                 {
