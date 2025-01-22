@@ -213,6 +213,7 @@
         #region Private-Members
 
         private string _Header = "[RestWrapper] ";
+        private ISerializationHelper _Serializer = new DefaultSerializationHelper();
         private int _StreamReadBufferSize = 65536;
         private int _TimeoutMilliseconds = 60000;
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
@@ -549,7 +550,6 @@
                 _HttpClient.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
                 _HttpClient.DefaultRequestHeaders.ExpectContinue = false;
                 _HttpClient.DefaultRequestHeaders.ConnectionClose = true;
-                _HttpClient.DefaultRequestHeaders.Date = Timestamp;
                 _HttpClient.DefaultRequestHeaders.TransferEncodingChunked = ChunkedTransfer;
 
                 #endregion
@@ -593,6 +593,11 @@
                 _HttpRequestMessage = new HttpRequestMessage(Method, Url);
                 _HttpRequestMessage.Content = new ByteArrayContent(Array.Empty<byte>());
                 _HttpRequestMessage.Version = new Version(1, 1);
+                _HttpRequestMessage.Headers.Accept.ParseAdd("*/*");
+                _HttpRequestMessage.Headers.Host = new Uri(Url).Authority;
+                _HttpRequestMessage.Headers.UserAgent.ParseAdd(UserAgent);
+                _HttpRequestMessage.Headers.Connection.Add("keep-alive");
+                _HttpRequestMessage.Headers.TransferEncodingChunked = ChunkedTransfer;
 
                 if (Headers != null && Headers.Count > 0)
                 {
@@ -723,8 +728,7 @@
 
                     HttpContent content = null;
 
-                    if (Method != HttpMethod.Get
-                        && Method != HttpMethod.Head)
+                    if (Method != HttpMethod.Get && Method != HttpMethod.Head)
                     {
                         if (contentLength > 0 && stream != null)
                         {

@@ -150,12 +150,12 @@
         {
             get
             {
-                return _SerializationHelper;
+                return _Serializer;
             }
             set
             {
                 if (value == null) throw new ArgumentNullException(nameof(SerializationHelper));
-                _SerializationHelper = value;
+                _Serializer = value;
             }
         }
 
@@ -166,7 +166,7 @@
         private HttpResponseMessage _Response = null;
         private Stream _Data = null;
         private byte[] _DataAsBytes = null;
-        private ISerializationHelper _SerializationHelper = new DefaultSerializationHelper();
+        private ISerializationHelper _Serializer = new DefaultSerializationHelper();
         private NameValueCollection _Headers = new NameValueCollection(StringComparer.InvariantCultureIgnoreCase);
         private bool _DisposedValue = false;
 
@@ -218,7 +218,7 @@
                 Headers.Add(key, val);
             }
 
-            if (_Response.Content != null)
+            if (_Response.Content != null && _Response.RequestMessage.Method != HttpMethod.Head)
             {
                 Stream responseStream = _Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
 
@@ -252,7 +252,7 @@
                 Data = null;
                 
                 _Headers = null;
-                _SerializationHelper = null;
+                _Serializer = null;
                 _DataAsBytes = null;
 
                 _Response?.Dispose();
@@ -332,7 +332,7 @@
         {
             if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
             if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
-            return _SerializationHelper.DeserializeJson<T>(DataAsString);
+            return _Serializer.DeserializeJson<T>(DataAsString);
         }
 
         /// <summary>
