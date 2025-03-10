@@ -172,6 +172,47 @@
             <param name="token">Cancellation token.</param>
             <returns>HTTP response message.</returns>
         </member>
+        <member name="T:RestWrapper.ContentTypeParser">
+            <summary>
+            Content-type header parser.
+            </summary>
+        </member>
+        <member name="M:RestWrapper.ContentTypeParser.ExtractMediaType(System.String)">
+            <summary>
+            Parses a Content-Type header and extracts the media type.
+            </summary>
+            <param name="contentTypeHeader">The Content-Type header value (e.g., "text/html; charset=utf-8").</param>
+            <returns>The media type portion of the Content-Type header (e.g., "text/html").</returns>
+        </member>
+        <member name="M:RestWrapper.ContentTypeParser.ExtractCharset(System.String)">
+            <summary>
+            Extracts the character set from a Content-Type header value.
+            </summary>
+            <param name="contentTypeHeader">The Content-Type header value (e.g., "text/html; charset=utf-8").</param>
+            <returns>The character set or null if not specified (e.g., "charset=utf-8").</returns>
+        </member>
+        <member name="M:RestWrapper.ContentTypeParser.ExtractBoundary(System.String)">
+            <summary>
+            Extracts the boundary parameter from a Content-Type header value.
+            </summary>
+            <param name="contentTypeHeader">The Content-Type header value.</param>
+            <returns>The boundary value or null if not specified.</returns>
+        </member>
+        <member name="M:RestWrapper.ContentTypeParser.ExtractParameters(System.String)">
+            <summary>
+            Extracts all parameters from a Content-Type header value.
+            </summary>
+            <param name="contentTypeHeader">The Content-Type header value.</param>
+            <returns>A dictionary containing all parameters.</returns>
+        </member>
+        <member name="M:RestWrapper.ContentTypeParser.ExtractParameter(System.String,System.String)">
+            <summary>
+            Extracts a specific parameter from a Content-Type header.
+            </summary>
+            <param name="contentTypeHeader">The Content-Type header value.</param>
+            <param name="parameterName">The name of the parameter to extract.</param>
+            <returns>The parameter value or null if not found.</returns>
+        </member>
         <member name="T:RestWrapper.DefaultSerializationHelper">
             <summary>
             Default serialization helper.

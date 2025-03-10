@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net462;net48;net6.0;net8.0</TargetFrameworks>
-		<Version>3.1.4</Version>
+		<Version>3.1.5</Version>
 		<Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
 		<PackageReleaseNotes>Better support for chunked transfer-encoding.</PackageReleaseNotes>
 		<Authors>Joel Christner</Authors>

@@ -623,7 +623,11 @@
                         }
                         else if (key.ToLower().Trim().Equals("content-type"))
                         {
-                            _HttpRequestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(val);
+                            _HttpRequestMessage.Content.Headers.ContentType = 
+                                new MediaTypeHeaderValue(ContentTypeParser.ExtractMediaType(val))
+                                {
+                                    CharSet = ContentTypeParser.ExtractCharset(ContentType)
+                                }; 
                         }
                         else
                         {
@@ -736,7 +740,11 @@
                             content = new StreamContent(stream, _StreamReadBufferSize);
 
                             if (!String.IsNullOrEmpty(ContentType))
-                                content.Headers.ContentType = new MediaTypeHeaderValue(ContentType);
+                                content.Headers.ContentType = 
+                                    new MediaTypeHeaderValue(ContentTypeParser.ExtractMediaType(ContentType))
+                                    {
+                                        CharSet = ContentTypeParser.ExtractCharset(ContentType)
+                                    };
                             else
                                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                         }
