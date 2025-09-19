@@ -36,7 +36,7 @@
         </member>
         <member name="M:RestWrapper.AuthorizationHeader.#ctor">
             <summary>
-            Instantiate the object.
+            Authorization header options.
             </summary>
         </member>
         <member name="T:RestWrapper.ChunkData">
@@ -56,7 +56,7 @@
         </member>
         <member name="M:RestWrapper.ChunkData.#ctor">
             <summary>
-            Instantiate.
+            Chunk data.
             </summary>
         </member>
         <member name="T:RestWrapper.ChunkedContent">
@@ -66,7 +66,7 @@
         </member>
         <member name="M:RestWrapper.ChunkedContent.#ctor">
             <summary>
-            Instantiate.
+            Chunked content.
             </summary>
         </member>
         <member name="M:RestWrapper.ChunkedContent.TryComputeLength(System.Int64@)">
@@ -113,24 +113,6 @@
             <param name="context">Transport context.</param>
             <returns>Task.</returns>
         </member>
-        <member name="T:RestWrapper.ChunkedStreamReader">
-            <summary>
-            Chunked stream reader.
-            </summary>
-        </member>
-        <member name="M:RestWrapper.ChunkedStreamReader.#ctor(System.IO.Stream)">
-            <summary>
-            Instantiate.
-            </summary>
-            <param name="stream">Stream.</param>
-        </member>
-        <member name="M:RestWrapper.ChunkedStreamReader.ReadNextChunkAsync(System.Threading.CancellationToken)">
-            <summary>
-            Read the next chunk.
-            </summary>
-            <param name="token">Cancellation token.</param>
-            <returns>String.</returns>
-        </member>
         <member name="T:RestWrapper.ChunkedSender">
             <summary>
             Chunked sender.
@@ -138,7 +120,7 @@
         </member>
         <member name="M:RestWrapper.ChunkedSender.#ctor(System.Net.Http.HttpClient,System.Net.Http.HttpRequestMessage)">
             <summary>
-            Instantiate.
+            Chunked sender.
             </summary>
             <param name="client">HTTP client.</param>
             <param name="request">HTTP request message.</param>
@@ -552,7 +534,8 @@
         </member>
         <member name="M:RestWrapper.RestResponse.#ctor">
             <summary>
-            Instantiate.
+            RESTful response from the server.
+            Encapsulate this object in a using block.
             </summary>
         </member>
         <member name="M:RestWrapper.RestResponse.#ctor(System.Net.Http.HttpResponseMessage)">
@@ -592,6 +575,13 @@
             <param name="token">Cancellation token.</param>
             <returns>Server-sent event.</returns>
         </member>
+        <member name="M:RestWrapper.RestResponse.ReadChunkAsync(System.Threading.CancellationToken)">
+            <summary>
+            Read the next chunk.  Only appropriate for responses where ChunkedTransferEncoding is true.
+            </summary>
+            <param name="token">Cancellation token.</param>
+            <returns>Chunk data, or null if called after the final chunk.</returns>
+        </member>
         <member name="T:RestWrapper.ServerSentEvent">
             <summary>
             Server-sent event.
@@ -619,7 +609,7 @@
         </member>
         <member name="M:RestWrapper.ServerSentEvent.#ctor">
             <summary>
-            Instantiate.
+            Server-sent event.
             </summary>
         </member>
         <member name="T:RestWrapper.ServerSentEventReader">
@@ -629,7 +619,7 @@
         </member>
         <member name="M:RestWrapper.ServerSentEventReader.#ctor(System.IO.Stream)">
             <summary>
-            Instantiate.
+            Server-sent events reader.
             </summary>
             <param name="stream">Stream.</param>
             <exception cref="T:System.ArgumentNullException"></exception>

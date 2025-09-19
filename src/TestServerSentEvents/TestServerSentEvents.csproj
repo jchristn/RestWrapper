@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Watson" Version="6.3.2" />
+    <PackageReference Include="Watson" Version="6.3.14" />
   </ItemGroup>
 
   <ItemGroup>

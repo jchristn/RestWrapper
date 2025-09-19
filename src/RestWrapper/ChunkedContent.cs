@@ -13,32 +13,18 @@
     /// </summary>
     public class ChunkedContent : HttpContent
     {
-        #region Public-Members
-
-        #endregion
-
-        #region Private-Members
-
         private static readonly byte[] _Crlf = new byte[] { 13, 10 }; // \r\n
         private readonly Stream _Stream = null;
         private readonly TaskCompletionSource<bool> _StreamCompletion;
 
-        #endregion
-
-        #region Constructors-and-Factories
-
         /// <summary>
-        /// Instantiate.
+        /// Chunked content.
         /// </summary>
         public ChunkedContent()
         {
             _Stream = new MemoryStream();
             _StreamCompletion = new TaskCompletionSource<bool>();
         }
-
-        #endregion
-
-        #region Public-Methods
 
         /// <summary>
         /// Try compute length.
@@ -128,11 +114,5 @@
             await _Stream.CopyToAsync(stream);
             _StreamCompletion.SetResult(true);
         }
-
-        #endregion
-
-        #region Private-Members
-
-        #endregion
     }
 }

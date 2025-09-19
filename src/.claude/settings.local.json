@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Code/RestWrapper/**)",
+      "Bash(find:*)",
+      "Bash(dotnet build:*)",
+      "Bash(TestServerSentEvents.exe)",
+      "Bash(dotnet:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(timeout:*)",
+      "Bash(\"C:\\Code\\RestWrapper\\src\\TestAll\\bin\\Debug\\net8.0\\TestAll.exe\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

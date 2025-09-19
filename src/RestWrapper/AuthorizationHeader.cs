@@ -31,7 +31,7 @@
         public string Raw { get; set; } = null;
 
         /// <summary>
-        /// Instantiate the object.
+        /// Authorization header options.
         /// </summary>
         public AuthorizationHeader()
         {

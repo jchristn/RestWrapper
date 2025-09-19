@@ -31,26 +31,55 @@
 
                 using (RestRequest req = new RestRequest("http://localhost:8000", System.Net.Http.HttpMethod.Post))
                 {
+                    string header = "[Client] ";
                     req.ChunkedTransfer = true;
 
+                    Console.WriteLine(header + "Sending request");
                     for (int i = 0; i < 10; i++)
                         await req.SendChunkAsync("Chunk " + i.ToString() + Environment.NewLine, false);
+                    Console.WriteLine(header + "Sent request");
 
                     using (RestResponse resp = await req.SendChunkAsync(Array.Empty<byte>(), true))
                     {
-                        Console.WriteLine("");
-                        Console.WriteLine("Response: " + resp.ToString());
-
+                        Console.WriteLine(header + "Waiting for response");
+                        
                         if (resp.ChunkedTransferEncoding)
                         {
-                            Console.WriteLine("Client received chunked data:");
+                            Console.WriteLine(header + "Chunked transfer encoding detected");
+
+                            try
+                            {
+                                int chunkCount = 0;
+                                while (true)
+                                {
+                                    ChunkData chunk = await resp.ReadChunkAsync();
+
+                                    if (chunk == null)
+                                    {
+                                        Console.WriteLine(header + "No more chunks available");
+                                        break;
+                                    }
+
+                                    chunkCount++;
+                                    string chunkStr = "";
+                                    if (chunk.Data != null && chunk.Data.Length > 0) chunkStr = Encoding.UTF8.GetString(chunk.Data);
+                                    
+                                    Console.WriteLine($"{header}Chunk {chunkCount}: {chunk.Data?.Length ?? 0} bytes (final: {chunk.IsFinal}): {chunkStr}");
+
+                                    if (chunk.IsFinal) break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"{header}Exception while reading chunks: {ex.GetType().Name}: {ex.Message}");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Client received non-chunked data:");
+                            Console.WriteLine(header + "Client received non-chunked data:");
+                            Console.WriteLine(header + "Response: " + resp.ToString());
+                            Console.WriteLine(resp.DataAsString);
                         }
-
-                        Console.WriteLine(resp.DataAsString);
                     }
                 }
             }
@@ -62,30 +91,32 @@
 
         private static async Task DefaultRoute(HttpContextBase ctx)
         {
+            string header = "[Server] ";
+            
             try
             {
                 if (ctx.Request.ChunkedTransfer)
                 {
-                    Console.WriteLine("Server received chunked data:");
+                    Console.WriteLine(header + "Server received chunked data:");
 
                     while (true)
                     {
                         Chunk chunk = await ctx.Request.ReadChunk();
                         if (chunk.Data != null && chunk.Data.Length > 0)
-                            Console.Write(Encoding.UTF8.GetString(chunk.Data));
+                            Console.Write(header + Encoding.UTF8.GetString(chunk.Data));
                         else
-                            Console.WriteLine("(empty chunk)");
+                            Console.WriteLine(header + "(empty chunk)");
 
                         if (chunk.IsFinal)
                         {
-                            Console.WriteLine("Last chunk received");
+                            Console.WriteLine(header + "Last chunk received");
                             break;
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Server received non-chunked data: " + ctx.Request.DataAsString);
+                    Console.WriteLine(header + "Server received non-chunked data: " + ctx.Request.DataAsString);
                 }
 
                 ctx.Response.ChunkedTransfer = true;
@@ -95,14 +126,15 @@
                 for (int i = 0; i < 10; i++)
                 {
                     byte[] data = Encoding.UTF8.GetBytes(("Chunk " + i.ToString() + Environment.NewLine));
-                    await ctx.Response.SendChunk(data);
+                    await ctx.Response.SendChunk(data, false);
+                    await Task.Delay(500);
                 }
 
-                await ctx.Response.SendFinalChunk(Array.Empty<byte>());
+                await ctx.Response.SendChunk(Array.Empty<byte>(), true);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Webserver exception:" + Environment.NewLine + e.ToString());
+                Console.WriteLine(header + "Webserver exception:" + Environment.NewLine + e.ToString());
             }
         }
 

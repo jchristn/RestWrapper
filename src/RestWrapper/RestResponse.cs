@@ -97,6 +97,7 @@
             get
             {
                 if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+                if (ChunkedTransferEncoding) throw new InvalidOperationException("The REST response is configured with chunked transfer encoding.  Use ReadChunkAsync() instead.");
                 return _Data;
             }
             internal set
@@ -115,6 +116,7 @@
             get
             {
                 if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+                if (ChunkedTransferEncoding) throw new InvalidOperationException("The REST response is configured with chunked transfer encoding.  Use ReadChunkAsync() instead.");
                 if (_DataAsBytes == null && Data != null && Data.CanRead)
                     _DataAsBytes = StreamToBytes(Data);
                 return _DataAsBytes;
@@ -131,6 +133,7 @@
             get
             {
                 if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+                if (ChunkedTransferEncoding) throw new InvalidOperationException("The REST response is configured with chunked transfer encoding.  Use ReadChunkAsync() instead.");
                 if (_DataAsBytes != null) return Encoding.UTF8.GetString(_DataAsBytes);
                 if (Data == null) return null;
                 if (Data.CanRead)
@@ -177,7 +180,8 @@
         #region Constructors-and-Factories
 
         /// <summary>
-        /// Instantiate.
+        /// RESTful response from the server.
+        /// Encapsulate this object in a using block.
         /// </summary>
         public RestResponse()
         {
@@ -220,10 +224,7 @@
 
             if (_Response.Content != null && _Response.RequestMessage.Method != HttpMethod.Head)
             {
-                Stream responseStream = _Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
-
-                _Data = _Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
-
+                _Data = _Response.Content.ReadAsStreamAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                 if (ServerSentEvents) _ServerSentEventReader = new ServerSentEventReader(_Data);
             }
         }
@@ -256,6 +257,8 @@
                 _DataAsBytes = null;
 
                 _Response?.Dispose();
+                _ServerSentEventReader?.Dispose();
+                _ChunkedDataReader?.Dispose();
 
                 _DisposedValue = true;
             }
@@ -331,6 +334,7 @@
         public T DataFromJson<T>()where T : class, new()
         {
             if (ServerSentEvents) throw new InvalidOperationException("The REST response is configured with server-sent events.  Use ReadEventAsync() instead.");
+            if (ChunkedTransferEncoding) throw new InvalidOperationException("The REST response is configured with chunked transfer encoding.  Use ReadChunkAsync() instead.");
             if (String.IsNullOrEmpty(DataAsString)) throw new InvalidOperationException("No data in the REST response.");
             return _Serializer.DeserializeJson<T>(DataAsString);
         }
@@ -344,6 +348,42 @@
         {
             if (!ServerSentEvents) throw new InvalidOperationException("The REST response is not configured with server-sent events.");
             return await _ServerSentEventReader.ReadNextEventAsync(token).ConfigureAwait(false);
+        }
+
+        private StreamReader _ChunkedDataReader = null;
+
+        /// <summary>
+        /// Read the next chunk.  Only appropriate for responses where ChunkedTransferEncoding is true.
+        /// </summary>
+        /// <param name="token">Cancellation token.</param>
+        /// <returns>Chunk data, or null if called after the final chunk.</returns>
+        public async Task<ChunkData> ReadChunkAsync(CancellationToken token = default)
+        {
+            if (!ChunkedTransferEncoding) throw new InvalidOperationException("The REST response is not configured with chunked transfer encoding.");
+
+            // Initialize the chunked data reader if not already done
+            if (_ChunkedDataReader == null)
+            {
+                if (_Data == null) return null;
+                _ChunkedDataReader = new StreamReader(_Data, System.Text.Encoding.UTF8);
+            }
+
+            // Read line by line - the chunked transfer protocol naturally creates line boundaries
+            // even when the server payload doesn't include line endings
+            string line = await _ChunkedDataReader.ReadLineAsync().ConfigureAwait(false);
+            if (line == null) return null;
+
+            // Don't add any line endings - return exactly what the server sent as payload
+            byte[] data = System.Text.Encoding.UTF8.GetBytes(line);
+
+            // Check if this is the final chunk by checking if more data is available
+            bool isFinal = _ChunkedDataReader.EndOfStream;
+
+            return new ChunkData
+            {
+                Data = data,
+                IsFinal = isFinal
+            };
         }
 
         #endregion

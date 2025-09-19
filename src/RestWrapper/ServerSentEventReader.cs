@@ -11,34 +11,19 @@
     /// </summary>
     public class ServerSentEventReader : IDisposable
     {
-        #region Public-Methods
-
-        #endregion
-
-        #region Private-Methods
-
-        private readonly Stream _Stream;
         private readonly StreamReader _Reader;
         private bool _disposedValue;
 
-        #endregion
-
-        #region Constructors-and-Factories
-
         /// <summary>
-        /// Instantiate.
+        /// Server-sent events reader.
         /// </summary>
         /// <param name="stream">Stream.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public ServerSentEventReader(Stream stream)
         {
-            _Stream = stream ?? throw new ArgumentNullException(nameof(stream));
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
             _Reader = new StreamReader(stream, Encoding.UTF8);
         }
-
-        #endregion
-
-        #region Public-Methods
 
         /// <summary>
         /// Read next event.
@@ -139,11 +124,5 @@
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-
-        #endregion
-
-        #region Private-Methods
-
-        #endregion
     }
 }

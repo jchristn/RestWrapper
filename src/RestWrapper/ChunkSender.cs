@@ -12,23 +12,13 @@
     /// </summary>
     public class ChunkedSender : IDisposable
     {
-        #region Public-Members
-
-        #endregion
-
-        #region Private-Members
-
         private readonly HttpClient _Client = null;
         private readonly HttpRequestMessage _Request = null;
         private readonly ChunkedContent _Content = null;
         private bool _Disposed = false;
 
-        #endregion
-
-        #region Constructors-and-Factories
-
         /// <summary>
-        /// Instantiate.
+        /// Chunked sender.
         /// </summary>
         /// <param name="client">HTTP client.</param>
         /// <param name="request">HTTP request message.</param>
@@ -41,10 +31,6 @@
             _Content = new ChunkedContent();
             _Request.Content = _Content;
         }
-
-        #endregion
-
-        #region Public-Methods
 
         /// <summary>
         /// Disposed.
@@ -100,20 +86,14 @@
             if (isFinal)
             {
                 await _Content.SendEmptyChunk(token).ConfigureAwait(false);
-                return await _Client.SendAsync(_Request);
+                return await _Client.SendAsync(_Request, HttpCompletionOption.ResponseHeadersRead, token);
             }
             return null;
         }
-
-        #endregion
-
-        #region Private-Methods
 
         private void ThrowIfDisposed()
         {
             if (_Disposed) throw new ObjectDisposedException(nameof(ChunkedSender));
         }
-
-        #endregion
     }
 }

@@ -10,7 +10,6 @@
     /// </summary>
     public class DefaultSerializationHelper : ISerializationHelper
     {
-        #region Public-Members
 
         /// <summary>
         /// Enable pretty print.
@@ -38,19 +37,7 @@
             }
         }
 
-        #endregion
-
-        #region Private-Members
-
         private static JsonSerializerOptions _Options = new JsonSerializerOptions();
-
-        #endregion
-
-        #region Constructors-and-Factories
-
-        #endregion
-
-        #region Public-Methods
 
         /// <summary>
         /// Deserialize JSON to an instance.
@@ -74,10 +61,6 @@
             return JsonSerializer.Serialize(obj, GetOptions(pretty));
         }
 
-        #endregion
-
-        #region Private-Methods
-
         private static JsonSerializerOptions GetOptions(bool pretty)
         {
             JsonSerializerOptions options = new JsonSerializerOptions(_Options);
@@ -90,7 +73,5 @@
 
             return options;
         }
-
-        #endregion
     }
 }

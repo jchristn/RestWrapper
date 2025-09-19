@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChunkedTransfer", "Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServerSentEvents", "TestServerSentEvents\TestServerSentEvents.csproj", "{7843DE27-C39F-4574-A2A7-975F49ECA457}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAll", "TestAll\TestAll.csproj", "{F65FAFC2-8CAE-403A-63D8-A9898FE914EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7843DE27-C39F-4574-A2A7-975F49ECA457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F65FAFC2-8CAE-403A-63D8-A9898FE914EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65FAFC2-8CAE-403A-63D8-A9898FE914EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65FAFC2-8CAE-403A-63D8-A9898FE914EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65FAFC2-8CAE-403A-63D8-A9898FE914EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
