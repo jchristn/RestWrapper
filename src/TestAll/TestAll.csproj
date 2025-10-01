@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RestWrapper\RestWrapper.csproj" />
-    <PackageReference Include="Watson" Version="6.3.14" />
+    <PackageReference Include="Watson" Version="6.3.15" />
   </ItemGroup>
 
 </Project>

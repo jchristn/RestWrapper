@@ -199,7 +199,10 @@
             ProtocolVersion = "HTTP/" + _Response.Version.ToString();
             StatusCode = (int)_Response.StatusCode;
             StatusDescription = _Response.StatusCode.ToString();
-            
+
+            ChunkedTransferEncoding = _Response.Headers.TransferEncoding?.Any(x => x.Value.Equals("chunked", StringComparison.OrdinalIgnoreCase)) ?? false;
+            ServerSentEvents = _Response.Content.Headers.ContentType?.MediaType == "text/event-stream";
+
             if (_Response.Content != null && _Response.Content.Headers != null)
             {
                 ContentType = _Response.Content.Headers.ContentType?.MediaType ?? "application/octet-stream";
@@ -210,9 +213,6 @@
 
                 if (_Response.Content.Headers.ContentEncoding != null)
                     ContentEncoding = string.Join(",", _Response.Content.Headers.ContentEncoding);
-
-                ChunkedTransferEncoding = _Response.Headers.TransferEncoding?.Any(x => x.Value.Equals("chunked", StringComparison.OrdinalIgnoreCase)) ?? false;
-                ServerSentEvents = _Response.Content.Headers.ContentType?.MediaType == "text/event-stream";
             }
 
             foreach (KeyValuePair<string, IEnumerable<string>> header in _Response.Headers)
@@ -317,9 +317,9 @@
             }
 
             sb.Append("  Data               : ");
-            if (_Data != null && ContentLength > 0) sb.Append("[stream]");
-            else if (ChunkedTransferEncoding) sb.Append("[chunked]");
+            if (ChunkedTransferEncoding) sb.Append("[chunked]");
             else if (ServerSentEvents) sb.Append("[server-sent events]");
+            else if (_Data != null && ContentLength > 0) sb.Append("[stream]");
             else sb.Append("[none]");
             sb.AppendLine();
 

@@ -736,8 +736,16 @@
                     {
                         if (contentLength > 0 && stream != null)
                         {
+                            if (stream.CanSeek)
+                            {
+                                Logger?.Invoke(_Header + "seeking to beginning of stream");
+                                stream.Position = 0;
+                            }
+
                             Logger?.Invoke(_Header + "adding " + contentLength + " bytes to request");
+
                             content = new StreamContent(stream, _StreamReadBufferSize);
+                            Logger?.Invoke(_Header + "created content stream");
 
                             if (!String.IsNullOrEmpty(ContentType))
                                 content.Headers.ContentType = 
@@ -747,16 +755,22 @@
                                     };
                             else
                                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+                            Logger?.Invoke(_Header + "added " + contentLength + " bytes to request");
                         }
                     }
 
                     _HttpRequestMessage.Content = content;
+                    Logger?.Invoke(_Header + "attached content to request message");
 
                     #endregion
 
                     #region Submit-Request-and-Build-Response
 
-                    HttpResponseMessage response = await _HttpClient.SendAsync(_HttpRequestMessage, HttpCompletionOption.ResponseHeadersRead, token);
+                    Logger?.Invoke(_Header + "sending request message");
+                    HttpResponseMessage response = await _HttpClient.SendAsync(_HttpRequestMessage, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
+
+                    Logger?.Invoke(_Header + "request send complete");
                     RestResponse ret = new RestResponse(response);
 
                     Logger?.Invoke(_Header + ret.StatusCode + " response received after " + ts.TotalMs + "ms");

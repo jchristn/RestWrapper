@@ -8,7 +8,10 @@
       "Bash(dotnet:*)",
       "WebFetch(domain:github.com)",
       "Bash(timeout:*)",
-      "Bash(\"C:\\Code\\RestWrapper\\src\\TestAll\\bin\\Debug\\net8.0\\TestAll.exe\")"
+      "Bash(\"C:\\Code\\RestWrapper\\src\\TestAll\\bin\\Debug\\net8.0\\TestAll.exe\")",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

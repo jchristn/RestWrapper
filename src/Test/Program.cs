@@ -241,8 +241,10 @@
                 {
                     while (true)
                     {
-                        byte[] bytes = await ReadStreamFullyAsync(resp.Data, 64, true);
-                        if (bytes == null) break;
+                        ChunkData chunk = await resp.ReadChunkAsync();
+                        if (chunk == null) break;
+                        if (chunk.Data != null) Console.WriteLine(Encoding.UTF8.GetString(chunk.Data));
+                        if (chunk.IsFinal) break;
                     }
                     Console.WriteLine("");
                 }

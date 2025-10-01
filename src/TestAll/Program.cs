@@ -13,6 +13,7 @@
     using WatsonWebserver.Core;
     using RestWrapperSerializationHelper = RestWrapper.ISerializationHelper;
     using HttpMethod = System.Net.Http.HttpMethod;
+    using System.ComponentModel;
 
     public static class Program
     {
@@ -20,7 +21,9 @@
 
         private static List<TestResult> _TestResults = new List<TestResult>();
         private static Webserver _Webserver = null;
-        private static string _WebserverUrl = "http://localhost:9000";
+        private static string _Hostname = "localhost";
+        private static int _Port = 9001;
+        private static string _WebserverUrl = $"http://{_Hostname}:{_Port}";
 
         public static async Task Main(string[] args)
         {
@@ -295,6 +298,23 @@
                     throw new Exception($"Expected body '{patchData}', got '{body}'");
             });
 
+            // Test POST /echo endpoint
+            await RunTest("POST /echo endpoint", async () =>
+            {
+                using var req = new RestRequest(_WebserverUrl + "/echo", HttpMethod.Post);
+                req.ContentType = "text/plain";
+                string echoData = "This is test data to echo back";
+
+                using var resp = await req.SendAsync(echoData);
+
+                if (resp.StatusCode != 200)
+                    throw new Exception($"Expected 200, got {resp.StatusCode}");
+
+                string responseData = resp.DataAsString;
+                if (responseData != echoData)
+                    throw new Exception($"Expected echoed data '{echoData}', got '{responseData}'");
+            });
+
             // Test with custom headers
             await RunTest("Custom headers", async () =>
             {
@@ -333,7 +353,6 @@
                     throw new Exception($"Expected method 'GET', got '{method}'");
             });
         }
-
 
         private static async Task RunChunkedTransferTests()
         {
@@ -718,7 +737,7 @@
         {
             try
             {
-                var settings = new WebserverSettings("localhost", 9000, false);
+                var settings = new WebserverSettings(_Hostname, _Port, false);
                 _Webserver = new Webserver(settings, DefaultRoute);
                 _Webserver.Start();
 
@@ -750,96 +769,285 @@
 
             try
             {
-                switch (path)
+                switch (ctx.Request.Method)
                 {
-                    case "/test":
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = "text/plain";
-                        await ctx.Response.Send("Hello from test server!");
-                        break;
-
-                    case "/text":
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = "text/plain";
-                        await ctx.Response.Send("Sample text response for testing");
-                        break;
-
-                    case "/echo":
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = ctx.Request.ContentType;
-                        await ctx.Response.Send(ctx.Request.DataAsString);
-                        break;
-
-                    case "/chunked":
-                        ctx.Response.ChunkedTransfer = true;
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = "text/plain";
-
-                        for (int i = 0; i < 20; i++)
+                    case WatsonWebserver.Core.HttpMethod.OPTIONS:
+                        switch (path)
                         {
-                            byte[] data = Encoding.UTF8.GetBytes($"Server chunk {i}\n");
-                            await ctx.Response.SendChunk(data, false);
-                            await Task.Delay(250);
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
                         }
-                        await ctx.Response.SendChunk(Array.Empty<byte>(), true);
                         break;
 
-                    case "/chunked-slow":
-                        ctx.Response.ChunkedTransfer = true;
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = "text/plain";
-
-                        for (int i = 0; i < 5; i++)
+                    case WatsonWebserver.Core.HttpMethod.PATCH:
+                        switch (path)
                         {
-                            byte[] data = Encoding.UTF8.GetBytes($"Slow chunk {i}\n");
-                            await ctx.Response.SendChunk(data, false);
-                            await Task.Delay(1000); // Longer delay for cancellation testing
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
                         }
-                        await ctx.Response.SendChunk(Array.Empty<byte>(), true);
                         break;
 
-                    case "/sse":
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ServerSentEvents = true;
-
-                        for (int i = 0; i < 20; i++)
+                    case WatsonWebserver.Core.HttpMethod.HEAD:
+                        switch (path)
                         {
-                            await ctx.Response.SendEvent($"Event data {i}", false);
-                            await Task.Delay(250);
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
                         }
-                        await ctx.Response.SendEvent("Final event", true);
                         break;
 
-                    case "/delay":
-                        // Long delay for cancellation testing
-                        await Task.Delay(2000);
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = "text/plain";
-                        await ctx.Response.Send("Delayed response");
-                        break;
-
-                    case "/methods":
-                        // Handle different HTTP methods
-                        var method = ctx.Request.Method;
-                        ctx.Response.StatusCode = 200;
-                        ctx.Response.ContentType = "application/json";
-
-                        var response = new
+                    case WatsonWebserver.Core.HttpMethod.GET:
+                        switch (path)
                         {
-                            method = method.ToString(),
-                            path = path,
-                            body = ctx.Request.DataAsString,
-                            timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-                        };
+                            case "/test":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+                                await ctx.Response.Send("Hello from test server!");
+                                break;
 
-                        string jsonResponse = JsonSerializer.Serialize(response);
-                        await ctx.Response.Send(jsonResponse);
+                            case "/text":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+                                await ctx.Response.Send("Sample text response for testing");
+                                break;
+
+                            case "/echo":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = ctx.Request.ContentType;
+                                await ctx.Response.Send(ctx.Request.DataAsString);
+                                break;
+
+                            case "/chunked":
+                                ctx.Response.ChunkedTransfer = true;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+
+                                for (int i = 0; i < 20; i++)
+                                {
+                                    byte[] data = Encoding.UTF8.GetBytes($"Server chunk {i}\n");
+                                    await ctx.Response.SendChunk(data, false);
+                                    await Task.Delay(250);
+                                }
+                                await ctx.Response.SendChunk(Array.Empty<byte>(), true);
+                                break;
+
+                            case "/chunked-slow":
+                                ctx.Response.ChunkedTransfer = true;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    byte[] data = Encoding.UTF8.GetBytes($"Slow chunk {i}\n");
+                                    await ctx.Response.SendChunk(data, false);
+                                    await Task.Delay(1000); // Longer delay for cancellation testing
+                                }
+                                await ctx.Response.SendChunk(Array.Empty<byte>(), true);
+                                break;
+
+                            case "/sse":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ServerSentEvents = true;
+
+                                for (int i = 0; i < 20; i++)
+                                {
+                                    await ctx.Response.SendEvent($"Event data {i}", false);
+                                    await Task.Delay(250);
+                                }
+                                await ctx.Response.SendEvent("Final event", true);
+                                break;
+
+                            case "/delay":
+                                // Long delay for cancellation testing
+                                await Task.Delay(2000);
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+                                await ctx.Response.Send("Delayed response");
+                                break;
+
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
+
+                            default:
+                                ctx.Response.StatusCode = 404;
+                                ctx.Response.ContentType = "text/plain";
+                                await ctx.Response.Send("Not found");
+                                break;
+                        }
                         break;
 
-                    default:
-                        ctx.Response.StatusCode = 404;
-                        ctx.Response.ContentType = "text/plain";
-                        await ctx.Response.Send("Not found");
+                    case WatsonWebserver.Core.HttpMethod.POST:
+                        switch (path)
+                        {
+                            case "/echo":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = ctx.Request.ContentType;
+                                await ctx.Response.Send(ctx.Request.DataAsString);
+                                break;
+
+                            case "/chunked":
+                                ctx.Response.ChunkedTransfer = true;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+
+                                for (int i = 0; i < 20; i++)
+                                {
+                                    byte[] data = Encoding.UTF8.GetBytes($"Server chunk {i}\n");
+                                    await ctx.Response.SendChunk(data, false);
+                                    await Task.Delay(250);
+                                }
+                                await ctx.Response.SendChunk(Array.Empty<byte>(), true);
+                                break;
+
+                            case "/chunked-slow":
+                                ctx.Response.ChunkedTransfer = true;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "text/plain";
+
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    byte[] data = Encoding.UTF8.GetBytes($"Slow chunk {i}\n");
+                                    await ctx.Response.SendChunk(data, false);
+                                    await Task.Delay(1000); // Longer delay for cancellation testing
+                                }
+                                await ctx.Response.SendChunk(Array.Empty<byte>(), true);
+                                break;
+
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
+                        }
+                        break;
+
+                    case WatsonWebserver.Core.HttpMethod.PUT:
+                        switch (path)
+                        {
+                            case "/echo":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = ctx.Request.ContentType;
+                                await ctx.Response.Send(ctx.Request.DataAsString);
+                                break;
+
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
+                        }
+                        break;
+
+                    case WatsonWebserver.Core.HttpMethod.DELETE:
+                        switch (path)
+                        {
+                            case "/echo":
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = ctx.Request.ContentType;
+                                await ctx.Response.Send(ctx.Request.DataAsString);
+                                break;
+
+                            case "/methods":
+                                // Handle different HTTP methods
+                                var method = ctx.Request.Method;
+                                ctx.Response.StatusCode = 200;
+                                ctx.Response.ContentType = "application/json";
+
+                                var response = new
+                                {
+                                    method = method.ToString(),
+                                    path = path,
+                                    body = ctx.Request.DataAsString,
+                                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                                };
+
+                                string jsonResponse = JsonSerializer.Serialize(response);
+                                await ctx.Response.Send(jsonResponse);
+                                break;
+                        }
                         break;
                 }
             }
