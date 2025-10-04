@@ -84,6 +84,14 @@
         public int StatusCode { get; internal set; } = 0;
 
         /// <summary>
+        /// Boolean indicating if the status code indicates success.
+        /// </summary>
+        public bool IsSuccessStatusCode
+        {
+            get => (StatusCode >= 200 && StatusCode <= 299);
+        }
+
+        /// <summary>
         /// The HTTP status description associated with the HTTP status code.
         /// </summary>
         public string StatusDescription { get; internal set; } = null;

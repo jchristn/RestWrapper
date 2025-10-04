@@ -505,6 +505,11 @@
             The HTTP status code returned with the response.
             </summary>
         </member>
+        <member name="P:RestWrapper.RestResponse.IsSuccessStatusCode">
+            <summary>
+            Boolean indicating if the status code indicates success.
+            </summary>
+        </member>
         <member name="P:RestWrapper.RestResponse.StatusDescription">
             <summary>
             The HTTP status description associated with the HTTP status code.
