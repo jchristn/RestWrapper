@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Inputty" Version="1.0.13" />
-    <PackageReference Include="Watson" Version="6.3.15" />
+    <PackageReference Include="Watson" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>

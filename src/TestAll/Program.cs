@@ -895,10 +895,17 @@
 
                                 for (int i = 0; i < 20; i++)
                                 {
-                                    await ctx.Response.SendEvent($"Event data {i}", false);
+                                    await ctx.Response.SendEvent(new WatsonWebserver.Core.ServerSentEvent
+                                    { 
+                                        Id = i.ToString(),
+                                        Data = $"Event data {i}"
+                                    }, false);
                                     await Task.Delay(250);
                                 }
-                                await ctx.Response.SendEvent("Final event", true);
+                                await ctx.Response.SendEvent(new WatsonWebserver.Core.ServerSentEvent
+                                {
+                                    Data = "Final event"
+                                }, true);
                                 break;
 
                             case "/delay":

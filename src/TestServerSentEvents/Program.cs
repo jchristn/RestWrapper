@@ -39,12 +39,18 @@
                         {
                             while (true)
                             {
-                                ServerSentEvent ev = await resp.ReadEventAsync();
+                                RestWrapper.ServerSentEvent ev = await resp.ReadEventAsync();
                                 if (ev == null) break;
                                 else
                                 {
-                                    if (!String.IsNullOrEmpty(ev.Data)) Console.WriteLine(ev.Data);
-                                    else break;
+                                    if (!String.IsNullOrEmpty(ev.Data))
+                                    {
+                                        Console.WriteLine($"| ID: {ev.Id}, Data: {ev.Data}");
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -70,10 +76,14 @@
 
             int events = 10;
 
-            for (int i = 0; i < events; i++)
+            for (int i = 1; i <= events; i++)
             {
                 await Task.Delay(250);
-                await ctx.Response.SendEvent("Event " + i.ToString(), (i == (events - 1)));
+                await ctx.Response.SendEvent(new WatsonWebserver.Core.ServerSentEvent
+                {
+                    Id = i.ToString(),
+                    Data = "Event " + i.ToString()
+                }, (i == events));
             }
         }
 
