@@ -11,7 +11,8 @@
     /// </summary>
     public class ServerSentEventReader : IDisposable
     {
-        private readonly StreamReader _Reader;
+        private readonly Stream _Stream;
+        private readonly byte[] _ReadBuffer = new byte[1];
         private bool _disposedValue;
 
         /// <summary>
@@ -22,7 +23,7 @@
         public ServerSentEventReader(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
-            _Reader = new StreamReader(stream, Encoding.UTF8);
+            _Stream = stream;
         }
 
         /// <summary>
@@ -32,18 +33,19 @@
         /// <returns>Server-sent event.</returns>
         public async Task<ServerSentEvent> ReadNextEventAsync(CancellationToken token = default)
         {
+            ThrowIfDisposed();
+
             ServerSentEvent eventData = new ServerSentEvent();
             StringBuilder dataBuilder = new StringBuilder();
-            string line;
+            string line = null;
 
-            while (!token.IsCancellationRequested &&
-                   (line = await _Reader.ReadLineAsync()) != null)
+            while ((line = await ReadLineAsync(token).ConfigureAwait(false)) != null)
             {
                 if (string.IsNullOrEmpty(line))
                 {
                     if (dataBuilder.Length > 0 || eventData.Event != null)
                     {
-                        eventData.Data = dataBuilder.ToString().TrimEnd('\n');
+                        eventData.Data = dataBuilder.ToString().TrimEnd('\r', '\n');
                         return eventData;
                     }
                     continue;
@@ -68,7 +70,7 @@
                         break;
 
                     case "data":
-                        dataBuilder.AppendLine(value);
+                        dataBuilder.Append(value).Append('\n');
                         break;
 
                     case "id":
@@ -84,7 +86,7 @@
 
             if (dataBuilder.Length > 0 || eventData.Event != null)
             {
-                eventData.Data = dataBuilder.ToString().TrimEnd('\n');
+                eventData.Data = dataBuilder.ToString().TrimEnd('\r', '\n');
                 return eventData;
             }
 
@@ -110,10 +112,45 @@
             {
                 if (disposing)
                 {
-                    _Reader?.Dispose();
+                    _Stream?.Dispose();
                 }
                 _disposedValue = true;
             }
+        }
+
+        private async Task<string> ReadLineAsync(CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+
+            using (MemoryStream lineBuffer = new MemoryStream())
+            {
+                while (true)
+                {
+                    int read = await _Stream.ReadAsync(_ReadBuffer, 0, 1, token).ConfigureAwait(false);
+                    if (read == 0)
+                    {
+                        if (lineBuffer.Length == 0) return null;
+                        return Encoding.UTF8.GetString(lineBuffer.ToArray());
+                    }
+
+                    byte current = _ReadBuffer[0];
+
+                    if (current == '\n')
+                    {
+                        return Encoding.UTF8.GetString(lineBuffer.ToArray());
+                    }
+
+                    if (current != '\r')
+                    {
+                        lineBuffer.WriteByte(current);
+                    }
+                }
+            }
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (_disposedValue) throw new ObjectDisposedException(nameof(ServerSentEventReader));
         }
 
         /// <summary>

@@ -220,6 +220,7 @@
         private AuthorizationHeader _Authorization = new AuthorizationHeader();
         private long? _ContentLength = null;
         private bool _DisposedValue = false;
+        private bool _OwnsHttpClient = false;
 
         private HttpClientHandler _HttpClientHandler = null;
         private HttpClient _HttpClient = null;
@@ -255,6 +256,29 @@
         }
 
         /// <summary>
+        /// A simple RESTful HTTP client using a caller-supplied HttpClient.
+        /// The supplied client remains caller-owned and will not be disposed by this instance.
+        /// </summary>
+        /// <param name="url">URL to access on the server.</param>
+        /// <param name="httpClient">Caller-supplied HTTP client.</param>
+        public RestRequest(string url, HttpClient httpClient) : this(url)
+        {
+            SetCallerOwnedHttpClient(httpClient);
+        }
+
+        /// <summary>
+        /// A simple RESTful HTTP client using a caller-supplied HttpClient.
+        /// The supplied client remains caller-owned and will not be disposed by this instance.
+        /// </summary>
+        /// <param name="url">URL to access on the server.</param>
+        /// <param name="method">HTTP method to use.</param>
+        /// <param name="httpClient">Caller-supplied HTTP client.</param>
+        public RestRequest(string url, HttpMethod method, HttpClient httpClient) : this(url, method)
+        {
+            SetCallerOwnedHttpClient(httpClient);
+        }
+
+        /// <summary>
         /// A simple RESTful HTTP client.
         /// </summary>
         /// <param name="url">URL to access on the server.</param>
@@ -270,6 +294,23 @@
             Url = url;
             Method = method;
             ContentType = contentType;
+        }
+
+        /// <summary>
+        /// A simple RESTful HTTP client using a caller-supplied HttpClient.
+        /// The supplied client remains caller-owned and will not be disposed by this instance.
+        /// </summary>
+        /// <param name="url">URL to access on the server.</param>
+        /// <param name="method">HTTP method to use.</param>
+        /// <param name="contentType">Content type to use.</param>
+        /// <param name="httpClient">Caller-supplied HTTP client.</param>
+        public RestRequest(
+            string url,
+            HttpMethod method,
+            string contentType,
+            HttpClient httpClient) : this(url, method, contentType)
+        {
+            SetCallerOwnedHttpClient(httpClient);
         }
 
         /// <summary>
@@ -291,6 +332,25 @@
             Method = method;
             ContentType = contentType;
             Headers = headers;
+        }
+
+        /// <summary>
+        /// A simple RESTful HTTP client using a caller-supplied HttpClient.
+        /// The supplied client remains caller-owned and will not be disposed by this instance.
+        /// </summary>
+        /// <param name="url">URL to access on the server.</param>
+        /// <param name="method">HTTP method to use.</param>
+        /// <param name="headers">HTTP headers to use.</param>
+        /// <param name="contentType">Content type to use.</param>
+        /// <param name="httpClient">Caller-supplied HTTP client.</param>
+        public RestRequest(
+            string url,
+            HttpMethod method,
+            NameValueCollection headers,
+            string contentType,
+            HttpClient httpClient) : this(url, method, headers, contentType)
+        {
+            SetCallerOwnedHttpClient(httpClient);
         }
 
         #endregion
@@ -321,7 +381,7 @@
 
                     if (_HttpClient != null)
                     {
-                        _HttpClient.Dispose();
+                        if (_OwnsHttpClient) _HttpClient.Dispose();
                         _HttpClient = null;
                     }
 
@@ -379,9 +439,11 @@
             if (Headers != null && Headers.Count > 0)
             {
                 ret += "  Headers" + Environment.NewLine;
-                foreach (KeyValuePair<string, string> curr in Headers)
+                for (int i = 0; i < Headers.Count; i++)
                 {
-                    ret += "    " + curr.Key + ": " + curr.Value + Environment.NewLine;
+                    string key = Headers.GetKey(i);
+                    string val = Headers.Get(i);
+                    ret += "    " + key + ": " + val + Environment.NewLine;
                 }
             }
               
@@ -498,27 +560,160 @@
             return true;
         }
 
+        private void SetCallerOwnedHttpClient(HttpClient httpClient)
+        {
+            _HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _OwnsHttpClient = false;
+        }
+
+        private void ValidateCallerOwnedHttpClientSettings()
+        {
+            if (_TimeoutMilliseconds != 60000)
+                throw new InvalidOperationException("TimeoutMilliseconds cannot be used when a caller-supplied HttpClient is provided.");
+
+            if (!AllowAutoRedirect)
+                throw new InvalidOperationException("AllowAutoRedirect cannot be used when a caller-supplied HttpClient is provided.");
+
+            if (IgnoreCertificateErrors)
+                throw new InvalidOperationException("IgnoreCertificateErrors cannot be used when a caller-supplied HttpClient is provided.");
+
+            if (!String.IsNullOrEmpty(CertificateFilename))
+                throw new InvalidOperationException("CertificateFilename cannot be used when a caller-supplied HttpClient is provided.");
+
+            if (!String.IsNullOrEmpty(CertificatePassword))
+                throw new InvalidOperationException("CertificatePassword cannot be used when a caller-supplied HttpClient is provided.");
+        }
+
+        private void ApplyAuthorizationHeader()
+        {
+            if (_Authorization == null || _HttpRequestMessage == null) return;
+
+            if (!String.IsNullOrEmpty(_Authorization.User))
+            {
+                if (_Authorization.EncodeCredentials)
+                {
+                    Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
+                    string authInfo = _Authorization.User + ":" + _Authorization.Password;
+                    authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
+                    _HttpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", authInfo);
+                }
+                else
+                {
+                    Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
+                    if (!_HttpRequestMessage.Headers.TryAddWithoutValidation("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password))
+                        Logger?.Invoke(_Header + "unable to add plaintext authorization header for user " + _Authorization.User);
+                }
+            }
+            else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
+            {
+                Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
+                _HttpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _Authorization.BearerToken);
+            }
+            else if (!String.IsNullOrEmpty(_Authorization.Raw))
+            {
+                Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
+                if (!_HttpRequestMessage.Headers.TryAddWithoutValidation("Authorization", _Authorization.Raw))
+                    Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
+            }
+        }
+
+        private void ApplyRequestHeaders()
+        {
+            if (_HttpRequestMessage == null || Headers == null || Headers.Count < 1) return;
+
+            for (int i = 0; i < Headers.Count; i++)
+            {
+                string key = Headers.GetKey(i);
+                string val = Headers.Get(i);
+
+                if (String.IsNullOrEmpty(key)) continue;
+                if (String.IsNullOrEmpty(val)) continue;
+
+                string keyNormalized = key.ToLower().Trim();
+
+                if (keyNormalized.Equals("close")) continue;
+                if (keyNormalized.Equals("connection")) continue;
+                if (keyNormalized.Equals("content-length")) continue;
+                if (keyNormalized.Equals("content-type")) continue;
+                if (keyNormalized.Equals("authorization")) continue;
+
+                if (!_HttpRequestMessage.Headers.TryAddWithoutValidation(key, val))
+                    Logger?.Invoke(_Header + "unable to add request header: " + key + ": " + val);
+            }
+        }
+
+        private void ApplyContentTypeHeader(HttpContent content, string contentType)
+        {
+            if (content == null) return;
+            if (String.IsNullOrEmpty(contentType)) return;
+
+            content.Headers.ContentType =
+                new MediaTypeHeaderValue(ContentTypeParser.ExtractMediaType(contentType))
+                {
+                    CharSet = ContentTypeParser.ExtractCharset(contentType)
+                };
+        }
+
+        private void ApplyContentHeaders(HttpContent content)
+        {
+            if (content == null) return;
+
+            if (!String.IsNullOrEmpty(ContentType))
+                ApplyContentTypeHeader(content, ContentType);
+
+            if (Headers == null || Headers.Count < 1) return;
+
+            for (int i = 0; i < Headers.Count; i++)
+            {
+                string key = Headers.GetKey(i);
+                string val = Headers.Get(i);
+
+                if (String.IsNullOrEmpty(key)) continue;
+                if (String.IsNullOrEmpty(val)) continue;
+
+                string keyNormalized = key.ToLower().Trim();
+
+                if (keyNormalized.Equals("content-length")) continue;
+
+                if (keyNormalized.Equals("content-type"))
+                {
+                    ApplyContentTypeHeader(content, val);
+                }
+                else if (keyNormalized.StartsWith("content-"))
+                {
+                    if (!content.Headers.TryAddWithoutValidation(key, val))
+                        Logger?.Invoke(_Header + "unable to add content header: " + key + ": " + val);
+                }
+            }
+        }
+
         private void SetupHttp()
         {
-            if (_HttpClientHandler == null && _HttpClient == null && _HttpRequestMessage == null)
+            if (_HttpRequestMessage == null)
             {
-                #region HTTP-Handler
+                if (_HttpClient == null)
+                {
+                    #region HTTP-Handler
 
-                _HttpClientHandler = new HttpClientHandler();
-                _HttpClientHandler.AllowAutoRedirect = AllowAutoRedirect;
+                    _HttpClientHandler = new HttpClientHandler();
+                    _HttpClientHandler.AllowAutoRedirect = AllowAutoRedirect;
 
-                #endregion
+                    #endregion
 
-                #region Handler-SSL
+                    #region Handler-SSL
 
+#if !NET10_0_OR_GREATER
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
 
                 if (IgnoreCertificateErrors)
                 {
 #if NET6_0_OR_GREATER
                     _HttpClientHandler.ServerCertificateCustomValidationCallback = Validator;
 #endif
+#if !NET10_0_OR_GREATER
                     ServicePointManager.ServerCertificateValidationCallback = Validator;
+#endif
                 }
 
                 if (!String.IsNullOrEmpty(CertificateFilename))
@@ -528,113 +723,59 @@
                     if (!String.IsNullOrEmpty(CertificatePassword))
                     {
                         Logger?.Invoke(_Header + "adding certificate including password");
+#if NET10_0_OR_GREATER
+                        cert = X509CertificateLoader.LoadPkcs12FromFile(
+                            CertificateFilename,
+                            CertificatePassword,
+                            X509KeyStorageFlags.DefaultKeySet,
+                            Pkcs12LoaderLimits.Defaults);
+#else
                         cert = new X509Certificate2(CertificateFilename, CertificatePassword);
+#endif
                     }
                     else
                     {
                         Logger?.Invoke(_Header + "adding certificate without password");
+#if NET10_0_OR_GREATER
+                        cert = X509CertificateLoader.LoadCertificateFromFile(CertificateFilename);
+#else
                         cert = new X509Certificate2(CertificateFilename);
+#endif
                     }
 
-                    _HttpClientHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                    _HttpClientHandler.SslProtocols = SslProtocols.Tls12;
-                    _HttpClientHandler.ClientCertificates.Add(cert);
+                        _HttpClientHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                        _HttpClientHandler.SslProtocols = SslProtocols.Tls12;
+                        _HttpClientHandler.ClientCertificates.Add(cert);
+                    }
+
+                    #endregion
+
+                    #region HTTP-Client
+
+                    _HttpClient = new HttpClient(_HttpClientHandler, true);
+                    _OwnsHttpClient = true;
+
+                    _HttpClient.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
+
+                    #endregion
                 }
-
-                #endregion
-
-                #region HTTP-Client
-
-                _HttpClient = new HttpClient(_HttpClientHandler, true);
-
-                _HttpClient.Timeout = TimeSpan.FromMilliseconds(_TimeoutMilliseconds);
-                _HttpClient.DefaultRequestHeaders.ExpectContinue = false;
-                _HttpClient.DefaultRequestHeaders.ConnectionClose = true;
-                _HttpClient.DefaultRequestHeaders.TransferEncodingChunked = ChunkedTransfer;
-
-                #endregion
-
-                #region Authorization
-
-                if (_Authorization != null)
+                else
                 {
-                    if (!String.IsNullOrEmpty(_Authorization.User))
-                    {
-                        if (_Authorization.EncodeCredentials)
-                        {
-                            Logger?.Invoke(_Header + "adding encoded credentials for user " + _Authorization.User);
-                            string authInfo = _Authorization.User + ":" + _Authorization.Password;
-                            authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
-                            _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + authInfo);
-                        }
-                        else
-                        {
-                            Logger?.Invoke(_Header + "adding plaintext credentials for user " + _Authorization.User);
-                            _HttpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + _Authorization.User + ":" + _Authorization.Password);
-                        }
-                    }
-                    else if (!String.IsNullOrEmpty(_Authorization.BearerToken))
-                    {
-                        Logger?.Invoke(_Header + "adding authorization bearer token " + _Authorization.BearerToken);
-                        _HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + _Authorization.BearerToken);
-                    }
-                    else if (!String.IsNullOrEmpty(_Authorization.Raw))
-                    {
-                        Logger?.Invoke(_Header + "adding authorization raw " + _Authorization.Raw);
-                        if (!_HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _Authorization.Raw))
-                            Logger?.Invoke(_Header + "unable to add raw authorization header: " + _Authorization.Raw);
-                    }
+                    ValidateCallerOwnedHttpClientSettings();
                 }
-
-                #endregion
 
                 #region Request-Message-and-Headers
 
                 _HttpRequestMessage = new HttpRequestMessage(Method, Url);
-                _HttpRequestMessage.Content = new ByteArrayContent(Array.Empty<byte>());
                 _HttpRequestMessage.Version = new Version(1, 1);
                 _HttpRequestMessage.Headers.Accept.ParseAdd("*/*");
                 _HttpRequestMessage.Headers.Host = new Uri(Url).Authority;
                 _HttpRequestMessage.Headers.UserAgent.ParseAdd(UserAgent);
+                _HttpRequestMessage.Headers.ExpectContinue = false;
                 _HttpRequestMessage.Headers.Connection.Add("keep-alive");
                 _HttpRequestMessage.Headers.TransferEncodingChunked = ChunkedTransfer;
-
-                if (Headers != null && Headers.Count > 0)
-                {
-                    for (int i = 0; i < Headers.Count; i++)
-                    {
-                        string key = Headers.GetKey(i);
-                        string val = Headers.Get(i);
-
-                        if (String.IsNullOrEmpty(key)) continue;
-                        if (String.IsNullOrEmpty(val)) continue;
-
-                        if (key.ToLower().Trim().Equals("close"))
-                        {
-                            // do nothing
-                        }
-                        else if (key.ToLower().Trim().Equals("connection"))
-                        {
-                            // do nothing
-                        }
-                        else if (key.ToLower().Trim().Equals("content-length"))
-                        {
-                            // do nothing
-                        }
-                        else if (key.ToLower().Trim().Equals("content-type"))
-                        {
-                            _HttpRequestMessage.Content.Headers.ContentType = 
-                                new MediaTypeHeaderValue(ContentTypeParser.ExtractMediaType(val))
-                                {
-                                    CharSet = ContentTypeParser.ExtractCharset(ContentType)
-                                }; 
-                        }
-                        else
-                        {
-                            _HttpClient.DefaultRequestHeaders.Add(key, val);
-                        }
-                    }
-                }
+                ApplyAuthorizationHeader();
+                ApplyRequestHeaders();
 
                 #endregion
 
@@ -643,6 +784,7 @@
                 if (ChunkedTransfer)
                 {
                     _ChunkedSender = new ChunkedSender(_HttpClient, _HttpRequestMessage);
+                    ApplyContentHeaders(_HttpRequestMessage.Content);
                 }
 
                 #endregion
@@ -761,6 +903,7 @@
                     }
 
                     _HttpRequestMessage.Content = content;
+                    ApplyContentHeaders(_HttpRequestMessage.Content);
                     Logger?.Invoke(_Header + "attached content to request message");
 
                     #endregion

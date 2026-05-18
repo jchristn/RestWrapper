@@ -266,7 +266,7 @@
 
                 _Response?.Dispose();
                 _ServerSentEventReader?.Dispose();
-                _ChunkedDataReader?.Dispose();
+                _ChunkedDataStream?.Dispose();
 
                 _DisposedValue = true;
             }
@@ -358,7 +358,9 @@
             return await _ServerSentEventReader.ReadNextEventAsync(token).ConfigureAwait(false);
         }
 
-        private StreamReader _ChunkedDataReader = null;
+        private Stream _ChunkedDataStream = null;
+        private byte[] _ChunkedByteBuffer = new byte[1];
+        private int? _ChunkedPendingByte = null;
 
         /// <summary>
         /// Read the next chunk.  Only appropriate for responses where ChunkedTransferEncoding is true.
@@ -368,30 +370,43 @@
         public async Task<ChunkData> ReadChunkAsync(CancellationToken token = default)
         {
             if (!ChunkedTransferEncoding) throw new InvalidOperationException("The REST response is not configured with chunked transfer encoding.");
+            token.ThrowIfCancellationRequested();
 
-            // Initialize the chunked data reader if not already done
-            if (_ChunkedDataReader == null)
+            if (_ChunkedDataStream == null)
             {
                 if (_Data == null) return null;
-                _ChunkedDataReader = new StreamReader(_Data, System.Text.Encoding.UTF8);
+                _ChunkedDataStream = _Data;
             }
 
-            // Read line by line - the chunked transfer protocol naturally creates line boundaries
-            // even when the server payload doesn't include line endings
-            string line = await _ChunkedDataReader.ReadLineAsync().ConfigureAwait(false);
-            if (line == null) return null;
-
-            // Don't add any line endings - return exactly what the server sent as payload
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(line);
-
-            // Check if this is the final chunk by checking if more data is available
-            bool isFinal = _ChunkedDataReader.EndOfStream;
-
-            return new ChunkData
+            using (MemoryStream chunkStream = new MemoryStream())
             {
-                Data = data,
-                IsFinal = isFinal
-            };
+                bool dataReceived = false;
+
+                while (true)
+                {
+                    int nextByte = await ReadNextChunkByteAsync(token).ConfigureAwait(false);
+                    if (nextByte == -1)
+                    {
+                        if (!dataReceived) return null;
+                        break;
+                    }
+
+                    dataReceived = true;
+
+                    if (nextByte == '\n') break;
+                    if (nextByte == '\r') continue;
+
+                    chunkStream.WriteByte((byte)nextByte);
+                }
+
+                bool isFinal = await PeekChunkEndOfStreamAsync(token).ConfigureAwait(false);
+
+                return new ChunkData
+                {
+                    Data = chunkStream.ToArray(),
+                    IsFinal = isFinal
+                };
+            }
         }
 
         #endregion
@@ -413,6 +428,35 @@
                 byte[] ret = ms.ToArray();
                 return ret;
             }
+        }
+
+        private async Task<int> ReadNextChunkByteAsync(CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+
+            if (_ChunkedPendingByte != null)
+            {
+                int pending = _ChunkedPendingByte.Value;
+                _ChunkedPendingByte = null;
+                return pending;
+            }
+
+            int read = await _ChunkedDataStream.ReadAsync(_ChunkedByteBuffer, 0, 1, token).ConfigureAwait(false);
+            if (read == 0) return -1;
+            return _ChunkedByteBuffer[0];
+        }
+
+        private async Task<bool> PeekChunkEndOfStreamAsync(CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+
+            if (_ChunkedPendingByte != null) return false;
+
+            int read = await _ChunkedDataStream.ReadAsync(_ChunkedByteBuffer, 0, 1, token).ConfigureAwait(false);
+            if (read == 0) return true;
+
+            _ChunkedPendingByte = _ChunkedByteBuffer[0];
+            return false;
         }
 
         #endregion

@@ -1,8 +1,24 @@
 # Change Log
 
-## Current Version
+## v3.2.0
 
-v3.0.x
+- Add constructor overloads that accept a caller-supplied `HttpClient`
+- Keep caller-supplied clients caller-owned; `RestRequest` will not dispose them
+- Apply authorization and custom headers at the request-message level so shared clients do not leak per-request state
+- Reject RestWrapper-owned transport settings when a caller-supplied `HttpClient` is used
+- Improve chunk-read cancellation behavior
+- Normalize SSE multiline payload handling and improve SSE read cancellation behavior
+- Fix `RestRequest.ToString()` header rendering
+- Consolidate automated tests into Touchstone shared suites with console, xUnit, and NUnit runners
+- Expand the automated surface to 120 shared test cases across internal/external client modes, streaming behaviors, parser edge cases, and helper utilities
+
+## v3.1.x
+
+- Minor breaking changes
+- Better internal support for chunked-transfer encoding
+- Remove non-async methods
+
+## v3.0.x
 
 - Minor breaking changes
 - Migration from ```HttpWebRequest``` to ```HttpClient```

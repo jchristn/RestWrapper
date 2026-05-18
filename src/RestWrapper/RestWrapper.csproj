@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net462;net48;net6.0;net8.0</TargetFrameworks>
-		<Version>3.1.8</Version>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net462;net48;net6.0;net8.0;net10.0</TargetFrameworks>
+		<Version>3.2.0</Version>
 		<Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
-		<PackageReleaseNotes>Better support for chunked transfer-encoding.</PackageReleaseNotes>
+		<PackageReleaseNotes>Custom HttpClient injection support, safer shared-client request handling, and expanded automated test coverage.</PackageReleaseNotes>
 		<Authors>Joel Christner</Authors>
 		<Copyright>(c)2025 Joel Christner</Copyright>
 		<PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
@@ -20,7 +20,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<DocumentationFile>RestWrapper.xml</DocumentationFile>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\RestWrapper.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -50,9 +50,6 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="assets\icon.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Update="RestWrapper.xml">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

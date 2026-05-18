@@ -356,6 +356,23 @@
             <param name="url">URL to access on the server.</param> 
             <param name="method">HTTP method to use.</param>
         </member>
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpClient)">
+            <summary>
+            A simple RESTful HTTP client using a caller-supplied HttpClient.
+            The supplied client remains caller-owned and will not be disposed by this instance.
+            </summary>
+            <param name="url">URL to access on the server.</param>
+            <param name="httpClient">Caller-supplied HTTP client.</param>
+        </member>
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.Net.Http.HttpClient)">
+            <summary>
+            A simple RESTful HTTP client using a caller-supplied HttpClient.
+            The supplied client remains caller-owned and will not be disposed by this instance.
+            </summary>
+            <param name="url">URL to access on the server.</param>
+            <param name="method">HTTP method to use.</param>
+            <param name="httpClient">Caller-supplied HTTP client.</param>
+        </member>
         <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.String)">
             <summary>
             A simple RESTful HTTP client.
@@ -363,6 +380,16 @@
             <param name="url">URL to access on the server.</param>
             <param name="method">HTTP method to use.</param> 
             <param name="contentType">Content type to use.</param>
+        </member>
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.String,System.Net.Http.HttpClient)">
+            <summary>
+            A simple RESTful HTTP client using a caller-supplied HttpClient.
+            The supplied client remains caller-owned and will not be disposed by this instance.
+            </summary>
+            <param name="url">URL to access on the server.</param>
+            <param name="method">HTTP method to use.</param>
+            <param name="contentType">Content type to use.</param>
+            <param name="httpClient">Caller-supplied HTTP client.</param>
         </member>
         <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.Collections.Specialized.NameValueCollection,System.String)">
             <summary>
@@ -372,6 +399,17 @@
             <param name="method">HTTP method to use.</param>
             <param name="headers">HTTP headers to use.</param>
             <param name="contentType">Content type to use.</param>
+        </member>
+        <member name="M:RestWrapper.RestRequest.#ctor(System.String,System.Net.Http.HttpMethod,System.Collections.Specialized.NameValueCollection,System.String,System.Net.Http.HttpClient)">
+            <summary>
+            A simple RESTful HTTP client using a caller-supplied HttpClient.
+            The supplied client remains caller-owned and will not be disposed by this instance.
+            </summary>
+            <param name="url">URL to access on the server.</param>
+            <param name="method">HTTP method to use.</param>
+            <param name="headers">HTTP headers to use.</param>
+            <param name="contentType">Content type to use.</param>
+            <param name="httpClient">Caller-supplied HTTP client.</param>
         </member>
         <member name="M:RestWrapper.RestRequest.Dispose(System.Boolean)">
             <summary>
