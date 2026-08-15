@@ -59,9 +59,16 @@ namespace Test.Shared
                     new TestCaseDescriptor(suiteId, "NullUrlThrows", "Constructors reject null URLs", ct => TestNullUrlThrowsAsync()),
                     new TestCaseDescriptor(suiteId, "NullHttpClientThrows", "Caller-supplied HttpClient constructors reject null clients", ct => TestNullHttpClientThrowsAsync()),
                     new TestCaseDescriptor(suiteId, "BufferSizeRejectsZero", "BufferSize rejects zero", ct => TestBufferSizeRejectsZeroAsync()),
+                    new TestCaseDescriptor(suiteId, "BufferSizeRejectsNegative", "BufferSize rejects negative values", ct => TestBufferSizeRejectsNegativeAsync()),
+                    new TestCaseDescriptor(suiteId, "BufferSizeAcceptsPositive", "BufferSize accepts and round-trips positive values", ct => TestBufferSizeAcceptsPositiveAsync()),
                     new TestCaseDescriptor(suiteId, "TimeoutRejectsZero", "TimeoutMilliseconds rejects zero", ct => TestTimeoutRejectsZeroAsync()),
+                    new TestCaseDescriptor(suiteId, "TimeoutRejectsNegative", "TimeoutMilliseconds rejects negative values", ct => TestTimeoutRejectsNegativeAsync()),
+                    new TestCaseDescriptor(suiteId, "TimeoutAcceptsPositive", "TimeoutMilliseconds accepts and round-trips positive values", ct => TestTimeoutAcceptsPositiveAsync()),
                     new TestCaseDescriptor(suiteId, "ContentLengthRejectsNegative", "ContentLength rejects negative values", ct => TestContentLengthRejectsNegativeAsync()),
-                    new TestCaseDescriptor(suiteId, "QueryParsesValues", "Query property parses URL query parameters", ct => TestQueryParsingAsync())
+                    new TestCaseDescriptor(suiteId, "ContentLengthAcceptsZeroAndPositive", "ContentLength accepts zero and positive values", ct => TestContentLengthAcceptsZeroAndPositiveAsync()),
+                    new TestCaseDescriptor(suiteId, "DefaultMethodIsGet", "RestRequest defaults to the GET method", ct => TestDefaultMethodIsGetAsync()),
+                    new TestCaseDescriptor(suiteId, "QueryParsesValues", "Query property parses URL query parameters", ct => TestQueryParsingAsync()),
+                    new TestCaseDescriptor(suiteId, "QueryWithoutQueryStringIsEmpty", "Query property is empty when the URL has no query string", ct => TestQueryWithoutQueryStringIsEmptyAsync())
                 });
         }
 
@@ -187,6 +194,23 @@ namespace Test.Shared
             return Task.CompletedTask;
         }
 
+        private static Task TestBufferSizeRejectsNegativeAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1");
+            AssertThrows<ArgumentException>(() => request.BufferSize = -1);
+            return Task.CompletedTask;
+        }
+
+        private static Task TestBufferSizeAcceptsPositiveAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1");
+            request.BufferSize = 1;
+            AssertEqual(1, request.BufferSize, "BufferSize (minimum)");
+            request.BufferSize = 16384;
+            AssertEqual(16384, request.BufferSize, "BufferSize");
+            return Task.CompletedTask;
+        }
+
         private static Task TestTimeoutRejectsZeroAsync()
         {
             using RestRequest request = new RestRequest("http://127.0.0.1");
@@ -194,10 +218,44 @@ namespace Test.Shared
             return Task.CompletedTask;
         }
 
+        private static Task TestTimeoutRejectsNegativeAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1");
+            AssertThrows<ArgumentException>(() => request.TimeoutMilliseconds = -1);
+            return Task.CompletedTask;
+        }
+
+        private static Task TestTimeoutAcceptsPositiveAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1");
+            request.TimeoutMilliseconds = 1;
+            AssertEqual(1, request.TimeoutMilliseconds, "TimeoutMilliseconds (minimum)");
+            request.TimeoutMilliseconds = 30000;
+            AssertEqual(30000, request.TimeoutMilliseconds, "TimeoutMilliseconds");
+            return Task.CompletedTask;
+        }
+
         private static Task TestContentLengthRejectsNegativeAsync()
         {
             using RestRequest request = new RestRequest("http://127.0.0.1");
             AssertThrows<ArgumentOutOfRangeException>(() => request.ContentLength = -1);
+            return Task.CompletedTask;
+        }
+
+        private static Task TestContentLengthAcceptsZeroAndPositiveAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1");
+            request.ContentLength = 0;
+            AssertEqual(0, (int)request.ContentLength, "ContentLength (zero)");
+            request.ContentLength = 4096;
+            AssertEqual(4096, (int)request.ContentLength, "ContentLength");
+            return Task.CompletedTask;
+        }
+
+        private static Task TestDefaultMethodIsGetAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1");
+            AssertEqual("GET", request.Method.Method, "default method");
             return Task.CompletedTask;
         }
 
@@ -209,6 +267,16 @@ namespace Test.Shared
             AssertEqual("value2", request.Query["param2"] ?? string.Empty, "param2");
             AssertTrue(request.Query.AllKeys != null && Array.Exists(request.Query.AllKeys, x => x == "flag"), "Expected flag query parameter");
             AssertEqual(string.Empty, request.Query["flag"] ?? string.Empty, "flag");
+
+            return Task.CompletedTask;
+        }
+
+        private static Task TestQueryWithoutQueryStringIsEmptyAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1/test");
+
+            AssertNotNull(request.Query, "Query");
+            AssertEqual(0, request.Query.Count, "Query.Count");
 
             return Task.CompletedTask;
         }

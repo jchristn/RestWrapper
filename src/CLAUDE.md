@@ -54,9 +54,9 @@ The main RestWrapper project is configured to generate NuGet packages on build (
 The library supports multiple .NET versions:
 - .NET Standard 2.0 and 2.1 (for broad compatibility)
 - .NET Framework 4.6.2 and 4.8
-- .NET 6.0 and 8.0
+- .NET 8.0 and 10.0
 
-Test projects target: .NET Framework 4.6.2, 4.8, .NET 6.0, and 8.0
+Test projects target: .NET Framework 4.6.2, 4.8, .NET 8.0, and 10.0 (the xUnit/NUnit suites target .NET 8.0 and 10.0)
 
 ## Key Dependencies
 
