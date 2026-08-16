@@ -68,7 +68,8 @@ namespace Test.Shared
                     new TestCaseDescriptor(suiteId, "ContentLengthAcceptsZeroAndPositive", "ContentLength accepts zero and positive values", ct => TestContentLengthAcceptsZeroAndPositiveAsync()),
                     new TestCaseDescriptor(suiteId, "DefaultMethodIsGet", "RestRequest defaults to the GET method", ct => TestDefaultMethodIsGetAsync()),
                     new TestCaseDescriptor(suiteId, "QueryParsesValues", "Query property parses URL query parameters", ct => TestQueryParsingAsync()),
-                    new TestCaseDescriptor(suiteId, "QueryWithoutQueryStringIsEmpty", "Query property is empty when the URL has no query string", ct => TestQueryWithoutQueryStringIsEmptyAsync())
+                    new TestCaseDescriptor(suiteId, "QueryWithoutQueryStringIsEmpty", "Query property is empty when the URL has no query string", ct => TestQueryWithoutQueryStringIsEmptyAsync()),
+                    new TestCaseDescriptor(suiteId, "QueryPreservesEqualsInValue", "Query values containing '=' are preserved intact", ct => TestQueryPreservesEqualsInValueAsync())
                 });
         }
 
@@ -277,6 +278,16 @@ namespace Test.Shared
 
             AssertNotNull(request.Query, "Query");
             AssertEqual(0, request.Query.Count, "Query.Count");
+
+            return Task.CompletedTask;
+        }
+
+        private static Task TestQueryPreservesEqualsInValueAsync()
+        {
+            using RestRequest request = new RestRequest("http://127.0.0.1/test?token=a=b=c&plain=1");
+
+            AssertEqual("a=b=c", request.Query["token"] ?? string.Empty, "token");
+            AssertEqual("1", request.Query["plain"] ?? string.Empty, "plain");
 
             return Task.CompletedTask;
         }

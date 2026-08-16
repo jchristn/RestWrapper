@@ -61,8 +61,8 @@ Test projects target: .NET Framework 4.6.2, 4.8, .NET 8.0, and 10.0 (the xUnit/N
 ## Key Dependencies
 
 - **System.Net.Http** (4.3.4): Core HTTP functionality
-- **System.Text.Json** (8.0.5): JSON serialization
-- **Timestamps** (1.0.11): Timing utilities for performance tracking
+- **System.Text.Json** (10.0.11): JSON serialization
+- **Timestamps** (1.0.12): Timing utilities for performance tracking
 
 ## Code Style and Implementation Rules
 

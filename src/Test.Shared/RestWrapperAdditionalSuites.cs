@@ -59,6 +59,7 @@ namespace Test.Shared
                 {
                     new TestCaseDescriptor(suiteId, "PostNullStringBody", "POST handles null string bodies using " + modeLabel, ct => TestPostNullStringBodyAsync(mode, ct)),
                     new TestCaseDescriptor(suiteId, "PostNullByteArrayBody", "POST handles null byte[] bodies using " + modeLabel, ct => TestPostNullByteArrayBodyAsync(mode, ct)),
+                    new TestCaseDescriptor(suiteId, "PostNullFormBody", "POST handles null form dictionaries using " + modeLabel, ct => TestPostNullFormBodyAsync(mode, ct)),
                     new TestCaseDescriptor(suiteId, "GetIgnoresBody", "GET ignores payload bodies using " + modeLabel, ct => TestGetIgnoresBodyAsync(mode, ct)),
                     new TestCaseDescriptor(suiteId, "SeekableStreamRewinds", "Seekable streams rewind before send using " + modeLabel, ct => TestSeekableStreamRewindsAsync(mode, ct)),
                     new TestCaseDescriptor(suiteId, "PlaintextBasicAuthorization", "Plaintext basic authorization is supported using " + modeLabel, ct => TestPlaintextBasicAuthorizationAsync(mode, ct)),
@@ -92,7 +93,10 @@ namespace Test.Shared
                     new TestCaseDescriptor(suiteId, "SyntheticHeadLeavesDataNull", "Synthetic HEAD responses do not expose a body stream", ct => TestSyntheticHeadLeavesDataNullAsync()),
                     new TestCaseDescriptor(suiteId, "SyntheticCharacterSetAndHeaders", "Synthetic responses expose character set and headers", ct => TestSyntheticCharacterSetAndHeadersAsync()),
                     new TestCaseDescriptor(suiteId, "SyntheticSseCancellationHonored", "Synthetic SSE reads honor cancellation", ct => TestSyntheticSseCancellationHonoredAsync()),
-                    new TestCaseDescriptor(suiteId, "SyntheticSuccessStatusFlags", "Synthetic responses expose success status flags", ct => TestSyntheticSuccessStatusFlagsAsync())
+                    new TestCaseDescriptor(suiteId, "SyntheticSuccessStatusFlags", "Synthetic responses expose success status flags", ct => TestSyntheticSuccessStatusFlagsAsync()),
+                    new TestCaseDescriptor(suiteId, "SyntheticEmptyBodyDataFromJsonThrows", "DataFromJson throws when the response body is empty", ct => TestSyntheticEmptyBodyDataFromJsonThrowsAsync()),
+                    new TestCaseDescriptor(suiteId, "SyntheticMalformedJsonThrows", "DataFromJson throws when the response body is not valid JSON", ct => TestSyntheticMalformedJsonThrowsAsync()),
+                    new TestCaseDescriptor(suiteId, "SyntheticContentEncodingSurfaced", "Responses surface the Content-Encoding header", ct => TestSyntheticContentEncodingSurfacedAsync())
                 });
         }
 
@@ -345,6 +349,16 @@ namespace Test.Shared
             {
                 request.ContentType = "application/octet-stream";
                 using RestResponse response = await request.SendAsync((byte[])null!, ct).ConfigureAwait(false);
+                AssertStatus(200, response.StatusCode);
+                AssertEqual(string.Empty, response.DataAsString ?? string.Empty, "echo payload");
+            }, cancellationToken).ConfigureAwait(false);
+        }
+
+        private static async Task TestPostNullFormBodyAsync(RequestTransportMode mode, CancellationToken cancellationToken)
+        {
+            await ExecuteWithRequestAsync(mode, "/echo", HttpMethod.Post, async (server, client, request, ct) =>
+            {
+                using RestResponse response = await request.SendAsync((Dictionary<string, string>)null!, ct).ConfigureAwait(false);
                 AssertStatus(200, response.StatusCode);
                 AssertEqual(string.Empty, response.DataAsString ?? string.Empty, "echo payload");
             }, cancellationToken).ConfigureAwait(false);
@@ -771,6 +785,56 @@ namespace Test.Shared
 
             AssertEqual(true, success.IsSuccessStatusCode, "success.IsSuccessStatusCode");
             AssertEqual(false, notFound.IsSuccessStatusCode, "notFound.IsSuccessStatusCode");
+            return Task.CompletedTask;
+        }
+
+        private static Task TestSyntheticEmptyBodyDataFromJsonThrowsAsync()
+        {
+            using RestResponse response = CreateSyntheticResponse(
+                method: HttpMethod.Get,
+                statusCode: HttpStatusCode.OK,
+                contentType: "application/json",
+                body: string.Empty);
+
+            AssertThrows<InvalidOperationException>(() =>
+            {
+                SamplePayload payload = response.DataFromJson<SamplePayload>();
+            });
+
+            return Task.CompletedTask;
+        }
+
+        private static Task TestSyntheticMalformedJsonThrowsAsync()
+        {
+            using RestResponse response = CreateSyntheticResponse(
+                method: HttpMethod.Get,
+                statusCode: HttpStatusCode.OK,
+                contentType: "application/json",
+                body: "{ this is not valid json ");
+
+            AssertThrows<JsonException>(() =>
+            {
+                SamplePayload payload = response.DataFromJson<SamplePayload>();
+            });
+
+            return Task.CompletedTask;
+        }
+
+        private static Task TestSyntheticContentEncodingSurfacedAsync()
+        {
+            HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Version = HttpVersion.Version11,
+                RequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1/test")
+            };
+
+            message.Content = new ByteArrayContent(Encoding.UTF8.GetBytes("encoded-body"));
+            message.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("text/plain");
+            message.Content.Headers.ContentEncoding.Add("gzip");
+
+            using RestResponse response = new RestResponse(message);
+            AssertEqual("gzip", response.ContentEncoding ?? string.Empty, "ContentEncoding");
+
             return Task.CompletedTask;
         }
 
