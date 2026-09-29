@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net462;net48;net8.0;net10.0</TargetFrameworks>
-		<Version>3.3.0</Version>
+		<Version>3.3.1</Version>
 		<Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
-		<PackageReleaseNotes>Dependency updates: System.Text.Json 10.0.11 and Timestamps 1.0.12. Expanded positive and negative test coverage. No public API changes.</PackageReleaseNotes>
+		<PackageReleaseNotes>RestResponse.Headers keeps repeated response headers (for example, Set-Cookie) as separate values, so Headers.GetValues(name) returns each one; Headers[name] still returns them comma-joined.</PackageReleaseNotes>
 		<Authors>Joel Christner</Authors>
 		<Copyright>(c)2026 Joel Christner</Copyright>
 		<PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>

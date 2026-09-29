@@ -33,7 +33,8 @@
         public string ProtocolVersion { get; internal set; } = null;
 
         /// <summary>
-        /// User-supplied headers.
+        /// Response headers.  A header received more than once (for example, Set-Cookie) is stored as one entry per value:
+        /// use Headers.GetValues(name) to read the individual values, while Headers[name] returns them comma-joined.
         /// </summary>
         public NameValueCollection Headers
         {
@@ -223,11 +224,15 @@
                     ContentEncoding = string.Join(",", _Response.Content.Headers.ContentEncoding);
             }
 
+            // Add each value separately so Headers.GetValues(key) returns the individual values
+            // (for example, one entry per Set-Cookie). Headers[key] still returns them comma-joined.
             foreach (KeyValuePair<string, IEnumerable<string>> header in _Response.Headers)
             {
                 string key = header.Key;
-                string val = string.Join(",", header.Value);
-                Headers.Add(key, val);
+                foreach (string val in header.Value)
+                {
+                    Headers.Add(key, val);
+                }
             }
 
             if (_Response.Content != null && _Response.RequestMessage.Method != HttpMethod.Head)

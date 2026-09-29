@@ -194,6 +194,17 @@ Console.WriteLine(response.ContentLength);
 Console.WriteLine(response.DataAsString);
 ```
 
+### Response headers
+
+`response.Headers` is a case-insensitive `NameValueCollection`. A header the server sends more than once, such as `Set-Cookie`, is kept as separate values:
+
+```csharp
+string[] cookies = response.Headers.GetValues("Set-Cookie"); // one entry per Set-Cookie header
+string joined = response.Headers["Set-Cookie"];              // all values, comma-joined
+```
+
+Use `GetValues` for `Set-Cookie`, because cookie `Expires` dates contain commas and the joined form cannot be split reliably.
+
 ### Timing metadata
 
 Each `RestResponse` includes a `Time` property:

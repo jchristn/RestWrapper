@@ -1,5 +1,16 @@
 # Change Log
 
+## v3.3.1
+
+- `RestResponse.Headers` keeps repeated response headers as separate values, so `Headers.GetValues("Set-Cookie")` returns one entry per cookie instead of a single comma-joined string that cannot be split safely (cookie `Expires` dates contain commas)
+- `Headers[name]` and `Headers.Get(name)` still return the comma-joined value, unchanged from earlier versions
+- Add a `ResponseHeaders` test suite covering repeated, single, comma-containing and missing headers, both on `RestResponse` directly and through `RestRequest.SendAsync`
+
+## v3.3.0
+
+- Dependency updates: System.Text.Json 10.0.11 and Timestamps 1.0.12
+- Expanded positive and negative test coverage; no public API changes
+
 ## v3.2.0
 
 - Add constructor overloads that accept a caller-supplied `HttpClient`

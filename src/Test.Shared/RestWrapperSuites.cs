@@ -38,6 +38,7 @@ namespace Test.Shared
                     ResponseSuite(RequestTransportMode.Internal),
                     ResponseSuite(RequestTransportMode.External),
                     DirectResponseSuite(),
+                    ResponseHeaderSuite(),
                     ServerSentEventReaderSuite(),
                     ExternalClientSuite(),
                     InternalClientSuite(),
