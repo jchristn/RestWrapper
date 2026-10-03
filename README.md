@@ -343,7 +343,7 @@ The repository includes both interactive and automated test hosts:
 - `src/Test.Xunit` exposes the shared suite through `dotnet test`
 - `src/Test.Nunit` exposes the same shared suite through `dotnet test`
 
-The current automated surface contains 120 shared cases covering:
+The current automated surface contains 140 shared cases covering:
 
 - internal and caller-supplied `HttpClient` flows
 - positive and negative transport behavior

@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.3.2
+
+- Dependency updates: System.Text.Json 10.0.12 and Timestamps 1.0.13
+- Test dependency updates: NUnit 5.0.0, NUnit.Analyzers 4.15.0, NUnit3TestAdapter 6.3.0, Microsoft.NET.Test.Sdk 18.10.1, coverlet.collector 10.1.0, Touchstone 0.2.0, Watson 7.2.2
+- All 140 shared test cases pass under the console, xUnit and NUnit runners on .NET 8.0 and 10.0; no public API changes
+
 ## v3.3.1
 
 - `RestResponse.Headers` keeps repeated response headers as separate values, so `Headers.GetValues("Set-Cookie")` returns one entry per cookie instead of a single comma-joined string that cannot be split safely (cookie `Expires` dates contain commas)

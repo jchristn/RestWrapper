@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Touchstone.Core" Version="0.1.12" />
-    <PackageReference Include="Watson" Version="7.1.0" />
+    <PackageReference Include="Touchstone.Core" Version="0.2.0" />
+    <PackageReference Include="Watson" Version="7.2.2" />
   </ItemGroup>
 
 </Project>
