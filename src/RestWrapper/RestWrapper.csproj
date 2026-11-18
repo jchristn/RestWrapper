@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net462;net48;net8.0;net10.0</TargetFrameworks>
-		<Version>3.3.2</Version>
+		<Version>3.3.3</Version>
 		<Description>Simple, easy HTTP REST API client for integrating and consuming services in C#.</Description>
 		<PackageReleaseNotes>RestResponse.Headers keeps repeated response headers (for example, Set-Cookie) as separate values, so Headers.GetValues(name) returns each one; Headers[name] still returns them comma-joined.</PackageReleaseNotes>
 		<Authors>Joel Christner</Authors>
@@ -10,9 +10,7 @@
 		<PackageTags>rest restful api http https client httpclient request response webrequest webresponse client json</PackageTags>
 		<PackageProjectUrl>https://github.com/jchristn/restwrapper</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/jchristn/restwrapper</RepositoryUrl>
-		<RepositoryType>Github</RepositoryType>
-		<PackageLicenseUrl></PackageLicenseUrl>
-		<PackageIconUrl></PackageIconUrl>
+		<RepositoryType>git</RepositoryType>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -21,6 +19,9 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\RestWrapper.xml</DocumentationFile>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
